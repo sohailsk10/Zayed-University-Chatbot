@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+{% block title %} Wrong Answer Update {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+{% endblock stylesheets %}
+{% block content %}
+
+<br>
+
+
+{% comment %} {{ wr.event_question }} {% endcomment %}
+<div class="row">
+    <div class="col-md-7">
+        <div class="card" id="newpost">
+            <div class="card-header card-header-warning">
+                <h4 class="card-title">
+                    Question Chatbot Response and Expected Answer 
+                </h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {% for wr in wrong_que_ans %}
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Question</label>
+                                <input type="text" class='form-control' id="question" name="question"
+                                       placeholder="Question"
+                                       value="{% if wr.event_question %}{{wr.event_question}}{% endif %}">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Chatbot Response</label>
+                                {% comment %} <input type="textarea" class='form-control' id="ans" name="ans"
+                                       placeholder="Answer" value="{% if wr.event_answer %}{{wr.event_answer}}{% endif %}"> {% endcomment %}
+                                <textarea class="form-control" id="ans" name="ans" placeholder="Answer" rows="3">{{wr.event_answer}}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Expected Answer</label>
+                                {% comment %} <input type="textarea" class='form-control' id="quest" name="quest"
+                                       placeholder="Expected Answer"
+                                       value=""> {% endcomment %}
+                                <textarea class="form-control" id="exp_ans" name="exp_ans" placeholder="Expected Answer"  rows="3">{{wr.event_answer}}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-primary" id="submit">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br>
+
+{% endblock %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+$(document).ready(function(){
+    $('#submit').on('click', function(){
+        $question = $('#question').val();
+        $ans = $('#ans').val();
+        $exp_ans = $('#exp_ans').val();
+        
+        debugger;
+
+        if($ans == ""){
+            $.ajax({
+                type: "POST",
+                url: "update_wr_ans",
+                data:{
+                    question: $question,
+                    ans: $ans,
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                },
+                success: function(){
+                    alert('Save Data');
+                    $('#question').val('');
+                    $('#exp_ans').val('');
+                    window.location = "/update_wr_ans";
+                }
+            });
+        }else{
+            $.ajax({
+                type: "POST",
+                url: "update_wr_ans",
+                data:{
+                    question: $question,
+                    exp_ans: $ans,
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                },
+                success: function(){
+                    alert('Save Data');
+                    $('#question').val('');
+                    $('#ans').val('');
+                    window.location = "/update_wr_ans";
+                }
+            });
+        
+    });
+});
+
+<script/>
+{% endblock javascripts %}
+
+
+<html/>

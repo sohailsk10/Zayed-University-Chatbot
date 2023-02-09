@@ -1,0 +1,103 @@
+<!-- side bar -->
+<div class="sidebar" data-color="purple" data-background-color="white" data-image="/static/assets/img/sidebar-1.jpg">
+    <div class="logo">
+        <a target="_blank" rel="noopener noreferrer"
+           href="" class="simple-text logo-normal">
+            User Panel
+        </a>
+    </div>
+    <div class="sidebar-wrapper">
+        <ul class="nav">
+
+            {% if depart_name == 'SuperAdmin' %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'report' %}">
+                    <i class="material-icons">fact_check</i>
+                    <p>Reports</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'user' %}">
+                    <i class="material-icons">person</i>
+                    <p>Users</p>
+                </a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'department_data' depart_name %}">
+                    <i class="material-icons">fact_check</i>
+                    <p>Reports</p>
+                </a>
+            </li>
+            {% if admin_type != 'Department_User' %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'deptwise_usrlist' %}">
+                    <i class="material-icons">person</i>
+                    <p>Users</p>
+                </a>
+            </li>
+            {% endif %}
+            {% endif %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'advance_filter' %}">
+                    <i class="material-icons">speaker_notes</i>
+                    <p>Logs</p>
+                </a>
+            </li>
+             {% if depart_name != 'SuperAdmin' %}
+             <li class="nav-item {% if 'page-user' in segment %} active {% endif %}">
+                <a class="nav-link" href="{% url 'export_pdf_dept' depart_name %}" target="_blank">
+                    <i class="material-icons">file_download</i>
+                    <p>Export Report (PDF)</p>
+                </a>
+            </li>
+            <li class="nav-item {% if 'page-user' in segment %} active {% endif %}">
+                <a class="nav-link" href="{% url 'export_exl_dept' depart_name %}">
+                    <i class="material-icons">file_download</i>
+                    <p>Export Report (Excel)</p>
+                </a>
+            </li> 
+            <!-- for rectication -->
+          <!--  <li class="nav-item active">
+                <a class="nav-link" href="{% url 'get_qa_category' %}">
+                    <i class="material-icons">menu</i>
+                    <p>Category Update</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'search_answer' %}">
+                    <i class="material-icons">manage_search</i>
+                    <p>Search Answer</p>
+                </a>
+            </li>-->
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout_' %}">
+                    <i class="material-icons">power_settings_new</i>
+                    <p>Logout</p>
+                </a>
+            </li>
+            {% else %}
+            <!-- for rectication 
+         <!--    <li class="nav-item active">
+                <a class="nav-link" href="{% url 'get_qa_category' %}">
+                    <i class="material-icons">menu</i>
+                    <p>Category Update</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'get_tag_qa' %}">
+                    <i class="material-icons">done_outline</i>
+                    <p>QA Update</p>
+                </a>
+            </li>-->
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">
+                    <i class="material-icons">power_settings_new</i>
+                    <p>Logout</p>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+<!-- end side bar -->

@@ -1,0 +1,159 @@
+{% extends "layouts/tag_qa_rectify_base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-7">
+        <div class="card" id="newpost">
+            <div class="card-header card-header-warning">
+                <h4 class="card-title">
+                    Update Question with Answers
+                </h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Question</label>
+                                <input type="search" class='form-control' id="quest" name="quest"
+                                       placeholder="Question" value="{% if event_question %}{{event_question}}{% endif %}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Keyword Extracted</label>
+                                <input type="search" class='form-control' id="key_extracted" name="key_extracted"
+                                       placeholder="Keyword Extracted" value="{% if keyword_list %}{{keyword_list}}{% endif %}">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Add Additional Keyword</label>
+                                <input type="search" class='form-control' id="add_key" name="add_key"
+                                       placeholder="Add Additional Keyword" value="{% if add_key %}{{add_key}}{% endif %}">
+                            </div>
+                        
+                        </div> 
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Answer</label>
+                                <input type="search" class='form-control' id="ans" name="ans"
+                                       placeholder="Answer"
+                                       value="{% if event_answer %}{{event_answer}}{% endif %}">
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group" id = "div_categories">
+                                <label class="bmd-label-floating">Category & Sub Category</label>
+                                <select id="ctype" name="ctype" class='form-control'  onchange="sub_category({{data}}, this)">
+                                   <option value="" selected>Select</option>
+                                    {% for category in categories %}
+                                    <option value="{{ category.id }}">{{ category.description }}</option>
+                                    {% endfor %}
+                                   </select>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <br/>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+
+    function arrayRemove(arr, value) { 
+    
+        return arr.filter(function(ele){ 
+            return ele != value; 
+        });
+    }
+    
+    
+    function add_dropdown(dropdown_data, parent_element, whole_data){
+        var selectList = document.createElement("select");
+        selectList.className = "form-control";
+        selectList.name = "ctype";
+        selectList.onchange = function(){
+            sub_category(whole_data, selectList);
+        };
+        parent_element.appendChild(selectList);
+        var option = document.createElement("option");
+        option.value = '';
+        option.text = 'Select';
+        selectList.appendChild(option);
+        for (var i = 0; i < dropdown_data.length; i++) {
+            var option = document.createElement("option");
+            option.value = dropdown_data[i]['pk'];
+            option.text = dropdown_data[i]['fields']['description'];
+            selectList.appendChild(option);
+        }
+    }
+
+    function sub_category(data,element){
+       // console.log(data);
+       // console.log(element.value);
+        var div_categories = document.getElementById('div_categories').children;
+        var select_count = 0;
+        for (var i = 0; i<div_categories.length ; i++){
+            if (div_categories[i] == element){
+                console.log("elementmax " + i);
+                select_count = i;
+                break;
+            }
+        }
+        console.log("select_count " + select_count + div_categories.length)
+        var _length = div_categories.length;
+        for (var i = div_categories.length; i > 0 ; i--){
+            if (select_count + 1 < i){
+               element.parentNode.removeChild(div_categories[i-1]);
+            }
+       }
+      
+        var new_data = [];
+        for (var i = 0; i < data.length; i++) {
+           // console.log(data[i]['fields']['parent_id'] === element.value);
+            if (data[i]['fields']['parent_id'] === element.value) {
+                new_data.push(data[i]);
+            }
+        }
+      //  console.log(new_data);
+        if (new_data.length > 0){
+            add_dropdown(new_data,element.parentElement, data)
+        }
+       
+
+    }
+
+    
+
+</script>
+
+{% endblock javascripts %}
