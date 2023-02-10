@@ -92,8 +92,10 @@ for f in csv_files:
 NEW_DF = pd.DataFrame(all_csv_, columns=['q_tag', 'title', 'path', 'timestamp'])
 # print(NEW_DF.head())
 print("IN Encoding")
-QUESTION_VEC = loadtxt('QUESTION_VEC.csv', delimiter=',')
+# QUESTION_VEC = loadtxt('QUESTION_VEC.csv', delimiter=',')
 # QUESTION_VEC = model.encode(NEW_DF['path'])
+# np.save('data.npy', QUESTION_VEC)
+QUESTION_VEC = np.load('data.npy')
 # savetxt('QUESTION_VEC_ZUCC.csv', QUESTION_VEC, delimiter=",")
 print("Encoding Done")
 
@@ -187,6 +189,12 @@ def string_similarity(str1, str2):
     result = SequenceMatcher(a=str1.lower(), b=str2.lower())
     return result.ratio()
 
+def remove_duplicates(input_list):
+    output_list = []
+    for item in input_list:
+        if item not in output_list:
+            output_list.append(item)
+    return output_list
 
 @csrf_exempt
 def get_response_from_watson(request):
@@ -260,6 +268,7 @@ def get_response_from_watson(request):
         print("Empty Intent")
 
         _text = text.lower()
+        _text = _text.replace("'", "")
         _text = text.lower().replace('zayed', '').replace('university', '')
 
         _input_list = text.split(' ')
@@ -301,12 +310,16 @@ def get_response_from_watson(request):
             questions_asked_vec = model.encode(questions_asked)
             res, res_list, conf = cosine_similarity_fn(NEW_DF, questions_asked_vec, QUESTION_VEC)
         print("#1", len(res_list), res_list)
+        res_list = remove_duplicates(res_list)
+        print(res_list)
         # res_list = list(set(res_list))
         # print("#2", len(res_list))
         print("res", res)
         # print("res_list", res_list)
         main_df = pd.DataFrame(res_list, columns=['path'])
+        main_df.to_csv("Main_df.csv")
         main_df = main_df.drop_duplicates(subset="path", keep="last")
+        # main_df = main_df.drop_duplicates()
         print(main_df.head(5))
         top_df1 = main_df.head(5).values.tolist()
         final_df = []
