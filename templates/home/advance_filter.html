@@ -10,6 +10,15 @@
 
 
 {% block content %}
+{% for msg in messages %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Hey </strong> {{ msg}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+{% endfor %}
 <div class="row">
     <div class="col-lg-8 col-md-8"></div>
     <div class="col-lg-4 col-md-4 text-warning">
@@ -183,9 +192,11 @@
                     <td style="word-wrap: break-word;width:170px">{{rec.event_question}}</td>
                     <td style="word-wrap: break-word;width:180px">{{rec.event_answer}}</td>
                     <td>{{rec.intent}}</td>
-                    <td><a href="{% url 'get_tag_qa' rec.id %}">
-                        <button type="button" class="btn btn-primary">Rectify Answer</button>
-                    </a></td>
+                    <td>
+                        <a href="{% url 'get_tag_qa' rec.id %}">
+                        <button type="button" class="btn btn-primary">Update</button>
+                        </a>
+                    </td>
                 </tr>
             {% endfor %}
             {% endif %}

@@ -18,15 +18,14 @@ urlpatterns = [
     
     # path('answer_rectification/', views.answer_rectification, name='answer_rectification'),
 
-    # qa_category
     path('get_qa_category/', views.get_qa_category, name='get_qa_category'),
-    # tag_qa
     path('get_tag_qa/<id>/', views.get_tag_qa,  name='get_tag_qa'),
     path('get_tag_qa/', views.get_tag_qa_1,  name='get_tag_qa'),
     path('get_child_categories/<parent>/', views.get_child_categories,  name='get_child_categories'),
 
+    # path('answer_search/', answer_search, 'answer_search')
 ]
 
 
 
-    # path('answer_search/', answer_search, 'answer_search')
+    

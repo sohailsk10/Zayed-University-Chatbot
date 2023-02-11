@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'report_app',
     'authentication',
     'zayed_university_app',
-    'django_filters'  # added 24/05
+    'django_filters'  
 ]
 
 MIDDLEWARE = [

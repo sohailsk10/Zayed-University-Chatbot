@@ -41,6 +41,11 @@ from sklearn.metrics.pairwise import cosine_similarity
 from keybert import KeyBERT
 from .cosine_similarity_fn import *
 from django.core.serializers import serialize
+from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
+from django.template import loader
+from django.urls import reverse
+from django.contrib import messages
 
 EXTENSTION_LIST = ["JPG", "PDF", "DOC", "PNG", "DOCX", "GIF", "XLSX", "JPEG", "ASPX", "ASP"]
 
@@ -822,12 +827,12 @@ def get_tag_qa(request, id):
             category = ctype)
 
         save_data.save()   
+        messages.success(request, "record updated sucessfully!!!")
         context = {
             'depart_name': depart_name,
             'admin_type': request.session['admin_type'],
         }
-        return render(request, 'home/advance_filter.html', context)
-        # return redirect('chatbot/advance_filter/')
+        return HttpResponseRedirect(reverse('advance_filter'))
 
     context = {
          'event_type_id' : event_type_id,
