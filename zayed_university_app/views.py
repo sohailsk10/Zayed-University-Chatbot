@@ -99,7 +99,10 @@ QUESTION_VEC = np.load('zu_data_encode.npy')
 print("[#] Encoding Done")
 
 nltk.download('stopwords')
-_stop_words = stopwords.words('english')
+# _stop_words = stopwords.words('english')
+_stop_words = set(stopwords.words("english"))
+# _stop_words_remove = ["on", "once"]
+# _stop_words = _stop_words - set(_stop_words_remove)
 _stop_words_ar = stopwords.words('arabic')
 
 
@@ -234,7 +237,7 @@ def get_response_from_watson(request):
     res = response.get_result()
     try:
         res_conf = res['output']['intents'][0]['confidence']
-        print("CONF", res_conf)
+        print("CONF Watson Assistant", res_conf)
     except:
         try:
             res_conf = res['output']['generic'][0]['primary_results'][0]['result_metadata']['confidence']
@@ -273,9 +276,10 @@ def get_response_from_watson(request):
 
         _main_input_list = remove_custom('i', _main_input_list)
         _main_input_list = remove_custom('a', _main_input_list)
-
+        # print("text", _text)
     
         keywords = kw_model.extract_keywords(text.strip().lower(), keyphrase_ngram_range=(1, 7), stop_words='english', use_mmr=True, diversity=0.7, highlight=False, top_n=10)
+        # keywords = kw_model.extract_keywords(text.strip().lower(), keyphrase_ngram_range=(1, 7), use_mmr=True, diversity=0.7, highlight=False, top_n=10)
         print("keywords", keywords)
         print('Before command dictionary')
         keywords_list = list(dict(keywords).keys())
@@ -293,16 +297,19 @@ def get_response_from_watson(request):
             print("TAG DF LOADED", TAG_DF.head())
             # res, res_list, conf = cosine_similarity_fn(TAG_DF, questions_asked_vec, TAG_QUESTION_VEC)
             res, res_list, conf = cosine_similarity_fn(TAG_DF, questions_asked_vec, TAG_QUESTION_VEC)
+            print("CONF TAG QA", conf)
         except Exception as e:
             print(e)
             conf = 0.0
-        print("conf", conf)
+        # print("conf", conf)
         if conf < 0.75:
             print("Checking on every file because of low confidence")
             questions_asked_vec = model.encode(questions_asked)
             
             res, res_list, conf = cosine_similarity_fn(NEW_DF, questions_asked_vec, QUESTION_VEC)
+            print("CONF ALL FILES", conf)
         res_list = remove_duplicates(res_list)
+        print("res_list", res_list)
         main_df = pd.DataFrame(res_list, columns=['path'])
         main_df = main_df.drop_duplicates(subset="path", keep="last")
         # print(main_df.head(5))

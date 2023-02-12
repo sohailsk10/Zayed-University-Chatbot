@@ -12,9 +12,11 @@ from django.contrib.auth.models import User
 
 from zayed_university_app.utils import render_to_pdf
 from . import models
-from .models import Report
+from .models import *
 from zayed_university_app.models import Log
 
+# import pymssql
+import pyodbc
 from .models import DepartmentAdminUser, Department, UserType
 from django.views.decorators.cache import cache_control
 from django.contrib.auth import authenticate, login, logout
@@ -26,7 +28,39 @@ import pandas as pd
 import openpyxl
 from zayed_university_app.models import Log
 from django.db.models import Count
-import pymssql
+
+from django.shortcuts import render, HttpResponse
+# from report_app.forms import UploadForm
+import xml.etree.ElementTree as ET
+from django.http import JsonResponse, QueryDict
+import os
+import json
+import re
+import urllib.request
+from xml.sax.handler import ContentHandler
+from xml.sax import make_parser
+import requests
+from django.http import QueryDict
+from django.utils.datastructures import MultiValueDict
+
+import urllib.request
+from pdfminer.high_level import extract_text
+from django.utils import timezone
+# from report_app.forms import UploadForm #upload csv
+
+
+def parsefile(file):
+    parser = make_parser()
+    parser.setContentHandler(ContentHandler())
+    parser.parse(file)
+
+
+# def validateJSON(jsonData):
+#     try:
+#         json.loads(jsonData)
+#     except ValueError as err:
+#         return False
+#     return True
 
 
 def admin_check(user):
@@ -53,12 +87,12 @@ def get_custuser(cname, cadmin, cdepart, chk_true):
 
 def get_connection():
     # # for server
-    conn = pymssql.connect(server='192.168.5.79', user='chatboat_sa', password='ch@tb0@t$@',
-    database='zu_chatbot_log_devel')
-    #conn = pymssql.connect('Driver=SQL Server;'  ## for local
-           #               'Server=ZAHEER;'
-           #               'Database=zu_chatbot_log_dev;'
-           #               'Trusted_Connection=yes;')
+    # conn = pymssql.connect(server='192.168.5.79', user='chatboat_sa', password='ch@tb0@t$@',
+    # database='zu_chatbot_log_devel')
+    conn = pyodbc.connect('Driver=SQL Server;'  ## for local
+                          'Server=SOHAIL;'
+                          'Database=zayed_university_db;'
+                          'Trusted_Connection=yes;')
     return conn
 
 
@@ -85,7 +119,7 @@ def daily_wrn_count():
         cur_no_ans.execute(no_ans_select_Query)
         no_ans_day = cur_no_ans.fetchall()
 
-    except pymssql.Error as error:
+    except pyodbc.Error as error:
         print("Error while fetching data from SQL", error)
     finally:
 
@@ -123,7 +157,7 @@ def monthly_wrn_count():
         cur_no_ans.execute(no_ans_select_Query)
         no_ans_month = cur_no_ans.fetchall()
 
-    except pymssql.Error as error:
+    except pyodbc.Error as error:
         print("Error while fetching data from SQL", error)
     finally:
 
@@ -160,6 +194,8 @@ def deptwise_data(dept_name):
         rep_users = cursor1.fetchall()
         rep_users = [list(tp) for tp in rep_users]
 
+        # print("rep_users---->", rep_users)
+
         busy_select_Query = "SELECT TOP(10) * FROM fn_deptwise_busy_period_cnt('" + dept_name + "');"
         cursor2.execute(busy_select_Query)
         busy_users = cursor2.fetchall()
@@ -172,7 +208,7 @@ def deptwise_data(dept_name):
         new_users = [list(tp) for tp in new_users]
         # print("new_users-deptwise_data> ", new_users)
 
-    except pymssql.Error as error:
+    except pyodbc.Error as error:
         print("Error while fetching data from SQL", error)
 
     finally:
@@ -400,7 +436,7 @@ def get_repeated_bot_users():
 
         busy_count = cursor.fetchall()
 
-    except pymssql.Error as error:
+    except pyodbc.Error as error:
 
         print("Error while fetching data from SQL server", error)
 
@@ -432,7 +468,7 @@ def get_repeated_bot_monthly_users():
 
         busy_count = cursor.fetchall()
 
-    except pymssql.Error as error:
+    except pyodbc.Error as error:
 
         print("Error while fetching data from SQL server", error)
 
@@ -462,7 +498,7 @@ def get_busy_period_count():
 
         busy_count = cursor.fetchall()
 
-    except pymssql.Error as error:
+    except pyodbc.Error as error:
 
         print("Error while fetching data from SQL server", error)
 
@@ -495,7 +531,7 @@ def get_busy_period_count_monthly():
         busy_count_month = cursor.fetchall()
         # print("TOP 10 busy_count_month", busy_count_month)
 
-    except pymssql.Error as error:
+    except pyodbc.Error as error:
 
         print("Error while fetching data from SQL server", error)
 
@@ -530,7 +566,7 @@ def live_count():
 
         live_month = cursor1.fetchall()
 
-    except pymssql.Error as error:
+    except pyodbc.Error as error:
         print(error)
 
     finally:
@@ -569,7 +605,7 @@ def reset_count():
 
         # print("reset_month", reset_month)
 
-    except pymssql.Error as error:
+    except pyodbc.Error as error:
 
         print("Error while fetching data from SQL server", error)
 
@@ -624,7 +660,7 @@ def get_total_users_cnt():
 
 
 
-    except pymssql.Error as error:
+    except pyodbc.Error as error:
 
         print("Error while fetching total_desc_cnt from SQL", error)
 
@@ -661,45 +697,51 @@ def get_monthly_data():
 
         cur_month_new = connection.cursor()
 
-        select_Query = 'SELECT * from dbo.monthly_data_view;'
-        cursor.execute(select_Query)
-        log_record = cursor.fetchall()
-        list_log_record = [list(tp) for tp in log_record]
-
-        # wr_answer_cnt = Log.objects.all().filter(user_datetime__month=datetime.now().month, event_type_id='3').count()
-        # rt_answer_cnt = Log.objects.all().filter(user_datetime__month=datetime.now().month, event_type_id='4').count()
-        # no_answer_cnt = Log.objects.all().filter(user_datetime__month=datetime.now().month, event_type_id='5').count()
-        #
-        # log_record = [('Right Answer', datetime.now().month, rt_answer_cnt),
-        #               ('No Answer', datetime.now().month, no_answer_cnt),
-        #               ('Wrong Answer', datetime.now().month, wr_answer_cnt)]
-        #
-        # # print(">>>>>>>>>>>>>", log_record)
+        # select_Query = 'SELECT * from dbo.monthly_data_view;'
+        # cursor.execute(select_Query)
+        # log_record = cursor.fetchall()
         # list_log_record = [list(tp) for tp in log_record]
 
-        eng_select_Query = 'SELECT * from dbo.monthly_engaged_users_view;'
-        cur_month_eng.execute(eng_select_Query)
-        count_eng_usr_month = cur_month_eng.fetchall()
+        wr_answer_cnt = Log.objects.all().filter(user_datetime__month=datetime.now().month, event_type_id='3').count()
+        rt_answer_cnt = Log.objects.all().filter(user_datetime__month=datetime.now().month, event_type_id='4').count()
+        no_answer_cnt = Log.objects.all().filter(user_datetime__month=datetime.now().month, event_type_id='5').count()
+        
+        log_record = [('Right Answer', datetime.now().month, rt_answer_cnt),
+                      ('No Answer', datetime.now().month, no_answer_cnt),
+                      ('Wrong Answer', datetime.now().month, wr_answer_cnt)]
+
+        # # print(">>>>>>>>>>>>>", log_record)
+        list_log_record = [list(tp) for tp in log_record]
+
+        # eng_select_Query = 'SELECT * from dbo.monthly_engaged_users_view;'
+        # cur_month_eng.execute(eng_select_Query)
+        # count_eng_usr_month = cur_month_eng.fetchall()
 
         new_select_Query = 'SELECT * from dbo.monthly_new_users_view;'
         cur_month_new.execute(new_select_Query)
         new_usr_month = cur_month_new.fetchall()
 
-        # count_eng_usr_month = Log.objects.values('user_email').annotate(login_count=Count('user_email')).filter(
-        #     user_datetime__month=datetime.now().month,
-        #     login_count=2)
+        count_eng_usr_month = Log.objects.values('user_email').annotate(login_count=Count('user_email')).filter(
+            user_datetime__month=datetime.now().month,event_type_id=1,
+            login_count__gt=1)
+
 
         # _usr = Log.objects.values('user_email').annotate(login_count=Count('event_type_id')).filter(
         #     user_datetime__month=datetime.now().month)
         # new_usr_month = Log.objects.filter(user_email__in=[item['user_email'] for item in _usr],
         #                                    user_datetime__month=datetime.now().month)
 
-        # print("-------------------", len(count_eng_usr_month))
-        # print("*******************>", len(new_usr_month))
+        new_usr_month = Log.objects.values('user_email').annotate(login_count=Count('user_email')).filter(
+            user_datetime__month=datetime.now().month,event_type_id=1,
+            login_count=1)
+   
+
+        # print("-------------------", count_eng_usr_month)
+        # print("*******************>", new_usr_month)
         # print("into get_monthly_data = > ", list_log_record)
 
 
-    except pymssql.Error as error:
+    except pyodbc.Error as error:
 
         print("Error while fetching data from SQL", error)
 
@@ -729,47 +771,58 @@ def get_daily_data():
 
         cursor = connection.cursor()
 
-        SQL_select_Query = 'SELECT * from dbo.daily_data_view;'
-        cursor.execute(SQL_select_Query)
-        log_record = cursor.fetchall()
-        # print("in daily data- ", log_record)
-        list_log_record = [list(tp) for tp in log_record]
+        # SQL_select_Query = 'SELECT * from dbo.daily_data_view;'
+        # cursor.execute(SQL_select_Query)
+        # log_record = cursor.fetchall()
+        # # print("in daily data- ", log_record)
+        # list_log_record = [list(tp) for tp in log_record]
 
         cur_eng_usr = connection.cursor()
 
         cur_new_usr = connection.cursor()
 
-        # wr_answer_cnt = Log.objects.all().filter(user_datetime__date=datetime.now().date(), event_type_id='3').count()
-        # rt_answer_cnt = Log.objects.all().filter(user_datetime__date=datetime.now().date(), event_type_id='4').count()
-        # no_answer_cnt = Log.objects.all().filter(user_datetime__date=datetime.now().date(), event_type_id='5').count()
-        #
-        # log_record = [('Right Answer', datetime.now().date(), rt_answer_cnt),
-        #               ('No Answer', datetime.now().date(), no_answer_cnt),
-        #               ('Wrong Answer', datetime.now().date(), wr_answer_cnt)]
-        # list_log_record = [list(tp) for tp in log_record]
+        wr_answer_cnt = Log.objects.all().filter(user_datetime__gte=timezone.now().replace(hour=0, minute=0, second=0),user_datetime__lte=timezone.now().replace(hour=23, minute=59, second=59), event_type_id='3').count()
+        rt_answer_cnt = Log.objects.all().filter(user_datetime__gte=timezone.now().replace(hour=0, minute=0, second=0),user_datetime__lte=timezone.now().replace(hour=23, minute=59, second=59), event_type_id='4').count()
+        no_answer_cnt = Log.objects.all().filter(user_datetime__gte=timezone.now().replace(hour=0, minute=0, second=0),user_datetime__lte=timezone.now().replace(hour=23, minute=59, second=59), event_type_id='5').count()
+        
+        log_record = [('Right Answer', datetime.now().date(), rt_answer_cnt),
+                      ('No Answer', datetime.now().date(), no_answer_cnt),
+                      ('Wrong Answer', datetime.now().date(), wr_answer_cnt)]
+        list_log_record = [list(tp) for tp in log_record]
 
-        eng_select_Query = 'SELECT * from dbo.daily_eng_users_view;'
-        cur_eng_usr.execute(eng_select_Query)
+        # eng_select_Query = 'SELECT * from dbo.daily_eng_users_view;'
+        # cur_eng_usr.execute(eng_select_Query)
 
-        count_eng_users = cur_eng_usr.fetchall()
+        # count_eng_users = cur_eng_usr.fetchall()
 
-        new_select_Query = 'SELECT * from dbo.daily_new_users_view;'
-        cur_new_usr.execute(new_select_Query)
-        new_users = cur_new_usr.fetchall()
+        # new_select_Query = 'SELECT * from dbo.daily_new_users_view;'
+        # cur_new_usr.execute(new_select_Query)
+        # new_users = cur_new_usr.fetchall()
 
         # count_eng_users = Log.objects.values('user_email').annotate(login_count=Count('user_email')).filter(
         #     user_datetime__date=datetime.now().date(),
         #     login_count=2)
-        #
+        
         # _usr = Log.objects.values('user_email').annotate(login_count=Count('event_type_id')).filter(login_count=1)
         # new_users = Log.objects.filter(user_email__in=[item['user_email'] for item in _usr],
         #                                user_datetime__date=datetime.now().date())
         # print("-------------------", count_eng_users)
         # print("*******************>", new_users)
 
+        count_eng_users = Log.objects.values('user_email').annotate(login_count=Count('user_email')).filter(
+        event_type_id=1,login_count__gt=1, user_datetime__gte=timezone.now().replace(hour=0, minute=0, second=0),user_datetime__lte=timezone.now().replace(hour=23, minute=59, second=59))
 
 
-    except pymssql.Error as error:
+        new_users = Log.objects.values('user_email').annotate(login_count=Count('user_email')).filter(
+            event_type_id=1,user_datetime__gte=timezone.now().replace(hour=0, minute=0, second=0),user_datetime__lte=timezone.now().replace(hour=23, minute=59, second=59),
+            login_count=1)
+
+        # print("-------------------", count_eng_users)
+        # print("*******************>", new_users)
+
+        # self.filter(location=location_id, start_gte=timezone.now().replace(hour=0, minute=0, second=0), end_lte=timezone.now().replace(hour=23, minute=59, second=59))
+
+    except pyodbc.Error as error:
 
         print("Error while fetching data from SQL", error)
 
@@ -813,7 +866,7 @@ def get_total_event_cnt():
 
         total_desc_cnt = [list(tp) for tp in desc_total_cnt]
 
-    except pymssql.Error as error:
+    except pyodbc.Error as error:
 
         print("Error while fetching total_desc_cnt from SQL", error)
 
@@ -836,7 +889,8 @@ def daily_charts(request):
     users_list = User.objects.filter(is_superuser=False)
 
     data, eng_usr_daily, new_usr_daily = get_daily_data()
-#     wr_day, rt_day, no_day = daily_wrn_count()
+    print("data, eng_usr_daily, new_usr_daily ", data, eng_usr_daily, new_usr_daily)
+    #     wr_day, rt_day, no_day = daily_wrn_count()
     tot_ans_cnt = get_total_event_cnt()
     # print("tot_ans_cnt_wr =============== ", tot_ans_cnt[0])
 
@@ -856,8 +910,8 @@ def daily_charts(request):
     _, reset_month = reset_count()
     _, live_month = live_count()
 
-    reset = Log.objects.all().filter(user_datetime__date=datetime.now().date(), event_type_id='7').count()
-    live = Log.objects.all().filter(user_datetime__date=datetime.now().date(), event_type_id='6').count()
+    reset = Log.objects.all().filter(user_datetime__gte=timezone.now().replace(hour=0, minute=0, second=0),user_datetime__lte=timezone.now().replace(hour=23, minute=59, second=59), event_type_id='7').count()
+    live = Log.objects.all().filter(user_datetime__gte=timezone.now().replace(hour=0, minute=0, second=0),user_datetime__lte=timezone.now().replace(hour=23, minute=59, second=59), event_type_id='6').count()
 
     # print("""================================= in daily charts =================================""")
     # total_usr_daily = Log.objects.filter(user_datetime__date=datetime.now().date()).values(
@@ -1106,8 +1160,7 @@ def daily_charts(request):
 
         'line_chart': line_dump,
 
-
-         'no_answer': "No Answer", 'no_answer_count': no_ans_data[0],
+        'no_answer': "No Answer", 'no_answer_count': no_ans_data[0],
 
         'rt_answer': "Right Answer", 'rt_answer_count': right_ans_data[0],
 
@@ -1139,7 +1192,7 @@ def monthly_charts(request):
     reset, reset_month = [], []
 
     data, eng_usr_monthly, new_usr_monthly = get_monthly_data()
-#     wr_mon, rt_mon, no_mon = monthly_wrn_count()
+    #     wr_mon, rt_mon, no_mon = monthly_wrn_count()
     tot_ans_cnt = get_total_event_cnt()
 
     _, live_month = live_count()
@@ -1183,8 +1236,6 @@ def monthly_charts(request):
                     if dt[0] == 'No Answer': temp[2] = dt[2]
 
         edict[i] = temp
-
-    # print(edict)
 
     for key, value in edict.items():
         right_ans_data.append(value[0])
@@ -1400,11 +1451,11 @@ def monthly_charts(request):
 
         'line_chart': line_dump,
 
-#         'no_answer': "No Answer", 'no_answer_count': no_mon,
+                # 'no_answer': "No Answer", 'no_answer_count': no_mon,
 
-#         'rt_answer': "Right Answer", 'rt_answer_count': rt_mon,
+                # 'rt_answer': "Right Answer", 'rt_answer_count': rt_mon,
 
-#         'wr_answer': "Wrong Answer", 'wr_answer_count':   wr_mon,
+                # 'wr_answer': "Wrong Answer", 'wr_answer_count':   wr_mon,
         'no_answer': "No Answer", 'no_answer_count': no_ans_data[0],
 
         'rt_answer': "Right Answer", 'rt_answer_count': right_ans_data[0],
@@ -1693,7 +1744,7 @@ def users(request):
         html += '<tr><td colspan=3>No Users Found</td></tr>'
         context = {
             'report_html': html,
-            # 'depart_name': request.session['depart']
+            'depart_name': request.session['depart']
         }
         return render(request, 'home/user_admin.html', context)
     else:
@@ -1725,7 +1776,7 @@ def users(request):
             'reports': temp_list,
             'user_list': users_list,
             'report_html': html,
-            # 'depart_name': request.session['depart']
+            'depart_name': request.session['depart']
         }
         return render(request, 'home/user_admin.html', context)
 
@@ -1791,14 +1842,10 @@ def index(request):
 
             if i["report_name"] not in temp_list:
                 temp_list.append(i["report_name"])
-        
-        print("#################################################################SESSION", request.session)
-        for key, value in request.session.items():
-            print("session key value pair", key, value)
 
         return render(request, 'home/index_admin.html', {'userlist': users_list, 'reports': temp_list,
-                                                         'depts': departments,})
-                                                        #  'depart_name': request.session['depart']})
+                                                         'depts': departments})
+        # 'depart_name': request.session['depart']})
 
     else:
 
@@ -1811,10 +1858,8 @@ def index(request):
             if i["report_name"] not in temp_list and i['assigned_to'] == current_user.id:
                 temp_list.append(i["report_name"])
 
-        return render(request, 'home/user_adoreta.html',
-                      {'reports': temp_list,
-                    #   'depart_name': request.session['depart']
-                      })
+        return render(request, 'home/user_adoreta.html', {'reports': temp_list})
+        # {'reports': temp_list, 'depart_name': request.session['depart']})
 
 
 @csrf_protect
@@ -1867,6 +1912,7 @@ def index_admin(request):
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def dept_register(request):
     session_dept = request.session['depart']
+    print("session_dept - ", session_dept)
     reg_user = request.user
     if reg_user is not None:
         name_title = reg_user.username
@@ -2000,6 +2046,9 @@ def get_dept_data(request, department_name):
         #
         # dept_new_users = Log.objects.filter(user_email__in=[item['user_email'] for item in _usr],
         #                                     intent=department_name, event_type_id='1')
+
+        rt_answer = Log.objects.filter(intent=department_name).filter(event_type_id='4')
+        # print("<------------>", rt_answer)
 
         _usr = Log.objects.values('user_email').annotate(login_count=Count('event_type_id')).filter(
             intent=department_name)
@@ -2237,9 +2286,279 @@ def deptwise_usrlist(request):
     did = Department.objects.get(department=request.session['depart'])
     dept_usr_list = DepartmentAdminUser.objects.filter(department=did)
 
-    # print("dept_usr_list >>> ", dept_usr_list)
     context = {
         'dept_usr_list': dept_usr_list,
         'depart_name': request.session['depart']
     }
     return render(request, 'home/dpt_usrlist.html', context)
+
+
+
+def upload_csv(request):
+    global url_nm, result, ext_
+    if request.method == 'POST':
+        ## file upload
+        form = UploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            qdict = QueryDict('', mutable=True)
+            qdict.update(request.FILES)
+            pdf_path = 'media' + os.sep + 'documents'
+            if os.path.exists('csv_files') and len('xml_files') > 0:
+                for i in os.listdir('csv_files'):
+                    if i.endswith('.csv'):
+                        print("csv> ", i)
+                        os.remove('csv_files' + os.sep + i)
+            
+            else:
+                os.mkdir('csv_files')
+     
+        else:
+            form = UploadForm()
+            context = {
+                'color': "green",
+                'msg': 'file uploaded successfully!!!',
+                'depart_name': request.session['depart'],
+                'admin_type': request.session['admin_type'],
+                'form': form,
+            }
+            return render(request, 'home/upload.html', context)
+    
+    context = {
+                # 'color': "red",
+                # 'msg': 'Error while uploading file',
+                'depart_name': request.session['depart'],
+                'admin_type': request.session['admin_type'],
+        }
+    html_template = loader.get_template('home/upload.html')
+    return HttpResponse(html_template.render(context, request))
+
+#def pdf_link_extract(pdf_name):
+#     link_regex = re.compile("((https?):((//)|(\\\\))+([\w\d:#@%/;$()~_?\+-=\\\.&](#!)?)*)",
+#                             re.DOTALL)  ## for pdf link extract
+#     text = extract_text(pdf_name)
+#     lst_links = re.findall(link_regex, text)
+#     return lst_links
+
+# def parse_jsonfile(json_path):
+#     res, keys = '', ''
+#     # print("parse_jsonfile_name-", json_path)
+#     # try:
+#     with open(json_path, 'r', encoding='utf-8') as f:
+#         # with open(filename, encoding='utf-8') as f:
+#         #     data = json.load(r'f')
+
+#         try:
+#             data = json.loads(f.read())
+#             # print("data - ", data)
+#             json_data = json.dumps(data)
+#             res = validateJSON(json_data)
+#             print(">>>", res)
+#             jsonData = data["assets"]
+#             print("in file ")
+#             for x in jsonData:
+#                 keys = x.keys()
+#             return res, keys
+#         except:
+#             return False, None
+
+# def fetch_xml_tag(xml_file):
+#     xmlTree = ET.parse(xml_file)
+#     elemList = []
+#     for elem in xmlTree.iter():
+#         elemList.append(elem.tag)
+#     elemList = list(set(elemList))
+#     return elemList
+
+
+# def url_xml_val(url, xml_dir):
+#     url_nm = url.rsplit('/', 1)[1]
+#     data = requests.get(url)
+#     xml_file = xml_dir + os.sep + url_nm
+#     with open(xml_file, 'wb') as xml_:
+#         xml_.write(data.content)
+#         print("xml_file- ", xml_file)
+#         tag_lst = fetch_xml_tag(xml_file)
+#         try:
+#             parsefile(url)
+#             print("XML is well-formed", url)
+#         except:
+#             print("XML is NOT well-formed!", url)
+
+#     return url, tag_lst
+
+
+# def url_json_val(url):
+#     url_nm = url.rsplit('/', 1)[1]
+#     with urllib.request.urlopen(url) as url_link:
+#         data = json.loads(url_link.read().decode())
+#         json_data = json.dumps(data)
+#         result = validateJSON(json_data)
+#         jsonData = data["assets"]
+#         for x in jsonData:
+#             keys = x.keys()
+#         json_file = 'json_files' + os.sep + url_nm
+#         with open(json_file, 'w', encoding='utf-8') as json_:
+#             json.dump(data, json_)
+#     return result, jsonData, keys
+
+
+# def validate_url(request):
+#     global url_nm, result, ext_, url_path, get_tag, url
+#     if request.method == 'POST':
+#         url = request.POST.get('url')
+#         get_tag = request.POST.getlist('tag_lst')
+#         print(">>**", url)
+#         print("****", get_tag)
+#         result = ''
+
+#         ## fro file upload
+#         form = UploadForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+
+#             # print("request.FILES - ", request.FILES['file'])
+#             # print("type  ", type(request.FILES['file']))
+
+#             ln = str(Upload.objects.last())
+#             print(">>", ln)
+#             ext_ = ln.split('.')[1]
+#             if ext_ == 'xml':
+#                 print("xml file ", ln)
+
+#                 try:
+#                     parsefile('media/' + ln)
+#                     tag_lst = fetch_xml_tag('media/' + ln)
+#                     print("XML is well-formed", ln)
+
+#                     context = {
+#                         'color': "green",
+#                         'msg': ln + '- is valid!',
+#                         'tag_lst': tag_lst,
+#                     }
+#                     return render(request, 'home/upload.html', context)
+
+#                 except:
+#                     print("XML is NOT well-formed!", ln)
+
+#                     context = {
+#                         'color': "red",
+#                         'msg': ln + '- is invalid!',
+
+#                     }
+#                     return render(request, 'home/upload.html', context)
+
+#             elif ext_ == 'json':
+#                 result, keys = parse_jsonfile('media/' + ln)
+#                 if result:
+#                     context = {
+#                         'tag_lst': keys,
+#                         'color': 'green',
+#                         'msg': ln + '- is valid!',
+#                     }
+#                     return render(request, 'home/upload.html', context)
+#                 else:
+#                     context = {
+#                         'color': 'red',
+#                         'msg': ln + '- is invalid!',
+#                     }
+#                 return render(request, 'home/upload.html', context)
+
+#         if url:
+#             ext_ = url.split('.')[-1]
+
+#             if ext_ and url and ext_ == 'xml':
+
+#                 # os.remove('xml_files')
+#                 # os.mkdir('xml_files')
+#                 url, tag_lst = url_xml_val(url, 'xml_files')
+#                 context = {
+#                     'color': "green",
+#                     'msg': url + '- is valid!',
+#                     'tag_lst': tag_lst,
+#                     # 'msg1': 'from' + " " + url_nm + 'you have selected_tag(s)-' + " ".join(get_tag),
+#                 }
+#                 return render(request, 'home/upload.html', context)
+
+#             elif ext_ and url and ext_ == 'json':
+
+#                 result, jsonData, keys = url_json_val(url)
+
+#                 context = {
+#                     'tag_lst': keys,
+#                     'color': 'green',
+#                     'msg': url + '- is valid!',
+#                 }
+#                 return render(request, 'home/upload.html', context)
+
+#         elif get_tag:
+#             context = {
+#                 'color': "green",
+#                 'msg': 'you have selected a tag(s)-' + " ".join(get_tag),
+#             }
+#             return render(request, 'home/upload.html', context)
+
+#         else:
+#             form = UploadForm()
+#             context = {
+#                 'color': "red",
+#                 'msg': str(url) + '- is invalid!',
+#                 'form': form,
+#             }
+#             return render(request, 'home/upload.html', context)
+
+#     return render(request, 'home/upload.html')
+
+
+
+
+# def get_wr_ans(request):
+#     wr_ans_lst = Log.objects.filter(event_type_id='3').values()
+#     # print("------------", wr_ans_lst)
+#     context = {
+#     'wrong_que_ans' : wr_ans_lst
+#     }
+#     return render(request, 'home/wrong_ans_update.html', context)
+
+# def update_wr_ans(request):
+#     print("iiiiiiiiiiii")
+#     quest = request.POST.get('question')
+#     ans = request.POST.get('ans')
+#     # if request.POST.get('expected_ans') == '':
+#     #     ans = request.POST.get('ans')
+#     # else:
+#     #     ans = request.POST.get('expected_ans')
+    
+#     data = UpdatedAnswer(question=quest, expected_ans=ans)
+#     data.save()
+#     return redirect('/')
+
+# def get_rt_ans(request):
+#     current_user = request.user
+#     # print("-------------", current_user)
+#     # user_data = DepartmentAdminUser.objects.values("user", "usertype", "department").filter(user=current_user)
+
+#     user_data = DepartmentAdminUser.objects.filter(user=current_user)                                      
+#     department = user_data.values('department')
+
+#     # print("dept_name---", department)
+#     rt_ans_lst = Log.objects.filter(event_type_id='4').values()
+
+ 
+#     context = {
+#     'rt_answer_list' : rt_ans_lst
+#     }
+#     return render(request, 'home/rt_ans_filter.html', context)
+
+# def update_rt_ans(request):
+#     print("iiiiiiiiiiii")
+#     quest = request.POST.get('question')
+#     ans = request.POST.get('ans')
+#     # if request.POST.get('expected_ans') == '':
+#     #     ans = request.POST.get('ans')
+#     # else:
+#     #     ans = request.POST.get('expected_ans')
+    
+#     data = UpdatedAnswer(question=quest, expected_ans=ans)
+#     data.save()
+#     return redirect('/')

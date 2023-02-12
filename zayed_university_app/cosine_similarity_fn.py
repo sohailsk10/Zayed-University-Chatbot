@@ -52,7 +52,7 @@ def cosine_similarity_fn(new_df, questions_asked_vec, questions_vec):
         else:
             score = dump_score
 
-    print("score", score)
+    # print("score", score)
     
 
     ans_disp = ""
