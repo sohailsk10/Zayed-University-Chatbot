@@ -47,31 +47,29 @@ from django.template import loader
 from django.urls import reverse
 from django.contrib import messages
 
+
 EXTENSTION_LIST = ["JPG", "PDF", "DOC", "PNG", "DOCX", "GIF", "XLSX", "JPEG", "ASPX", "ASP"]
 
+workspace_id = 'lMpsX8-ivT4J5jaAZRo4cNUnotfqOO-_Vp2zia532An5'
+workspace_url = 'https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/dbb25da5-56bd-4b0c-ac66-62db88b266a6'
+assistant_id_eng = '20a3ca09-8ae6-4c62-ae83-b9f9d1f7e394'
+assistant_url = 'https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/dbb25da5-56bd-4b0c-ac66-62db88b266a6'
+assistant_id_ar = '67525f3e-6b3d-4474-a957-dfe0ee55730f'
+assistant_id_crawl = '498b1e0a-15c0-47c9-9204-829053559b00'
+assistant_crawl_json_id = '4c8f53fc-7293-43dd-970c-fba16887b8b2'
+
+global assistant
+authenticator = IAMAuthenticator(workspace_id)
+assistant = AssistantV2(version='2021-06-14', authenticator=authenticator)
+assistant.set_service_url(assistant_url)
+
 tag_model = SentenceTransformer('bert-base-nli-mean-tokens')
-# kw_model = KeyBERT(model='all-mpnet-base-v2')
-
-TAG_DF = pd.DataFrame(list(Tag_QA.objects.all().values()))
-
-try:
-    TAG_DF['q_tag'] = np.arange(len(TAG_DF))
-    TAG_DF['title'] = TAG_DF['question']
-    TAG_DF['path'] = TAG_DF['answer']
-    TAG_DF['bert_keyword'] = TAG_DF['keywords']
-    print("TAGDF", TAG_DF.head())
-
-    TAG_QUESTION_VEC = tag_model.encode(TAG_DF['title'])
-except:
-    pass
-
 model = SentenceTransformer('bert-base-nli-mean-tokens')
 kw_model = KeyBERT(model='all-mpnet-base-v2')
 
 all_csv_ = []
 q_tag = 0
 file_path = r"zayed_university_app/remove_404_csv"
-# file_path = r"zayed_university_app/Gcd_files_csv"
 csv_files = glob.glob(os.path.join(file_path, "*.csv"))
 for f in csv_files:
     df = pd.read_csv(f)
@@ -88,23 +86,17 @@ for f in csv_files:
                 created_on = row['created_on']
         except:
             title = row['ServiceName']
-            path = row['GeneratedLink']
+            path = row['ServiceUrl']
             created_on = 1
 
         all_csv_.append([q_tag, title, path, created_on])
         q_tag += 1
 
 NEW_DF = pd.DataFrame(all_csv_, columns=['q_tag', 'title', 'path', 'timestamp'])
-# print(NEW_DF.head())
-print("IN Encoding")
-# QUESTION_VEC = loadtxt('QUESTION_VEC.csv', delimiter=',')
-# QUESTION_VEC = model.encode(NEW_DF['path'])
-# np.save('data.npy', QUESTION_VEC)
-QUESTION_VEC = np.load('data.npy')
-# savetxt('QUESTION_VEC_ZUCC.csv', QUESTION_VEC, delimiter=",")
-print("Encoding Done")
-
-
+NEW_DF.to_csv('NEW_DF.csv')
+print("[#] IN Encoding")
+QUESTION_VEC = np.load('zu_data_encode.npy')
+print("[#] Encoding Done")
 
 nltk.download('stopwords')
 _stop_words = stopwords.words('english')
@@ -119,7 +111,6 @@ def remove_custom(_char, _list):
             pass
 
     return _list
-
 
 
 def string_similarity(str1, str2):
@@ -150,14 +141,6 @@ def list_to_str(_list):
     return _str
 
 
-workspace_id = 'lMpsX8-ivT4J5jaAZRo4cNUnotfqOO-_Vp2zia532An5'
-workspace_url = 'https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/dbb25da5-56bd-4b0c-ac66-62db88b266a6'
-assistant_id_eng = '20a3ca09-8ae6-4c62-ae83-b9f9d1f7e394'
-assistant_url = 'https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/dbb25da5-56bd-4b0c-ac66-62db88b266a6'
-assistant_id_ar = '67525f3e-6b3d-4474-a957-dfe0ee55730f'
-assistant_id_crawl = '498b1e0a-15c0-47c9-9204-829053559b00'
-assistant_crawl_json_id = '4c8f53fc-7293-43dd-970c-fba16887b8b2'
-
 cont = {}
 translator = ''
 # assistant = ''
@@ -180,11 +163,6 @@ def cleanhtml(raw_html):
     return cleantext
 
 
-global assistant
-authenticator = IAMAuthenticator(workspace_id)
-assistant = AssistantV2(version='2021-06-14', authenticator=authenticator)
-assistant.set_service_url(assistant_url)
-
 
 def get_data(_dict):
     return _dict['event_type'], _dict['event_question'], _dict['user_email']
@@ -194,12 +172,14 @@ def string_similarity(str1, str2):
     result = SequenceMatcher(a=str1.lower(), b=str2.lower())
     return result.ratio()
 
+
 def remove_duplicates(input_list):
     output_list = []
     for item in input_list:
         if item not in output_list:
             output_list.append(item)
     return output_list
+
 
 @csrf_exempt
 def get_response_from_watson(request):
@@ -252,8 +232,6 @@ def get_response_from_watson(request):
         print("assistant_id_eng")
 
     res = response.get_result()
-    # print('RESPONSE ', res)
-
     try:
         res_conf = res['output']['intents'][0]['confidence']
         print("CONF", res_conf)
@@ -306,41 +284,43 @@ def get_response_from_watson(request):
         questions_asked_vec = tag_model.encode(questions_asked)
         # questions_asked_vec = loadtxt('questions_asked_vec.csv', delimiter=',')
         try:
+            TAG_QUESTION_VEC = np.load("TAG_QUESTION_VEC.npy")
+            TAG_DF = pd.DataFrame(list(Tag_QA.objects.all().values()))
+            TAG_DF['q_tag'] = np.arange(len(TAG_DF))
+            TAG_DF['title'] = TAG_DF['question']
+            TAG_DF['path'] = TAG_DF['answer']
+            TAG_DF['bert_keyword'] = TAG_DF['keywords']
+            print("TAG DF LOADED", TAG_DF.head())
+            # res, res_list, conf = cosine_similarity_fn(TAG_DF, questions_asked_vec, TAG_QUESTION_VEC)
             res, res_list, conf = cosine_similarity_fn(TAG_DF, questions_asked_vec, TAG_QUESTION_VEC)
-        except:
+        except Exception as e:
+            print(e)
             conf = 0.0
         print("conf", conf)
-        if conf < 0.65:
+        if conf < 0.75:
             print("Checking on every file because of low confidence")
             questions_asked_vec = model.encode(questions_asked)
+            
             res, res_list, conf = cosine_similarity_fn(NEW_DF, questions_asked_vec, QUESTION_VEC)
-        print("#1", len(res_list), res_list)
         res_list = remove_duplicates(res_list)
-        print(res_list)
-        # res_list = list(set(res_list))
-        # print("#2", len(res_list))
-        print("res", res)
-        # print("res_list", res_list)
         main_df = pd.DataFrame(res_list, columns=['path'])
-        main_df.to_csv("Main_df.csv")
         main_df = main_df.drop_duplicates(subset="path", keep="last")
-        # main_df = main_df.drop_duplicates()
-        print(main_df.head(5))
+        # print(main_df.head(5))
         top_df1 = main_df.head(5).values.tolist()
         final_df = []
-        temp = True
         for i in res_list:
-            for j in EXTENSTION_LIST:
-                if j.upper() in i.upper() and temp:
-                    temp = False
-                    final_df.append(i)
-            if temp:
-                final_df.append(i + ".aspx")
+            if 'https://eservices.zu.ac.ae' in i:
+                final_df.append(i)
+            else:
+                temp = True
+                for j in EXTENSTION_LIST:
+                    if j in i.split("/")[-1].upper() and temp:
+                        temp = False
+                        final_df.append(i)
+                        break
+                if temp:
+                    final_df.append(i + ".aspx")
         final_df = final_df[:5]
-        print("final_df", final_df)
-        # top_df1 = [i[0] + ".aspx" for i in top_df1]
-        # top_df1 = [i[0] if  in i[0]  else i[0] + ".aspx" for i in top_df1]
-
 
         df1_str = ""
         for i in final_df:
@@ -578,21 +558,7 @@ def export_excel(request):
     return HttpResponse("No Data Found.")
 
 
-# # Automatically downloads Filtered PDF file
-# class FilterPDF(LoginRequiredMixin, View):
 
-#     def get(self, request, *args, **kwargs):
-#         global log_exp
-
-#         context = {
-#             'log_': log_exp,
-#         }
-#         pdf = render_to_pdf('home/filter_template.html', context)
-#         if pdf:
-#             return HttpResponse(pdf, content_type='application/pdf')
-#         return HttpResponse("PDF Not Found.")
-
-# Automatically downloads Filtered PDF file
 class FilterPDF(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         global log_exp
@@ -666,7 +632,6 @@ def filter_excel(request):
     if wb:
         return response
     return HttpResponse("No Data Found.")
-
 
 
 @login_required
@@ -754,9 +719,8 @@ def get_keyword_KeyBERT(text):
                                         highlight=False,
                                         top_n=10)
     keywords_list= list(dict(keywords).keys())
+    keywords_list = ','.join(keywords_list)
     return keywords_list
-
-
 
 
 @login_required
@@ -775,6 +739,11 @@ def get_plain_string(_string):
     return ''.join(e for e in _string if e.isalnum())
 
 
+class NumpyEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        return json.JSONEncoder.default(self, obj)
 
 
 @login_required
@@ -812,14 +781,12 @@ def get_tag_qa(request, id):
             for j  in i.split(' '):
                 temp += get_plain_string(j) + " "
             temp_add_key.append(temp)
-        # print("temp_add_key - ", temp_add_key)
         mix_list = temp_ex_key + temp_add_key
         mix_list = list_to_str(mix_list)
         mix_list = mix_list.lower().replace("zayed", "")
         mix_list = mix_list.lower().replace("university", "")
         answer = request.POST['ans']
         ctype = request.POST.getlist('ctype')
-        # print(">>>>>>>", ctype)
         save_data = Tag_QA(
             question=question,
             keywords= mix_list,
@@ -827,6 +794,16 @@ def get_tag_qa(request, id):
             category = ctype)
 
         save_data.save()   
+        TAG_DF = pd.DataFrame(list(Tag_QA.objects.all().values()))
+        TAG_DF['q_tag'] = np.arange(len(TAG_DF))
+        TAG_DF['title'] = TAG_DF['question']
+        TAG_DF['path'] = TAG_DF['answer']
+        TAG_DF['bert_keyword'] = TAG_DF['keywords']
+        print("TAGDF", TAG_DF.head())
+        TAG_QUESTION_VEC = tag_model.encode(TAG_DF['title'])
+        np.save('TAG_QUESTION_VEC.npy', TAG_QUESTION_VEC)
+        
+
         messages.success(request, "record updated sucessfully!!!")
         context = {
             'depart_name': depart_name,
@@ -838,7 +815,7 @@ def get_tag_qa(request, id):
          'event_type_id' : event_type_id,
          'user_email' : user_email,
          'event_question' : event_question,
-         'event_answer' : event_answer,
+         'event_answer' : event_answer.strip(),
          'intent' : intent,
          'keyword_list':keyword_lst,
          'categories':categories,
@@ -861,10 +838,9 @@ def get_tag_qa_1(request):
     }
     return render(request, 'home/tag_qa_update.html', context)
 
+
 def get_child_categories(request, parent):
-    # print(">>", parent)
     categories =  QA_Category.objects.filter(parent_id = parent)
-    # print("---", len(categories), categories)
     data = serialize("json",categories, fields=('id', 'description'))
     return HttpResponse(data, content_type="application/json")
 

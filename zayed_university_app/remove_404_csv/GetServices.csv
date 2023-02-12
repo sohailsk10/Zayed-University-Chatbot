@@ -1,0 +1,765 @@
+ServiceName,ServiceCode,GeneratedLink,Description,Procedures,TargetAudience,ServiceTime,ServiceFee,ServiceLocation,ServiceContact,SDGoals,title,name,path,keywords,ServiceUrl,IconFileUrl,DescriptionTrimmed,ServiceID
+Academic Advising,AD-001,,"Academic Risk Management (ARM) is a web-based advising system where students can schedule an appointment to meet their advisors. Also, students can attain academic support services such as PALs.
+It is an easy and effective service that allows students to follow their academic performance and identify their strengths and weaknesses in their academic performance in advance. This system is also providing management of students’ advising appointments, records meetings reports, identify students during academic assessments, and first-year duration, as well as provide internal training and career path guidance. 
+The most important features of ARM:
+• Students can check their assigned advisors when they need to make an appointment
+• ARM provides early warning notifications for students that may be at-risk academically.
+• Students can access their academic reports related to advising services.
+ •Contact students through emails
+ •Obtain academic support services such as PALs, Al Waha center, and Math Café
+ •Follow the progress of students during their assessments to improve the success criteria
+ •The system is effective and easy to use","1. Login with your ZU ID and password    
+2. Click on Start button     
+3. Fill in the appointment form for your preferred date/time      
+4. Submit the request form
+5. Get Confirmation on the Date/Time from the advisor by Email   
+6. Meet the advisor online",['7'],The average time to make an appointment is 2 mintues.,N/A,Through online meeting Zoom and MS Teams.,Email us at: Student_Success@zu.ac.ae,"Zayed University provides high quality of advising services to support the students in education journey required to realize a sustainable society. We are at ZU promoting efforts to create common values with society, including the discovery and prevention of risks. The ZU analyzes our contributions to the sustainable development goals and the impacts on our long-term growth from the areas of the quality education, reduced inequalities and good health and wellbeing. 
+
+
+Sustainable Development Goal:  	Rationale to advising services
+Quality Education:                    	The advising services ensure to allow students to have high quality of education
+Reduced inequalities:	                The advising services are available and can be easily obtained by any student at ZU regardless of their personalities and background
+Good health and wellbeing:	        The advising services increase the wellbeing of students when they have the necessary support from their advisors
+
+",Academic Advising,AD-001,NA,Academic Advising,https://eservices.zu.ac.ae/Service/en/Card/Academic-Advising,https://eservices.zu.ac.ae/Content/Icons/44e50a94-e2c1-4146-98b3-db3a1176fd05.png,Academic Risk Management (ARM) is a web-based advising system where students can schedule an appoint...,75
+Admission Acceptance Offer ,AAO,https://admission.zu.ac.ae/Welcome,"This is an online link of the Admission Offer. This link is sent to admitted students through email and SMS message to confirm acceptance of the admission offer, update personal data, confirm reading ZU student handbook, agree on ZU policies and procedures related to confidentiality of data, off campus trips, and registration in SMS messages.","1- Student data is downloaded from NAPO/MOE system
+2- An online link is sent to all admitted students
+3- Student press the link, enter the verification code 
+4- Student confirm personal data, read student handbook, and agree to ZU policies and procedures related to confidentiality of data, off campus trips, and conditional offers. ",['7'],After the official release of admission results by MOE,0,Online link,DXB_admission[@]zu.ac.ae.  AUH_admission[@]zu.ac.ae.,"Goal 4: Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all
+
+This service allows students to pursue a higher education degree that equips them with the knowledge, skills and competences that are needed for effective contribution to the social and economic development of the country. Maximizing participation in higher education will lead to more intellectual, competent and innovative citizens who would be able to compete effectively in the increasingly competitive and complex global market  ",Admission Acceptance Offer ,AAO,https://www.zu.ac.ae/mainhttps://admission.zu.ac.ae/Welcome,Admission Acceptance Offer ,https://eservices.zu.ac.ae/Service/en/Card/Admission-Acceptance-Offer-,https://eservices.zu.ac.ae/Content/Icons/851d549b-7b43-458f-81c4-49b4741636e4.png,This is an online link of the Admission Offer This link is sent to admitted students through email a...,89
+Admission for International Students,Adm-06,https://application.zu.ac.ae/,All international students(Non-Emirati and/or students who do not have a UAE family book),"1.	Click on “Apply Now” 
+2.	Fill the required fields to create a profile.
+3.	Complete the expressions part of the application (5 questions interview).
+4.	Complete the writing part of the application.
+5.	Complete all other sections of the application.
+6.	Click on “Submit Application”.
+",['7'],3-4 Weeks,262.50 AED,"Admission office
+Zayed University  
+Dubai campus: Main entrance 
+Abu Dhabi campus: Gate 2 for female students , Gate 5 for male students.","DXB Campus email: ug_admissions@zu.ac.ae - DXB Tel no: 04- 4021444. AUH Campus email: ug_admissions@zu.ac.ae -AUH Tel no: 02- 5993593
+
+",,Admission for International Students,Adm-06,https://www.zu.ac.ae/mainhttps://application.zu.ac.ae/,Admission for International Students,https://eservices.zu.ac.ae/Service/en/Card/Admission-for-International-Students,https://eservices.zu.ac.ae/Content/Icons/ee9c6957-8f3d-41da-99b6-ca5b82e4dd44.png,All international students(Non-Emirati and/or students who do not have a UAE family book),90
+Alumni ID Card,SCO-G-1,,"Alumni ID card has now been digitalised. Graduates may apply for the electronic Alumni ID card online and receive it via link on their registered personal e-mail. The e-card may be used to access ZU campus,  the privilege of the benefits from the community and to apply for Fazaa Card. 
+
+Note: Kindly  check the alumni webpage for all new offers, as new benefits gets added from time to time
+","•	Click on e-services tab on ZU Official Website 
+•	Click on “Alumni ID Card” to apply for the Alumni ID Card 
+•	Click on “Login”, log in using your Username (ZU ID number) and Password 
+Incase you have not used your account for a long period of time, the system will send you a re-activation link to their registered personal e-mail address to reactivate it 
+
+Note: In case you do not recall your password, click on “Reset Password”, a new password will be sent to your personal e-mail. 
+Re-log in using the new password sent by the system through e-mail. This is the password that you will be required to use every time He/She logins in. 
+•	Fill the form to apply 
+•	Fill the survey 
+•	Click on “Submit”
+Your Alumni ID e-Card wil be sent to you via link on your registered personal e-mail ",['5'],24 to 48 working hours once the request is submitted ,0 AED,"Student and Alumni Careers Office - Zayed University
+
+Dubai Campus - located in block E.
+
+Abu Dhabi Campus - located on the ground floor of the Administration building. ",Alumni[@]zu.ac.ae.,,Alumni ID Card,SCO-G-1,NA,Alumni ID Card,https://eservices.zu.ac.ae/Service/en/Card/Alumni-ID-Card,https://eservices.zu.ac.ae/Content/Icons/586847ba-85ca-48ce-8374-cdd012420308.png,Alumni ID card has now been digitalised Graduates may apply for the electronic Alumni ID card online...,4
+Application for Graduate Program Admission,GS-1-APPGRAD, https://apply.zu.ac.ae/Ellucian.ERecruiting.Web.External/Pages/Welcome.aspx,Application for Graduate Program Admission,"1.	Click ""Start"" to be redirected to the Application for Graduate Program Admission. 
+2.	If you are already registered, please enter your email address and password to log in.
+3.	Click ""Create a Profile"" to register with our email address and password and submit.
+4.	Complete the Application for Graduate Program Admission by entering your information in each of the sections. Fields with a red asterisk (*) are required and must be completed before you can submit your application. Additional questions may become required based on your answers to a previous question.
+5.	Click ""Submit Application"".
+6.	Click ""My Account"" to submit the required supplemental documents and receipt of the non-refundable application fee in PDF format.
+7.	Click ""Log Out"".
+","['3', '6', '8']",*Average time for application submission: 20 minutes  *Average time to admit: 2 weeks from the graduate programs admissions deadline ,AED 420 ,"Deanship of Graduate Studies 
+Office Nr. MF1-2-073
+Zayed University - Khalifa City West Campus
+Male Section, Gate 5 
+Abu Dhabi, U.A.E.
+
+",Maureen Goodwin /Maureen.Goodwin@zu.ac.ae +971-2-599-3605,,Application for Graduate Program Admission,GS-1-APPGRAD,https://www.zu.ac.ae/main https://apply.zu.ac.ae/Ellucian.ERecruiting.Web.External/Pages/Welcome.aspx,Application for Graduate Program Admission,https://eservices.zu.ac.ae/Service/en/Card/Application-for-Graduate-Program-Admission,https://eservices.zu.ac.ae/Content/Icons/f75071cd-aaa4-4afd-991b-94947d8dce97.png,Application for Graduate Program Admission,62
+Assessment Form,SAS001,,"The Student Accessibility Services Department (SAS) conducts a variety of psycho-educational assessments to have a deeper understanding of the students’ educational needs and abilities, and identify other issues that can interfere with their learning process.","1. Click Login. 
+2. Use your ZU ID and password to login. 
+3. Fill the ""Assessment Request Form"" fields. 
+5. Click Submit. 
+6. Your request will be reviewed, and you will be contacted by Student Accessibility Services staff. 
+",['7'],On average 3 working days from the date of submitting the request.,No Fees Required,"Abu Dhabi: Student Accessibility Services Department           
+           Library, LB-01-037- 1st Floor
+
+Dubai: Student Accessibility Services Department
+       Ground Floor, 04-GF-054","Hassan.Wardi@zu.ac.ae, Rania.Ali@zu.ac.ae",,Assessment Form,SAS001,NA,Assessment Form,https://eservices.zu.ac.ae/Service/en/Card/Assessment-Form,https://eservices.zu.ac.ae/Content/Icons/d4bdf1bf-e6a4-4ac5-b884-b920576396eb.png,The Student Accessibility Services Department (SAS) conducts a variety of psycho-educational assessm...,81
+Business Card  e-form,CP 001,https://businesscard.zu.ac.ae/,Request for a business card,"1. Click on the below link for business card request.
+2. Click on submit to finalize your request.  
+",['3'],10 days,No fee required,Contracts & Procurement Department,businesscard.gcd@zu.ac.ae ,,Business Card  e-form,CP 001,https://www.zu.ac.ae/mainhttps://businesscard.zu.ac.ae/,Business Card  e-form,https://eservices.zu.ac.ae/Service/en/Card/Business-Card--e-form,https://eservices.zu.ac.ae/Content/Icons/763cae8c-ab10-49aa-8a4b-fcf06b4fe3e1.png,Request for a business card,48
+Certificate Regarding required documents to apply for Financial Aid - Digital PDF,FA-03,,Issuing a digital certificate regarding the required documents to apply for Financial Aid in the university upon student’s request.,"1. Click Login
+2. Use your ZU ID and password
+3. Click Start
+4. Submit
+5. Student Support Unit will issue the certificate.
+6. Student Support Unit will send you an email with the certificate attached as a file.
+",['7'],The average time for application submission: 5 minutes/ The average time to issue the digital document: 2 working days,N/A,e-Service,Submit your inquiries to: https://fa.zu.ac.ae/Enquiries/EnquirySurvey?f=1,Financial aid services provided by Zayed University ensures inclusivity and equitable quality education and ensure lifelong learning opportunities for students who come from low-income family.,Certificate Regarding required documents to apply for Financial Aid - Digital PDF,FA-03,NA,Certificate Regarding required documents to apply for Financial Aid - Digital PDF,https://eservices.zu.ac.ae/Service/en/Card/Certificate-Regarding-required-documents-to-apply-for-Financial-Aid---Digital-PDF,https://eservices.zu.ac.ae/Content/Icons/f2a04d9f-505f-4b90-be76-3c94f9e16eef.png,Issuing a digital certificate regarding the required documents to apply for Financial Aid in the uni...,76
+Convention center feedback form ,CPDS - 05,https://irsurveys.zu.ac.ae/Blue/a.aspx?s=694_1_9NnwpoAOpFq,Its forms to be send to all Internal and external clients who use facility of the convention center.,After each event the Convention center team send the online feedback form to the clients who conduct the event at the CC,"['6', '5', '3', '7', '8']",N/A,No fee required,Administration building – Level 1 – Campus services  ,zucc-dxb@zu.ac.ae/     -      zucc-auh@zu.ac.ae ,,Convention center feedback form ,CPDS - 05,https://www.zu.ac.ae/mainhttps://irsurveys.zu.ac.ae/Blue/a.aspx?s=694_1_9NnwpoAOpFq,Convention center feedback form ,https://eservices.zu.ac.ae/Service/en/Card/Convention-center-feedback-form-,https://eservices.zu.ac.ae/Content/Icons/040cb3f5-8bf6-4867-a5be-2c573dbb4738.png,Its forms to be send to all Internal and external clients who use facility of the convention center,42
+Course Materials Accommodation for Students of Determination,SAS002,,"The Student Accessibility Services Department (SAS) offers material accommodation services for Students of Determination to facilitate access to curriculum and course materials, to ensure equal educational opportunities. Faculty members can apply for this service for their Students of Determination.","
+1. Click Login.
+2. Use your ZU ID and password to login. 
+3. Fill the ""Course Material Accommodation Request Form"" fields.
+4. Attach the document. 
+5. Click Submit.
+6. Request will be reviewed, and you will be contacted by Student Accessibility Services staff.
+
+","['7', '3']","On average 7 working days, depending on size, from the date of submitting the required material  or request. ",No Fees Required,"Abu Dhabi: Student Accessibility Services Department           
+           Library, LB-01-037- 1st Floor
+
+Dubai: Student Accessibility Services Department
+       Ground Floor, 04-GF-054
+
+",(Dubai): Mariyam.Juma@zu.ac.ae - 04 402 1258  (Abu Dhabi): Fatima.AlSaqqaf@zu.ac.ae - 02 599 3228 ,,Course Materials Accommodation for Students of Determination,SAS002,NA,Course Materials Accommodation for Students of Determination,https://eservices.zu.ac.ae/Service/en/Card/Course-Materials-Accommodation-for-Students-of-Determination,https://eservices.zu.ac.ae/Content/Icons/9e6fb71b-e519-425d-982e-939ebed5d3b9.png,The Student Accessibility Services Department (SAS) offers material accommodation services for Stude...,51
+EHS incident report form,CPDS - 06,https://smartapps.zu.ac.ae/EHS/IncidentForm/Authorized,"It is form through which EHS incidents, unsafe actions and conditions can be reported. Further the reported cases will be investigated.  ",The Community can either log in through intranet or EHS mobile application at EHS section. On intranet it is available under CPDS unit tabs. ,"['7', '3', '5', '6', '8']",N/A,No fee required,Administration building – Level 1 – Campus physical development.  ,EHSCPDO@zu.ac.ae  ,,EHS incident report form,CPDS - 06,https://www.zu.ac.ae/mainhttps://smartapps.zu.ac.ae/EHS/IncidentForm/Authorized,EHS incident report form,https://eservices.zu.ac.ae/Service/en/Card/EHS-incident-report-form,https://eservices.zu.ac.ae/Content/Icons/398d91f6-b05c-44ed-8886-e80c2867bfbc.png,"It is form through which EHS incidents, unsafe actions and conditions can be reported Further the re...",43
+Employee Car Registration,CPDS - 09,https://gatesystem.zu.ac.ae/SitePages/Home.aspx,Online service to register student/staff and faculty cars in ZU gate system,"- Login using your ZU ID
+- Open: http://gatesystem.zu.ac.ae/SitePages/Home.aspx
+- Click New request
+- Fill the information and attachment 
+- submit",['3'],2 working days,25 AED for 3rd and 4th cars,Online,CarRegistration_DXB@zu.ac.ae,,Employee Car Registration,CPDS - 09,https://www.zu.ac.ae/mainhttps://gatesystem.zu.ac.ae/SitePages/Home.aspx,Employee Car Registration,https://eservices.zu.ac.ae/Service/en/Card/Employee-Car-Registration,https://eservices.zu.ac.ae/Content/Icons/8477ea97-e7e8-40a0-8e34-bd7d90f1d4df.png,Online service to register student/staff and faculty cars in ZU gate system,22
+Employers-Online CV Portal,SCO-E-1,http://www.zu.ac.ae/apps/CVBook/Access,An online CV Book is to help employers actively search for ZU graduates. This book represents different CVs from different majors and different batches.,"1. Click start
+2. you will be redirected to online CV book system
+3. Complete the online CV book request form (when you will start the service, you will see the form)
+4. Click submit
+5. Student Careers Office will receive automatic massage to approve the employer access
+6. A password will be sent automatically to the employer
+7. The employer has to log in with email address and the password
+8. The employer can choose the campus (Dubai/Abu Dhabi) and the college or the degree to filter the CVs and download them 
+",['6'],Immediate after approving online registration,N/A,"Zayed University - Dubai Campus, Zayed University - Abu Dhabi Campus",Hessa AlMuhairy - 04-4021445,,Employers-Online CV Portal,SCO-E-1,https://www.zu.ac.ae/mainhttp://www.zu.ac.ae/apps/CVBook/Access,Employers-Online CV Portal,https://eservices.zu.ac.ae/Service/en/Card/Employers-Online-CV-Portal,https://eservices.zu.ac.ae/Content/Icons/cf2b5e42-d760-4aae-94d8-548ef1b7a37e.png,An online CV Book is to help employers actively search for ZU graduates This book represents differe...,13
+Exams Accommodation Request for Students of Determination ,SAS001,,Here faculty are able to request exam accommodations for up to 5 courses. After requests are submitted they will be reviewed and processed by an SAS staff.  ,"1. Click Login.
+2. Use your ZU ID and password to login. 
+3. Fill the ""Exam Accommodation Request Form"" fields.
+4. Attach the exam document. 
+5. Click Submit.
+6. Request will be reviewed, and you will be contacted by Student Accessibility Services staff. 
+",['3'],On average 5 working days from the date of submitting the request.,No Fees Required,"Abu Dhabi: Student Accessibility Services Department           
+           Library, LB-01-037- 1st Floor
+
+Dubai: Student Accessibility Services Department
+       Ground Floor, 04-GF-054
+
+",(Dubai): Mariyam.Juma@zu.ac.ae - 04 402 1258  (Abu Dhabi): Fatima.AlSaqqaf@zu.ac.ae - 02 599 3228 ,,Exams Accommodation Request for Students of Determination ,SAS001,NA,Exams Accommodation Request for Students of Determination ,https://eservices.zu.ac.ae/Service/en/Card/Exams-Accommodation-Request-for-Students-of-Determination-,https://eservices.zu.ac.ae/Content/Icons/7ae56a46-1cf2-4f00-9d1c-d8136e6f0180.png,Here faculty are able to request exam accommodations for up to 5 courses After requests are submitte...,1
+Extract Academic Transcript in English Language for undergraduate students,Reg-03,,Issuing an academic transcript upon the student’s or alumni's request,"1. Click Login.
+2. Use your ZU ID and password.
+3. Click Start.
+4. In case you have a comment, please write it in the comment box.
+5. Submit.
+6. You will receive automatic email with payment instructions link.
+7. When you click on the link it will take you to the electronic gate system (e-dirham). You can then pay either by e-dirham or credit card. 
+8. You will receive the payment confirmation invoice in your email. 
+9. Finance Department and Enrollment & Registration Department will start the service. 
+10. Enrollment & Registration Department will send you a notification that the document is ready for collection from the Registration Office.
+","['7', '5']",•	The average time for application submission: 5 minutes        •	The average time to issue the certificate:  2 working days,AED 52.50  ,"Enrollment & Registration Department at Zayed University - Abu Dhabi Campus
+Enrollment & Registration Department at Zayed University - Dubai Campus
+",Enrollment & Registration Department: RegistrarAuh[@]zu.ac.ae. or RegistrarDxb[@]zu.ac.ae.,,Extract Academic Transcript in English Language for undergraduate students,Reg-03,NA,Extract Academic Transcript in English Language for undergraduate students,https://eservices.zu.ac.ae/Service/en/Card/Extract-Academic-Transcript-in-English-Language-for-undergraduate-students,https://eservices.zu.ac.ae/Content/Icons/06447b80-4a2c-4d65-a72a-f69b001d7c78.png,Issuing an academic transcript upon the student’s or alumnis request,41
+Extract Academic Transcript in English Language for undergraduate students - Digital PDF,Reg-03-D,,Issuing a digital academic transcript upon the student’s or alumni's request,"
+1. Click Login.
+2. Use your ZU ID and password.
+3. Click Start.
+4. In case you have a comment, please write it in the comment box.
+5. Submit.
+6. Admissions & Registration Department will issue the digital academic transcript.
+7. Admissions & Registration Department will send you an email with the digital academic transcript attached as a file.
+
+","['7', '5']",The average time for application submission: 5 minutes        • The average time to issue the digital document:  2 working days,N/A,"Admissions & Registration Department at Zayed University - Abu Dhabi Campus
+Admissions & Registration Department at Zayed University - Dubai Campus",Admissions & Registration Department: Abu Dhabi: RegistrarAuh[@]zu.ac.ae Male Campus 02-5993659 / Female Campus 02-5993773 -  Dubai: RegistrarDxb[@]zu.ac.ae 04-4021444,"Goal 11: Make cities inclusive, safe, resilient and sustainable.
+Goal 12: Ensure sustainable consumption and production patterns.
+Several sustainable development goals are embedded within the services of Registrar’s Office, ensure a quality education by providing quality services. This includes streaming our services to our students to allow them to have peace of mind and focus on their education and personal development than be burdened by administrative paperwork and making inconvenient trips to the campus. Course registration as well as requests for enrolment confirmation and attestation certificates have become web-based services significantly reducing paper waste. This in turn reduces our carbon footprint and helps mitigate the effects of climate change, and the greenhouse gas emissions associated with visiting the campus is another added environmental benefit. Together these benefits contribute to the responsible consumption and production within our institution while providing a high-quality education, and simultaneously prompting sustainable cities and communities.  
+",Extract Academic Transcript in English Language for undergraduate students - Digital PDF,Reg-03-D,NA,Extract Academic Transcript in English Language for undergraduate students - Digital PDF,https://eservices.zu.ac.ae/Service/en/Card/Extract-Academic-Transcript-in-English-Language-for-undergraduate-students---Digital-PDF,https://eservices.zu.ac.ae/Content/Icons/1ed1703b-30d2-4bbe-883b-476570432936.png,Issuing a digital academic transcript upon the student’s or alumnis request,91
+Financial Aid,FA-01,http://fa.zu.ac.ae/,"Zayed University provides its undergraduate students with financial support opportunities, Educational Devices and Monthly Stipends. Applicants must either have a UAE passport and family book; be a child of an Emirati mother; or be Marsoom funded (Residency Type). Those opportunities are exclusively focused on supporting students whose financial conditions may prevent them from continuing their higher education. The Student Support Unit receives applications and ensures that any support provided is in compliance with the University’s policy and procedures. Financial support decisions are taken according to availability of resources.
+
+There are two kinds of aid provided:
+
+Monthly Stipends Aid (for transportation/meals, ...etc.)
+Educational Devices Aid (laptops and tablets)","1- Click on ""Start This Service "" button.
+2- You will be redirected to ""Smart Financial Aid Application"".
+3- Read the guide on how to apply
+4- Apply for aid. 
+",['7'],From 4 to 5 Weeks,N/A,"All Applications must be submitted through ""Smart Financial Aid Application"". Click on ""Start This Service"" button to redirected to the Smart Financial Aid Application.
+","All inquires regarding your applications must be submitted through this link:
+https://fa.zu.ac.ae/Enquiries/EnquirySurvey?f=1
+
+For general Inquiries please contact Saeea Alktbee on Sareea.Alktbee@zu.ac.ae",Financial aid services provided by Zayed University ensures inclusivity and equitable quality education and ensure lifelong learning opportunities for students who come from low-income family.,Financial Aid,FA-01,https://www.zu.ac.ae/mainhttp://fa.zu.ac.ae/,Financial Aid,https://eservices.zu.ac.ae/Service/en/Card/Financial-Aid,https://eservices.zu.ac.ae/Content/Icons/558b32cd-1267-4900-9660-4683f4e75007.png,"Zayed University provides its undergraduate students with financial support opportunities, Education...",88
+Graduate Career Counselling,SCO-SG-1,,"Provide career awareness and coaching to fresh graduates on career decisions, and development of essential career related skills. ","
+1. Login   
+2. Sign In with your ZU ID and password   
+3. Start the E-Service   
+4. Fill in the counselling form for your preferred date/time    
+5. Submit   
+6. Get Confirmation on the Date/Time by Email 
+7. Meet with the Career counselor in the Student Careers and Alumni Department ",['5'],Services provided within one working day,N/A,Zayed University - Dubai Campus Zayed University - Abu-Dhabi Campus,AUH - Rawdha.AlSaiqal@zu.ac.ae ; DXB - Ahlam.AlShehhi@zu.ac.ae,,Graduate Career Counselling,SCO-SG-1,NA,Graduate Career Counselling,https://eservices.zu.ac.ae/Service/en/Card/Graduate-Career-Counselling,https://eservices.zu.ac.ae/Content/Icons/40490dda-620e-4b2f-82a7-c60783fcb2ec.png,"Provide career awareness and coaching to fresh graduates on career decisions, and development of ess...",8
+Individual Educational Plan (IEP),SAS001,,"The Student Accessibility Services Department (SAS) offers Individualized Educational Plans (IEP) which are developed for students with Learning Difficulties to enhance their educational skills, enabling them to achieve their academic goals.","1. Click Login. 
+2. Use your ZU ID and password to login. 
+3. Fill the "" Individualized Educational Program Request Form"" fields. 
+5. Click Submit. 
+6. Your request will be reviewed, and you will be contacted by Student Accessibility Services staff. 
+",['7'],On average 3 working days from the date of submitting the request.,No Fees Required,"Abu Dhabi: Student Accessibility Services Department           
+           Library, LB-01-037- 1st Floor
+
+Dubai: Student Accessibility Services Department
+       Ground Floor, 04-GF-054","Rukiya.Deetjen@zu.ac.ae, Serene.AbuDaiyeh@zu.ac.ae,  Marjorie.Daniel@zu.ac.ae, Kholoud.AlAbdallah@zu.ac.ae ",,Individual Educational Plan (IEP),SAS001,NA,Individual Educational Plan (IEP),https://eservices.zu.ac.ae/Service/en/Card/Individual-Educational-Plan--IEP-,https://eservices.zu.ac.ae/Content/Icons/0551f7e5-b91b-49e5-9ba0-34c17897c523.png,The Student Accessibility Services Department (SAS) offers Individualized Educational Plans (IEP) wh...,82
+"Issue "" to Whom It May Concern"" certificates (Study Continuation)",Reg-01,,Issuing “To Whom It May Concern” certificate (study continuation) upon the student’s request to certify he/she is a student at ZU,"1. Click Login
+2. Use your ZU ID and password
+3. Click Start
+4. In case you have a comment, please write it in the comment box
+5. Submit
+6. Enrollment & Registration Department will issue the certificate
+7. Enrollment & Registration Department will send you a notification that the document is ready for collection from the Enrollment & Registration Department ",['7'],•The average time for application submission: 5 minutes     •	The average time to issue the document:  2 working days,N/A,"Enrollment & Registration Department at Zayed University - Abu Dhabi Campus
+Enrollment & Registration Department at Zayed University - Dubai Campus ",Enrollment & Registration Department: RegistrarAuh[@]zu.ac.ae. or RegistrarDxb[@]zu.ac.ae.,,"Issue "" to Whom It May Concern"" certificates (Study Continuation)",Reg-01,NA,"Issue "" to Whom It May Concern"" certificates (Study Continuation)",https://eservices.zu.ac.ae/Service/en/Card/Issue---to-Whom-It-May-Concern--certificates--Study-Continuation-,https://eservices.zu.ac.ae/Content/Icons/ebb0e020-2865-4499-9254-3d0ddb0e0a9c.png,Issuing “To Whom It May Concern” certificate (study continuation) upon the student’s request to cert...,18
+"Issue "" to Whom It May Concern"" certificates (Study Continuation) - Digital PDF",Reg-01-D,,Issuing “To Whom It May Concern” digital certificate (study continuation) upon the student’s request to certify he/she is a student at ZU.,"1. Click Login
+2. Use your ZU ID and password
+3. Click Start
+4. In case you have a comment, please write it in the comment box
+5. Submit
+6. Admissions & Registration Department will issue the digital certificate
+7. Admissions & Registration Department will send you an email with digital “To Whom It May
+Concern” certificate attached as a file",['7'],- The average time for application submission: 5 minutes - The average time to issue the digital document: 2 working days,N/A,"Admissions & Registration Department at Zayed University - Abu Dhabi Campus
+Admissions & Registration Department at Zayed University - Dubai Campus ",Admissions & Registration Department: Abu Dhabi: RegistrarAuh[@]zu.ac.ae Male Campus 02-5993659 / Female Campus 02-5993773 -  Dubai: RegistrarDxb[@]zu.ac.ae 04-4021444,"Goal 11: Make cities inclusive, safe, resilient and sustainable.
+Goal 12: Ensure sustainable consumption and production patterns.
+Several sustainable development goals are embedded within the services of Registrar’s Office, ensure a quality education by providing quality services. This includes streaming our services to our students to allow them to have peace of mind and focus on their education and personal development than be burdened by administrative paperwork and making inconvenient trips to the campus. Course registration as well as requests for enrolment confirmation and attestation certificates have become web-based services significantly reducing paper waste. This in turn reduces our carbon footprint and helps mitigate the effects of climate change, and the greenhouse gas emissions associated with visiting the campus is another added environmental benefit. Together these benefits contribute to the responsible consumption and production within our institution while providing a high-quality education, and simultaneously prompting sustainable cities and communities.
+
+","Issue "" to Whom It May Concern"" certificates (Study Continuation) - Digital PDF",Reg-01-D,NA,"Issue "" to Whom It May Concern"" certificates (Study Continuation) - Digital PDF",https://eservices.zu.ac.ae/Service/en/Card/Issue---to-Whom-It-May-Concern--certificates--Study-Continuation----Digital-PDF,https://eservices.zu.ac.ae/Content/Icons/9683c915-1b6f-49d3-b8e5-edd0438ad193.png,Issuing “To Whom It May Concern” digital certificate (study continuation) upon the student’s request...,93
+Issue a Certificate of Attestation – Digital PDF,Reg-11-D,,Issuing a certificate of attestation upon the alumni's request,"1. Click Login
+2. Use your ZU ID and password
+3. Click Start
+4. In case you have a comment, please write it in the comment box
+5. Submit
+6. Admissions & Registration Department will issue the digital certificate
+7. Admissions & Registration Department will send you an email with digital document
+",['5'],• The average time for application submission: 10 minutes          •	The average time to issue the certificate:  2 working days,No fee required,"• Admissions & Registration Department at Zayed University - Abu Dhabi Campus
+• Admissions & Registration Department at Zayed University - Dubai Campus
+",Admissions & Registration Department: Abu Dhabi: RegistrarAuh[@]zu.ac.ae Male Campus 02-5993659 / Female Campus 02-5993773 - Dubai: RegistrarDxb[@]zu.ac.ae 04-4021444,"Goal 11: Make cities inclusive, safe, resilient and sustainable.
+Goal 12: Ensure sustainable consumption and production patterns.
+Several sustainable development goals are embedded within the services of Registrar’s Office, ensure a quality education by providing quality services. This includes streaming our services to our students to allow them to have peace of mind and focus on their education and personal development than be burdened by administrative paperwork and making inconvenient trips to the campus. Course registration as well as requests for enrolment confirmation and attestation certificates have become web-based services significantly reducing paper waste. This in turn reduces our carbon footprint and helps mitigate the effects of climate change, and the greenhouse gas emissions associated with visiting the campus is another added environmental benefit. Together these benefits contribute to the responsible consumption and production within our institution while providing a high-quality education, and simultaneously prompting sustainable cities and communities.  
+
+",Issue a Certificate of Attestation – Digital PDF,Reg-11-D,NA,Issue a Certificate of Attestation – Digital PDF,https://eservices.zu.ac.ae/Service/en/Card/Issue-a-Certificate-of-Attestation---Digital-PDF,https://eservices.zu.ac.ae/Content/Icons/66f4fd56-b93f-4ea4-8304-ba36efed434d.png,Issuing a certificate of attestation upon the alumnis request,65
+Issue a Faculty ID Card as a replacement (Abu Dhabi Campus Only),ZU-AUH-FACULTY-ID,,Replace the faculty university ID card in case of lost or damage.,"1. Click Login. 
+2. Use your ZU ID and password. 
+3. Click Start. 
+4. In case you have a comment, please write it in the comment box. 
+5. Submit. 
+6. You will receive automatic email with payment instructions link. 
+7. When you click in the link it will take you to the electronic gate system (e-dirham). You can then pay either by e-dirham or credit card. 
+8. You will receive the payment confirmation invoice in your email. 
+9. Finance department and Campus Physical Development & Services Department will start the service. 
+10. Campus Physical Development & Services Department will send you a notification that the document is ready for collection from the Lost & Found Office (Location- ADM-0-048)
+",['3'],2 Working Days,AED 52.5 including VAT,"Campus Physical Development & Services Department - Abu Dhabi
+Admin building First Floor
+","Abu Dhabi: Campus Physical Development & Services Department
+FacilitiesAuh@zu.ac.ae
+CPDO Reception 02599-3222
+","Goal 11: Make cities inclusive, safe, resilient and sustainable. 
+Goal 12: Ensure sustainable consumption and production patterns. 
+Several sustainable development goals are embedded within the services of Campus Physical Development & Services Office, ensure a quality education by providing quality services. This includes streaming our services to our students to allow them to have peace of mind and focus on their education and personal development than be burdened by administrative paperwork and making inconvenient trips to the campus. Locker registration, car Registration, Lost & Found, Online print request etc. have become web-based services significantly reducing paper waste. This in turn reduces our carbon footprint and helps mitigate the effects of climate change, and the greenhouse gas emissions associated with visiting the campus is another added environmental benefit. Together these benefits contribute to the responsible consumption and production within our institution while providing a high-quality education, and simultaneously prompting sustainable cities and communities. 
+",Issue a Faculty ID Card as a replacement (Abu Dhabi Campus Only),ZU-AUH-FACULTY-ID,NA,Issue a Faculty ID Card as a replacement (Abu Dhabi Campus Only),https://eservices.zu.ac.ae/Service/en/Card/Issue-a-Faculty-ID-Card-as-a-replacement--Abu-Dhabi-Campus-Only-,https://eservices.zu.ac.ae/Content/Icons/cf0c5ac0-a187-40fc-b6e7-c3322147745d.png,Replace the faculty university ID card in case of lost or damage,68
+Issue a Graduate Confirmation Letter – Digital ,Reg-10-D,,Issuing a Graduate Confirmation Letter upon the request of expected graduate student.,"Go to the service: 
+
+1. Click Login.
+2. Use your ZU ID and password.
+3. Click Start.
+4. In case you have a comment, please write it in the comment box.
+5. Submit.
+6. Admissions & Registration Department will issue the Graduate Confirmation Letter.
+7. Admissions & Registration Department will send you an email with digital document.
+",['7'],•	The average time for application submission: 10 minutes   •	The average time to issue the certificate:  2 working days,No fee required,"•	Admissions & Registration Department at Zayed University - Abu Dhabi Campus
+•	Admissions & Registration Department at Zayed University - Dubai Campus
+",Admissions & Registration Department: Abu Dhabi: RegistrarAuh[@]zu.ac.ae Male Campus 02-5993659 / Female Campus 02-5993773 - Dubai: RegistrarDxb[@]zu.ac.ae 04-4021444,"Goal 11: Make cities inclusive, safe, resilient and sustainable.
+Goal 12: Ensure sustainable consumption and production patterns.
+Several sustainable development goals are embedded within the services of Registrar’s Office, ensure a quality education by providing quality services. This includes streaming our services to our students to allow them to have peace of mind and focus on their education and personal development than be burdened by administrative paperwork and making inconvenient trips to the campus. Course registration as well as requests for enrolment confirmation and attestation certificates have become web-based services significantly reducing paper waste. This in turn reduces our carbon footprint and helps mitigate the effects of climate change, and the greenhouse gas emissions associated with visiting the campus is another added environmental benefit. Together these benefits contribute to the responsible consumption and production within our institution while providing a high-quality education, and simultaneously prompting sustainable cities and communities.  
+
+",Issue a Graduate Confirmation Letter – Digital ,Reg-10-D,NA,Issue a Graduate Confirmation Letter – Digital ,https://eservices.zu.ac.ae/Service/en/Card/Issue-a-Graduate-Confirmation-Letter---Digital-,https://eservices.zu.ac.ae/Content/Icons/f6d33e12-bd2c-454b-8a33-6a81d75a3ef0.png,Issuing a Graduate Confirmation Letter upon the request of expected graduate student,66
+Issue a Graduation Degree Certificate as a replacement,Reg-02,,"Issuing the replacement of the graduate degree certificate in case it's lost, damaged or has a typo error.","(Please before starting the service, hand the original passport, passport copy, and court letter if needed to the Admissions & Registration Department. The Staff will verify and take the copy only)
+ 
+1. Click Login.
+2. Use your ZU ID and password.
+3. Click Start.
+4. In case you have a comment, please write it in the comment box.
+5. Submit.
+6. You will receive automatic email with payment instructions link.
+7. When you click on the link it will take you to the electronic gate system (e-dirham). You can then pay either by e-dirham or credit card. 
+8. You will receive the payment confirmation invoice in your email. 
+9. Finance department and Admissions & Registration department will start the service. 
+10. Admissions & Registration department will send you a notification that the document is ready for collection from the Registration Office.
+",['5'], •	The average time for application submission: 5 minutes      •	The average time to issue the document: 5 working days for Replacement of any lost original diploma and one month for the digital diploma.,AED 157.50 ,"Admissions & Registration Department at Zayed University - Abu Dhabi Campus
+Admissions & Registration Department at Zayed University - Dubai Campus
+",Admissions & Registration Department: RegistrarAuh[@]zu.ac.ae. or RegistrarDxb[@]zu.ac.ae.,,Issue a Graduation Degree Certificate as a replacement,Reg-02,NA,Issue a Graduation Degree Certificate as a replacement,https://eservices.zu.ac.ae/Service/en/Card/Issue-a-Graduation-Degree-Certificate-as-a-replacement,https://eservices.zu.ac.ae/Content/Icons/0ec23a40-a9a6-4b05-a0d7-5603f23921b4.png,"Issuing the replacement of the graduate degree certificate in case its lost, damaged or has a typo e...",72
+Issue a staff ID Card as a replacement (Abu Dhabi Campus Only),ZU-AUH-STAFF-ID,,Replace the staff university ID card in case of lost or damage.,"1. Click Login. 
+2. Use your ZU ID and password. 
+3. Click Start. 
+4. In case you have a comment, please write it in the comment box. 
+5. Submit. 
+6. You will receive automatic email with payment instructions link. 
+7. When you click in the link it will take you to the electronic gate system (e-dirham). You can then pay either by e-dirham or credit card. 
+8. You will receive the payment confirmation invoice in your email. 
+9. Finance department and Campus Physical Development & Services Department will start the service. 
+10. Campus Physical Development & Services Department will send you a notification that the document is ready for collection from the Lost & Found Office (Location- ADM-0-048)
+",['3'],2 Working Days,AED 52.5 including VAT,"Campus Physical Development & Services Department - Abu Dhabi
+Admin building First Floor
+","Abu Dhabi: Campus Physical Development & Services Department
+FacilitiesAuh@zu.ac.ae
+CPDO Reception 02599-3222
+","Goal 11: Make cities inclusive, safe, resilient and sustainable. 
+Goal 12: Ensure sustainable consumption and production patterns. 
+Several sustainable development goals are embedded within the services of Campus Physical Development & Services Office, ensure a quality education by providing quality services. This includes streaming our services to our students to allow them to have peace of mind and focus on their education and personal development than be burdened by administrative paperwork and making inconvenient trips to the campus. Locker registration, car Registration, Lost & Found, Online print request etc. have become web-based services significantly reducing paper waste. This in turn reduces our carbon footprint and helps mitigate the effects of climate change, and the greenhouse gas emissions associated with visiting the campus is another added environmental benefit. Together these benefits contribute to the responsible consumption and production within our institution while providing a high-quality education, and simultaneously prompting sustainable cities and communities. 
+",Issue a staff ID Card as a replacement (Abu Dhabi Campus Only),ZU-AUH-STAFF-ID,NA,Issue a staff ID Card as a replacement (Abu Dhabi Campus Only),https://eservices.zu.ac.ae/Service/en/Card/Issue-a-staff-ID-Card-as-a-replacement--Abu-Dhabi-Campus-Only-,https://eservices.zu.ac.ae/Content/Icons/c3b63fcc-b214-4a34-b390-e09f3b116ba9.png,Replace the staff university ID card in case of lost or damage,61
+Issue a Student ID Card as a replacement (Abu Dhabi Campus Only),ZU-AUH-STUDENT-ID,,Replace the student university ID card in case of lost or damage.,"1. Click Login. 
+2. Use your ZU ID and password. 
+3. Click Start. 
+4. In case you have a comment, please write it in the comment box. 
+5. Submit. 
+6. You will receive automatic email with payment instructions link. 
+7. When you click in the link it will take you to the electronic gate system (e-dirham). You can then pay either by e-dirham or credit card. 
+8. You will receive the payment confirmation invoice in your email. 
+9. Finance department and Campus Physical Development & Services Department will start the service. 
+10. Campus Physical Development & Services Department will send you a notification that the document is ready for collection from the Lost & Found Office (Location- ADM-0-048)
+",['7'],2 Working Days,AED 52.5 including VAT,"Campus Physical Development & Services Department - Abu Dhabi
+Admin building First Floor
+","Abu Dhabi: Campus Physical Development & Services Department
+FacilitiesAuh@zu.ac.ae
+CPD Reception 02599-3222
+","Goal 11: Make cities inclusive, safe, resilient and sustainable. 
+Goal 12: Ensure sustainable consumption and production patterns. 
+Several sustainable development goals are embedded within the services of Campus Physical Development & Services Office, ensure a quality education by providing quality services. This includes streaming our services to our students to allow them to have peace of mind and focus on their education and personal development than be burdened by administrative paperwork and making inconvenient trips to the campus. Locker registration, car Registration, Lost & Found, Online print request etc. have become web-based services significantly reducing paper waste. This in turn reduces our carbon footprint and helps mitigate the effects of climate change, and the greenhouse gas emissions associated with visiting the campus is another added environmental benefit. Together these benefits contribute to the responsible consumption and production within our institution while providing a high-quality education, and simultaneously prompting sustainable cities and communities. 
+",Issue a Student ID Card as a replacement (Abu Dhabi Campus Only),ZU-AUH-STUDENT-ID,NA,Issue a Student ID Card as a replacement (Abu Dhabi Campus Only),https://eservices.zu.ac.ae/Service/en/Card/Issue-a-Student-ID-Card-as-a-replacement--Abu-Dhabi-Campus-Only-,https://eservices.zu.ac.ae/Content/Icons/5cb5c1fa-6cf5-4bd2-bd4b-0dd3faabae7f.png,Replace the student university ID card in case of lost or damage,31
+Issue a Student ID Card as a replacement (Dubai Campus Only) ,Reg-04,,Replace the student university ID card in case of lost or damage,"1. Click Login.
+2. Use your ZU ID and password.
+3. Click Start.
+4. In case you have a comment, please write it in the comment box.
+5. Submit.
+6. You will receive automatic email with payment instructions link.
+7. When you click in the link it will take you to the electronic gate system (e-dirham). You can then pay either by e-dirham or credit card. 
+8. You will receive the payment confirmation invoice in your email. 
+9. Finance department and Admissions & Registration Department will start the service. 
+10. Admissions & Registration Department will send you a notification that the document is ready for collection from the Registration Office.
+",['7'],•	The average time for application submission: 5 minutes     •	The average time to issue the certificate:  2 working days,AED 52.5 including VAT,"Admissions & Registration Department at Zayed University - Dubai Campus
+",Abu Dhabi: Campus Physical Development & Services Department - Dubai: Admissions & Registration Department: RegistrarDxb[@]zu.ac.ae 04-4021444,"Goal 11: Make cities inclusive, safe, resilient and sustainable.
+Goal 12: Ensure sustainable consumption and production patterns.
+Several sustainable development goals are embedded within the services of Registrar’s Office, ensure a quality education by providing quality services. This includes streaming our services to our students to allow them to have peace of mind and focus on their education and personal development than be burdened by administrative paperwork and making inconvenient trips to the campus. Course registration as well as requests for enrolment confirmation and attestation certificates have become web-based services significantly reducing paper waste. This in turn reduces our carbon footprint and helps mitigate the effects of climate change, and the greenhouse gas emissions associated with visiting the campus is another added environmental benefit. Together these benefits contribute to the responsible consumption and production within our institution while providing a high-quality education, and simultaneously prompting sustainable cities and communities.  ",Issue a Student ID Card as a replacement (Dubai Campus Only) ,Reg-04,NA,Issue a Student ID Card as a replacement (Dubai Campus Only) ,https://eservices.zu.ac.ae/Service/en/Card/Issue-a-Student-ID-Card-as-a-replacement--Dubai-Campus-Only--,https://eservices.zu.ac.ae/Content/Icons/7a3c3f14-6153-4613-939e-a538ed592e2a.png,Replace the student university ID card in case of lost or damage,67
+Issue an English Proficiency Letter – Digital ,Reg-09-D,,Issuing an English Proficiency Letter upon the alumni's request,"Go to the service: 
+
+1. Click Login.
+2. Use your ZU ID and password.
+3. Click Start.
+4. In case you have a comment, please write it in the comment box.
+5. Submit.
+6. Admissions & Registration Department will issue the English Proficiency Letter.
+7. Admissions & Registration Department will send you an email with digital document.
+",['5'],• The average time for application submission: 10 minutes   • The average time to issue the certificate:  2 working days,No fee required,"• Admissions & Registration Department at Zayed University - Abu Dhabi Campus
+• Admissions & Registration Department at Zayed University - Dubai Campus",Admissions & Registration Department: Abu Dhabi: RegistrarAuh[@]zu.ac.ae Male Campus 02-5993659 / Female Campus 02-5993773 -  Dubai: RegistrarDxb[@]zu.ac.ae 04-4021444,"Goal 11: Make cities inclusive, safe, resilient and sustainable.
+Goal 12: Ensure sustainable consumption and production patterns.
+Several sustainable development goals are embedded within the services of Registrar’s Office, ensure a quality education by providing quality services. This includes streaming our services to our students to allow them to have peace of mind and focus on their education and personal development than be burdened by administrative paperwork and making inconvenient trips to the campus. Course registration as well as requests for enrolment confirmation and attestation certificates have become web-based services significantly reducing paper waste. This in turn reduces our carbon footprint and helps mitigate the effects of climate change, and the greenhouse gas emissions associated with visiting the campus is another added environmental benefit. Together these benefits contribute to the responsible consumption and production within our institution while providing a high-quality education, and simultaneously prompting sustainable cities and communities. 
+
+",Issue an English Proficiency Letter – Digital ,Reg-09-D,NA,Issue an English Proficiency Letter – Digital ,https://eservices.zu.ac.ae/Service/en/Card/Issue-an-English-Proficiency-Letter---Digital-,https://eservices.zu.ac.ae/Content/Icons/39c1bd7f-62d1-4f0c-a34c-a072a56234a4.png,Issuing an English Proficiency Letter upon the alumnis request,63
+Issue Graduation Degree Certificate– Digital PDF,Reg-12-D,,"Issuing a graduation degree certificate – Digital ""PDF"" upon the alumni's request","1. Click Login
+2. Use your ZU ID and password
+3. Click Start
+4. In case you have a comment, please write it in the comment box
+5. Submit
+6. Admissions & Registration Department will issue the digital certificate
+7. Admissions & Registration Department will send you an email with digital document
+",['5'],•	The average time for application submission: 10 minutes   •	The average time to issue the certificate:  5 working days,No fee required ,"•	Admissions & Registration Department at Zayed University - Abu Dhabi Campus
+•	Admissions & Registration Department at Zayed University - Dubai Campus
+",Admissions & Registration Department: Abu Dhabi: RegistrarAuh[@]zu.ac.ae Male Campus 02-5993659 / Female Campus 02-5993773 - Dubai: RegistrarDxb[@]zu.ac.ae 04-4021444,"Goal 11: Make cities inclusive, safe, resilient and sustainable.
+Goal 12: Ensure sustainable consumption and production patterns.
+Several sustainable development goals are embedded within the services of Registrar’s Office, ensure a quality education by providing quality services. This includes streaming our services to our students to allow them to have peace of mind and focus on their education and personal development than be burdened by administrative paperwork and making inconvenient trips to the campus. Course registration as well as requests for enrolment confirmation and attestation certificates have become web-based services significantly reducing paper waste. This in turn reduces our carbon footprint and helps mitigate the effects of climate change, and the greenhouse gas emissions associated with visiting the campus is another added environmental benefit. Together these benefits contribute to the responsible consumption and production within our institution while providing a high-quality education, and simultaneously prompting sustainable cities and communities.  
+ا
+
+",Issue Graduation Degree Certificate– Digital PDF,Reg-12-D,NA,Issue Graduation Degree Certificate– Digital PDF,https://eservices.zu.ac.ae/Service/en/Card/Issue-Graduation-Degree-Certificate--Digital-PDF,https://eservices.zu.ac.ae/Content/Icons/8c2936fe-1f78-436e-872c-3a67cfc4d26b.png,"Issuing a graduation degree certificate – Digital ""PDF"" upon the alumnis request",64
+Issuing To Whom It May Concern Certificate Regarding not receiving Financial Aid-Digital PDF,FA-02,,Issuing “To Whom It May Concern” digital certificate regarding not receiving Financial Aid upon student’s request to certify he/she is not receiving Financial Aid from the university.,"1. Click Login
+2. Use your ZU ID and password
+3. Click Start
+4. Please write the name of Organization that requested the certificate in the comment box.
+5. Submit
+6. Student Support Unit will issue the certificate.
+7. Student Support Unit will send you an email with the certificate attached as a file.
+",['7'],The average time for application submission: 5 minutes /The average time to issue the digital document: 2 working days,N/A,e-Service,Submit your inquiries to: https://fa.zu.ac.ae/Enquiries/EnquirySurvey?f=1,Financial aid services provided by Zayed University ensures inclusivity and equitable quality education and ensure lifelong learning opportunities for students who come from low-income family.,Issuing To Whom It May Concern Certificate Regarding not receiving Financial Aid-Digital PDF,FA-02,NA,Issuing To Whom It May Concern Certificate Regarding not receiving Financial Aid-Digital PDF,https://eservices.zu.ac.ae/Service/en/Card/Issuing-To-Whom-It-May-Concern-Certificate-Regarding-not-receiving-Financial-Aid-Digital-PDF,https://eservices.zu.ac.ae/Content/Icons/4fe5c0ea-c1db-4356-a85c-31743dbaeccb.png,Issuing “To Whom It May Concern” digital certificate regarding not receiving Financial Aid upon stud...,86
+IT Equipment Request,IT 002,https://zuportal.zu.ac.ae/sites/CSD/cs/IT%20Equipment%20Requests%20Library/Forms/template.xsn ,"Request for additional IT equipment (Laptops, Monitors, etc) for more than 3 business days.","Fill the details on IT Equipment Request form available on zuportal http://zuportal.zu.ac.ae under E-Forms section and fill following details.
+•	Period for which the equipment is needed. (Maximum period one year from the start date.)
+•	Mention items needed (Laptop, Monitors, etc)
+•	Provide clear purpose for the request. 
+","['3', '7', '8']","As per defined SLA, currently Requests are delivered with SLA of 72 Business Hours.",No fee required,Information Technology Department,IT.ServiceDesk@zu.ac.ae  or http://sanad.zu.ac.ae,,IT Equipment Request,IT 002,https://www.zu.ac.ae/mainhttps://zuportal.zu.ac.ae/sites/CSD/cs/IT%20Equipment%20Requests%20Library/Forms/template.xsn ,IT Equipment Request,https://eservices.zu.ac.ae/Service/en/Card/IT-Equipment-Request,https://eservices.zu.ac.ae/Content/Icons/82e13b0c-3e4f-406e-a468-cbf7ec4db957.png,"Request for additional IT equipment (Laptops, Monitors, etc) for more than 3 business days",39
+Job Advertisement,SCO-E-2,,Employers can post jobs to students and graduates though campus announcements and Career Focus Portal.,"1. Login 
+2. If you registered, log in with username and password 
+3. If not registered, please register
+4. Fill the job advertisement form under “Used form section”
+5. Start the service
+6. Attach job advertisement form 
+7. Submit
+8. Students Career Office will review the job advertisement form
+9. Job advertisement is advertised to students/graduates
+10. Companies to update the Career Service Unit on the hiring process within 48 hours of interview",['6'],One week from the job posting,N/A,"Zayed University - Dubai Campus, Zayed University -Abu Dhabi Campus",Hessa AlMuhairy - 04-4021445,,Job Advertisement,SCO-E-2,NA,Job Advertisement,https://eservices.zu.ac.ae/Service/en/Card/Job-Advertisement,https://eservices.zu.ac.ae/Content/Icons/2b3f814a-fb2e-42ad-b1c2-3b9b6a0d1447.png,Employers can post jobs to students and graduates though campus announcements and Career Focus Porta...,14
+Library - Holding a book,LIBRARY,https://zu.account.worldcat.org/account,"Reserving a book that is currently checked out or on the shelf at another branch library. This book will be sent to the branch of your choice to be picked up. 
+1.	Login to your account using ZU credentials
+2.	Search for the item you want to request.
+3.	Click on the title to view item detail.
+4.	Select the place hold button.
+5.	The Place Hold Request form appears.
+6.	Select the copy.
+7.	Select your pick-up location 
+8.	Click Submit to complete the request.
+You will get an email when the item is ready for pick-up.","1.	Login to your account using ZU credentials
+2.	Search for the item you want to request.
+3.	Click on the title to view item detail.
+4.	Select the place hold button.
+5.	The Place Hold Request form appears.
+6.	Select the copy.
+7.	Select your pick-up location 
+8.	Click Submit to complete the request.
+You will get an email when the item is ready for pick-up.","['7', '3', '5', '8']",Immediate ,No fee required / 0,https://www.zu.ac.ae/main/en/library/services.aspx,library@zu.ac.ae,"Goal 4: Quality education
+Zayed University Library provides access to top-notch information through books and research databases. It fosters physical and online learning environments that are student-centered, authentic, cooperative, engaging, and supported by an extended range of high-quality resources, facilities and technologies. Through using the e-resources, students have access to quality learning material 24/7, and 365 days. This accords them to develop knowledge which enhances their individual transformation, that of academic communities, and the nation at large.
+",Library - Holding a book,LIBRARY,https://www.zu.ac.ae/mainhttps://zu.account.worldcat.org/account,Library - Holding a book,https://eservices.zu.ac.ae/Service/en/Card/Library---Holding-a-book,https://eservices.zu.ac.ae/Content/Icons/c1473c82-0e16-42d0-aa0d-e6b637b01a8d.png,Reserving a book that is currently checked out or on the shelf at another branch library This book w...,71
+Library - Remote Access,LIBRARY,https://www.zu.ac.ae/main/en/library/index.aspx,"Access our Electronic Resources off-campus via EZProxy
+The Zayed University Library has implemented EZProxy to provide an easier way of accessing the library's electronic resources off-campus.
+1.	On the ZU Library Homepage, Type in Your Keywords in the Search Box
+2.	After typing your keywords, you will be directed to the search results page. 
+3.	Click the Full-Text Online link
+4.	Once you click the Full-Text Online link, you will be prompted to login through EZProxy. 
+5.	Use your ZU username and password to continue.
+6.	Congratulations! You now have access to the e-Resource!
+7.	You can now continue and use all online resources including databases to find articles
+","1.	On the ZU Library Homepage, Type in Your Keywords in the Search Box
+2.	After typing your keywords, you will be directed to the search results page. 
+3.	Click the Full-Text Online link
+4.	Once you click the Full-Text Online link, you will be prompted to login through EZProxy. 
+5.	Use your ZU username and password to continue.
+6.	Congratulations! You now have access to the e-Resource!
+7.	You can now continue and use all online resources including databases to find articles","['7', '3', '5', '8']",Immediate ,No fee required / 0,"https://www.zu.ac.ae/main/en/library/index.aspx
+",library@zu.ac.ae,"Goal 4: Quality education
+Zayed University Library provides access to top-notch information through books and research databases. It fosters physical and online learning environments that are student-centered, authentic, cooperative, engaging, and supported by an extended range of high-quality resources, facilities and technologies. Through using the e-resources, students have access to quality learning material 24/7, and 365 days. This accords them to develop knowledge which enhances their individual transformation, that of academic communities, and the nation at large.
+",Library - Remote Access,LIBRARY,https://www.zu.ac.ae/mainhttps://www.zu.ac.ae/main/en/library/index.aspx,Library - Remote Access,https://eservices.zu.ac.ae/Service/en/Card/Library---Remote-Access,https://eservices.zu.ac.ae/Content/Icons/6e855f7c-a96a-4775-ba13-b0d21bb8f325.png,Access our Electronic Resources off-campus via EZProxy  The Zayed University Library has implemented...,69
+Library - Renewing a book,LIBRARY,https://zu.account.worldcat.org/account,"Renewing your checked out library items.
+1.	Login to your account using ZU credentials
+2.	The system shows all your checked-out items.
+3.	Click Renew button against the item you want to renew
+The system shows the new due date. You will also get an email confirmation regarding this.","1.	Login to your account using ZU credentials
+2.	The system shows all your checked-out items.
+3.	Click Renew button against the item you want to renew
+The system shows the new due date. You will also get an email confirmation regarding this.","['7', '3', '5', '8']",Immediate ,No fee required / 0,https://zu.account.worldcat.org/account,library@zu.ac.ae,"Goal 4: Quality education
+Zayed University Library provides access to top-notch information through books and research databases. It fosters physical and online learning environments that are student-centered, authentic, cooperative, engaging, and supported by an extended range of high-quality resources, facilities and technologies. Through using the e-resources, students have access to quality learning material 24/7, and 365 days. This accords them to develop knowledge which enhances their individual transformation, that of academic communities, and the nation at large.
+
+",Library - Renewing a book,LIBRARY,https://www.zu.ac.ae/mainhttps://zu.account.worldcat.org/account,Library - Renewing a book,https://eservices.zu.ac.ae/Service/en/Card/Library---Renewing-a-book,https://eservices.zu.ac.ae/Content/Icons/030f08a7-9069-43ac-9460-b311f3d4145d.png,Renewing your checked out library items  1	Login to your account using ZU credentials  2	The system ...,54
+Lost and Found Service,CPDS-10,https://lostfound.zu.ac.ae/,"Report & Log all lost items
+","Student or faculty/staff log in lost & found web, then report their missing item.
+CPDS log in lost & found web, then log all lost & found items","['7', '3', '5', '6', '8']",NA,Free,CPDO office,Lost_and_found[@]zu.ac.ae.,,Lost and Found Service,CPDS-10,https://www.zu.ac.ae/mainhttps://lostfound.zu.ac.ae/,Lost and Found Service,https://eservices.zu.ac.ae/Service/en/Card/Lost-and-Found-Service,https://eservices.zu.ac.ae/Content/Icons/52e98037-c57b-493c-b3dd-7f2570e909a4.png,Report & Log all lost items  ,32
+Master Programs - Attestation Letter in Arabic,GRAD-AL-AR,,Master Programs - Attestation Letter in Arabic,"•	Master students must fill up the e-service form
+•	Master students must have a graduate status (MG)
+•	Graduate Registrar Office check the financial status of the master student with finance department.
+•	If the financial status is cleared, the transcript will be issued and sent to master students to their ZU email.
+•	If the financial status is not cleared, the master student will be notified to clear the finances in order to proceed with the request. 
+•	If there is a library hold, Graduate Registrar Office requests the master student to clear the hold in order to proceed with the request. 
+•	Master students must notify the Graduate Registrar Office once they clear their accounts
+",['5'],2 Working Days,NA,Graduate Registrar Office - Abu Dhabi Khalifa City Campus - MF1 Building - Second floor,Kalthoum Al Marzouqi - Email Kalthoum.AlMarzouqi@zu.ac.ae>- 025993562,,Master Programs - Attestation Letter in Arabic,GRAD-AL-AR,NA,Master Programs - Attestation Letter in Arabic,https://eservices.zu.ac.ae/Service/en/Card/Master-Programs---Attestation-Letter-in-Arabic,https://eservices.zu.ac.ae/Content/Icons/7b2f5a88-e738-48a1-9352-2e1ee3dc896c.png,Master Programs - Attestation Letter in Arabic,56
+Master Programs - Sponsor Access System,GRAD-SA,https://sponsors.zu.ac.ae,Master Programs - Sponsor Access,"1. Register a eService Account.
+2. Start the service. 
+3. Provide the required information shown on the page then submit.
+4. Wait for the confirmation email that your account has been approved.
+5. Go to Sponsor Access System to access your account.
+",['6'],NA,NA,Sponsors can access the academic data of their sponsored students from their premises   ,NA,,Master Programs - Sponsor Access System,GRAD-SA,https://www.zu.ac.ae/mainhttps://sponsors.zu.ac.ae,Master Programs - Sponsor Access System,https://eservices.zu.ac.ae/Service/en/Card/Master-Programs---Sponsor-Access-System,https://eservices.zu.ac.ae/Content/Icons/1ce73a63-11d9-411c-88b5-b02c78a0fe91.png,Master Programs - Sponsor Access,12
+Master Programs - To Whom It May Concern Letter - Digital PDF,GRAD-TWIMC-D,,Master Programs - To Whom It May Concern Letter ,"•	Master students must fill up the e-service form
+-	Name:
+-	Student ID Number:
+-	Program Name:
+-	Cohort Number:
+-	Message:
+-	The message should include information about the letter layout.
+
+•	Master students must have an active status (AS) and should be Registered at the time of requesting the letter
+•	The request will go to Finance Department for financial verification  
+•	The request is approved by Finance will move to Graduate Registrar to check the registration status and then issue the letter within 2 working days from receiving the approval from Finance 
+•	If the financial status is not cleared, student will be informed to pay the outstanding amount, it the payment is not done within 2 working days the request will be rejected by Finance Department 
+","['8', '5']",2 Working Days from Finance Department approval,N/A,Graduate Registrar Office - Abu Dhabi Khalifa City Campus - MF1 Building - Second floor,025993331,,Master Programs - To Whom It May Concern Letter - Digital PDF,GRAD-TWIMC-D,NA,Master Programs - To Whom It May Concern Letter - Digital PDF,https://eservices.zu.ac.ae/Service/en/Card/Master-Programs---To-Whom-It-May-Concern-Letter---Digital-PDF,https://eservices.zu.ac.ae/Content/Icons/90c6f917-dee4-4816-b192-56b57981f84b.png,Master Programs - To Whom It May Concern Letter ,17
+Master Students - Academic Official Transcript,GRAD-AT,,Issuing an academic transcript upon Master student request,"•	Click Start (If you are already logged in).
+•	If you are not logged in, please click Login.
+•	Write your Program Name, Cohort Number on the comment box.
+•	Submit 
+•	Then, please check your email for the payment link
+
+Payment Procedures:
+	Your request is now issued against a fee of AED 52.5. Fee is inclusive of Value Added Tax(VAT)
+	Payments can be made directly online, through the link received in your email
+	Payment can be made also in either Dubai or Abu Dhabi Campuses; we accept payment on cash, credit cards and cheques
+	Please review the eService details, check the Terms and Condition, and click Pay to proceed.
+•	If the financial status is not cleared, the master student will be notified to clear the finances in order to proceed with the request. 
+•	Once the request is approved by Finance, Then the transcript will be issued within 3 working days.
+•	Scanned copy with be sent through the e-service and original document will be ready for collection.
+","['8', '5']",2  Working Days,52.5 AED,Graduate Registrar Office - Abu Dhabi Khalifa City Campus - MF1 building - Second floor,Wafa Alwahedi - 025993112 - wafa.alwahedi[@]zu.ac.ae.,,Master Students - Academic Official Transcript,GRAD-AT,NA,Master Students - Academic Official Transcript,https://eservices.zu.ac.ae/Service/en/Card/Master-Students---Academic-Official-Transcript,https://eservices.zu.ac.ae/Content/Icons/d6e896cf-67d4-4d34-ab41-54a78917b674.png,Issuing an academic transcript upon Master student request,84
+Master Students - Defer Admission - English Version ,GRAD-DA-EN,,Request to Defer Graduate Program Admission - English Version,"Click Login. 
+•	Enter your ZU ID # and password to login. 
+•	Click Start. 
+•	Write your Full Name as per passport, ZU Student ID Number, Program Name, Academic Year, Admission Deferment Fee (5,000 AED) Receipt # on the comment box. 
+•	The Graduate Registrar’s Office checks your financial status with the Finance Department. 
+•	If your financial status is cleared, the Graduate Registrar’s Office defers your admission and notifies you of your deferred admission status by using your ZU email address.
+•	If your financial status is not cleared, the Graduate Registrar's Office notifies you by using your ZU email address to clear your finances in order to proceed with your request. 
+•	You must notify the Graduate Registrar’s Office once you have cleared your accounts.
+",['8'],7 (Seven) Calendar Days,"5,000 AED",Zayed University Abu Dhabi Campus,"Kalthoum AlMarzouqi, Senior Graduate Programs Admissions Officer, Tel: +971-2-599-3562 Email: cgs.admissions[@]zu.ac.ae.. ",,Master Students - Defer Admission - English Version ,GRAD-DA-EN,NA,Master Students - Defer Admission - English Version ,https://eservices.zu.ac.ae/Service/en/Card/Master-Students---Defer-Admission---English-Version-,https://eservices.zu.ac.ae/Content/Icons/d56d6164-0da6-43b2-bb71-0ed14d499b42.png,Request to Defer Graduate Program Admission - English Version,78
+Master Students - Letter of Examination Leave,GRAD-LEL,,Master Programs - Letter of Examination Leave,"Master students must fill up the e-service form
+•	Graduate Registrar Office check the financial status of the master student with Finance Department.
+•	If the financial status is cleared, the transcript will be issued and sent to master students to their ZU email.
+•	If the financial status is not cleared, the master student will be notified to clear the finances in order to proceed with the request. 
+•	If there is a library hold, Graduate Registrar Office requests the master student to clear the hold in order to proceed with the request. 
+•	Master students must notify the Graduate Registrar Office once they clear their accounts
+Student must attach the course syllabus or the exam announcement to the request as support document  
+",['8'],2 Working Days ,NA,Graduate Registrar Office - Abu Dhabi Khalifa City Campus - MF1 building - Second floor,Graduate Registrar AUH,,Master Students - Letter of Examination Leave,GRAD-LEL,NA,Master Students - Letter of Examination Leave,https://eservices.zu.ac.ae/Service/en/Card/Master-Students---Letter-of-Examination-Leave,https://eservices.zu.ac.ae/Content/Icons/8aa7b5fa-2ed3-49b4-bdb4-c5a90ddf3aec.png,Master Programs - Letter of Examination Leave,70
+Master Students – Replacement Official Diploma - Arabic version,GRAD-ROD- AR,,Issuing replacement Diploma - Arabic version upon Master student request,"•         Click Login
+•         Enter your ZU ID and password to login
+•         Click Start
+•         Write your Full Name as per passport (please attach your passport copy) , ZU Student ID        Number, Program/ Major 
+Graduation Date, Replacement Diploma Fee (157.5)) Receipt # on the comment box.
+•         Graduate Registrar Office check the financial status of the master student with Finance Department.
+•         If the financial status is cleared, the replacement Diploma will be issued and sent to master students to their ZU email.
+•         If the financial status is not cleared, the master student will be notified to clear the finances in order to proceed with the request. 
+•         Master students must notify the Graduate Registrar Office once they clear their accounts
+","['5', '8']",3 WD,157.5 AED ,Graduate Registrar Office - Abu Dhabi Khalifa City Campus - MF1 building - Second floor,Graduate Registrar Office - Abu Dhabi Khalifa City Campus - MF1 building - Second floor - 025993331,,Master Students – Replacement Official Diploma - Arabic version,GRAD-ROD- AR,NA,Master Students – Replacement Official Diploma - Arabic version,https://eservices.zu.ac.ae/Service/en/Card/Master-Students---Replacement-Official-Diploma---Arabic-version,https://eservices.zu.ac.ae/Content/Icons/baa6d0da-974f-42e6-9c48-cfe9bf5771f8.png,Issuing replacement Diploma - Arabic version upon Master student request,21
+Master Students – Replacement Official Diploma - English version,GRAD-ROD- EN,,Issuing replacement Diploma - English version upon Master student request,"Click Login
+•         Enter your ZU ID and password to login
+•         Click Start
+•         Write your Full Name as per passport (please attach your passport copy) , ZU Student ID        Number, Program/ Major, Reasons of Diploma Replacement (Damaged/Lost/Mistake), 
+Graduation Date, Replacement Diploma Fee (150AED) Receipt # on the comment box.
+•         Graduate Registrar Office check the financial status of the master student with Finance Department.
+•         If the financial status is cleared, the replacement Diploma will be issued and sent to master students to their ZU email.
+•         If the financial status is not cleared, the master student will be notified to clear the finances in order to proceed with the request. 
+•         Master students must notify the Graduate Registrar Office once they clear their accounts
+","['5', '8']",3 WD,150 AED,Graduate Registrar Office - Abu Dhabi Khalifa City Campus - MF1 building - Second floor,Graduate Registrar Office - Abu Dhabi Khalifa City Campus - MF1 building - Second floor - 025993562,,Master Students – Replacement Official Diploma - English version,GRAD-ROD- EN,NA,Master Students – Replacement Official Diploma - English version,https://eservices.zu.ac.ae/Service/en/Card/Master-Students---Replacement-Official-Diploma---English-version,https://eservices.zu.ac.ae/Content/Icons/e72e9ad7-11ec-4f68-81c0-00bafac46031.png,Issuing replacement Diploma - English version upon Master student request,30
+Mentoring Tool ,HR 002, https://mentoringtool.zu.ac.ae/,"* The program is designed to give UAE employees on grades (3, 4s, 4,5s) the opportunity to gain knowledge and guidance from Mentors of different backgrounds and experiences. 
+* Mentorship provides a safe learning environment and focuses on the professional development of the mentee. 
+* The duration of the mentoring sessions can last from 3 to 6 months. The aim of the mentoring sessions can be focused on the overall career development or can be project based.
+","As a Mentee:
+- You will be prompted to enter a user name and password, enter your ZU ID and Login Password.
+- You need to select Mentor from the list provided, you will be able to review the Mentor’s profile 
+- Write a comment to specify mentoring area
+- Click on Submit
+- Once you submit, you will receive notification emails as the process goes until end of the mentoring duration.
+- At the end of the mentoring duration, notification will be sent to fill the evaluation form.
+- log in and press on the evaluation form, then fill, save and attach the form.
+- press Submit.",['3'],N/A,No fee required,HR Department,HRSupport@zu.ac.ae,,Mentoring Tool ,HR 002,https://www.zu.ac.ae/main https://mentoringtool.zu.ac.ae/,Mentoring Tool ,https://eservices.zu.ac.ae/Service/en/Card/Mentoring-Tool-,https://eservices.zu.ac.ae/Content/Icons/e828b2ee-2062-4ba7-9ee8-506e71c45ca2.png,"* The program is designed to give UAE employees on grades (3, 4s, 4,5s) the opportunity to gain know...",53
+Moving to Cash Housing Request ,HR 001,https://cashhousing.zu.ac.ae/,"* Applying for Cash Housing 
+* Applying to notify Zayed University of any change in the family situation or if the spouse commences work with a Government organization, which will impact the cash housing benefit.","* Fill in the E-form
+* Attach the required documents
+* Tick the cash housing advance option
+* press submit
+",['3'],N/A,N/A,HR Department,ahmad.alnaji[@]zu.ac.ae. ,,Moving to Cash Housing Request ,HR 001,https://www.zu.ac.ae/mainhttps://cashhousing.zu.ac.ae/,Moving to Cash Housing Request ,https://eservices.zu.ac.ae/Service/en/Card/Moving-to-Cash-Housing-Request-,https://eservices.zu.ac.ae/Content/Icons/2c6e23e2-1140-407f-ae7d-38bade0c09e4.png,* Applying for Cash Housing   * Applying to notify Zayed University of any change in the family situ...,73
+ONCE Program,SCO-S-1,https://careers.zu.ac.ae,On Campus Employment (ONCE) Program for Zayed University students on their free time.,"1. Click start
+2. You will be redirected to ONCE Portal
+3. Login with your ZU ID and password
+4. Check the ONCE Portal for vacancies available
+5. Select the Job advertised
+6. Upload your CV and apply for the job",['7'],One week after receiving the job post from the department.,N/A,Student Careers Office - Zayed University Dubai & Zayed University  Abu Dhabi ,Email: Naseema.Almarzooqi@zu.ac.ae /  04-402-1659,,ONCE Program,SCO-S-1,https://www.zu.ac.ae/mainhttps://careers.zu.ac.ae,ONCE Program,https://eservices.zu.ac.ae/Service/en/Card/ONCE-Program,https://eservices.zu.ac.ae/Content/Icons/9135ab3b-1f86-482e-b409-ef85676f4752.png,On Campus Employment (ONCE) Program for Zayed University students on their free time,15
+Online Printing System ,CPDS - 04,https://printing.zu.ac.ae,All students and employees can send their printing request in advance and then they can collect their request at business center. The payment can be made through staff/student ZU ID card.,They need to log in from Intranet and then go to e-services.,"['7', '3', '8']",N/A,Raising the request: No fee required. Business Center Services: Applicable,Administration building – Level 1 – Campus services  ,dxb_BusCenter[@]zu.ac.ae./    -     Auh_BusCenter[@]zu.ac.ae. ,,Online Printing System ,CPDS - 04,https://www.zu.ac.ae/mainhttps://printing.zu.ac.ae,Online Printing System ,https://eservices.zu.ac.ae/Service/en/Card/Online-Printing-System-,https://eservices.zu.ac.ae/Content/Icons/09a96fd3-5785-489f-90d3-ca928142378b.png,All students and employees can send their printing request in advance and then they can collect thei...,57
+Parking Violation Fine Payment,CPDS - 11,,"Parking violation fine payment for the students, faculty and staff (Both campuses)","1. Click Login. 
+2. Use your ZU ID and password. 
+3. Click Start. 
+4. In case you have a comment, please write it in the comment box. 
+5. Submit. 
+6. You will receive automatic email with payment instructions link. 
+7. When you click in the link it will take you to the electronic gate system. You can then pay either by e-dirham or credit card. 
+8. You will receive the payment confirmation invoice in your email. 
+9. Finance department and Campus Physical Development & Services Department will start the service. 
+10. Campus Physical Development & Services Department will send you a notification stating that ""The car clamp is removed""
+","['7', '3', '5', '6']",Payment needs to be done on the same day,200 AED,Zayed University Dubai campus and Abu Dhabi Campus,"FacilitiesAUH@zu.ac.ae
+FacilitiesDXB@zu.ac.ae","Goal 1. Make cities inclusive, safe, resilient and sustainable. 
+Goal 2. Ensure sustainable consumption and production patterns. 
+Several sustainable development goals are embedded within the services of Campus Physical Development & Services Office, ensure a quality education by providing quality services. This includes streaming our services to our students to allow them to have peace of mind and focus on their education and personal development than be burdened by administrative paperwork and making inconvenient trips to the campus. Locker registration, Car Registration, Lost & Found, Online print request etc. have become web-based services significantly reducing paper waste. This in turn reduces our carbon footprint and helps mitigate the effects of climate change, and the greenhouse gas emissions associated with visiting the campus is another added environmental benefit. Together these benefits contribute to the responsible consumption and production within our institution while providing a high-quality education, and simultaneously prompting sustainable cities and communities. ",Parking Violation Fine Payment,CPDS - 11,NA,Parking Violation Fine Payment,https://eservices.zu.ac.ae/Service/en/Card/Parking-Violation-Fine-Payment,https://eservices.zu.ac.ae/Content/Icons/544481b7-a3ef-4138-a4ec-06d5f2eeb103.png,"Parking violation fine payment for the students, faculty and staff (Both campuses)",55
+Provide Career Counseling Services,SCO-S-2,https://zayed-csm.symplicity.com/students/index.php?s=calendar&ss=app_main&mode=landing,"Provide career awareness and coaching to students on decision making, career choices and development of essential career related skills. ","
+1. Log in with your ZU ID number and password
+2. Press on the Start icon to begin
+3. Fill in the counselling form and select a date and time from the timings available for counselling
+4. Select if the service will be Face to Face or Virtual via Webex
+5. Submit
+6. Get Confirmation on the Date/Time and link ( for virtual appointments through Webex) by Email
+7. Meet with the Career counselor in the Student Careers and Alumni Department (AUH 0.133 or R-GF-060A) or virtually through Webex",['7'],Services provided within one working day,No fee required,"Zayed University - Dubai Campus
+Zayed University - Abu-Dhabi Campus",AUH - jane.tatterton@zu.ac.ae;  DXB - Rafeef.Dahir@zu.ac.ae,"Provide career awareness and coaching to students on decision making, career choices and development of essential career related skills to promote inclusive and sustainable economic growth, employment and decent work for all.",Provide Career Counseling Services,SCO-S-2,https://www.zu.ac.ae/mainhttps://zayed-csm.symplicity.com/students/index.php?s=calendar&ss=app_main&mode=landing,Provide Career Counseling Services,https://eservices.zu.ac.ae/Service/en/Card/Provide-Career-Counseling-Services,https://eservices.zu.ac.ae/Content/Icons/76dedf0a-a102-410c-9602-0cb643a6bd19.png,"Provide career awareness and coaching to students on decision making, career choices and development...",36
+Register courses for MA students,GRAD-CSR-EN,https://bannerweb.zu.ac.ae,Course Self-Registration - English Version,"Click Login 
+• Enter your ZU ID # and password to login. 
+• Click Start. 
+• Write your Full Name as per passport, ZU Student ID Number, Program Name, Course Registration Fee (as per the Schedule of Graduate Tuition Payment Plans) Receipt # on the comment box. 
+• Select the course(s)for self-registration.
+• If your financial status is cleared, the Graduate Registrar notifies you by using your ZU email address. 
+• If your financial status is not cleared, the Graduate Registrar's Office notifies you by using your ZU email address to clear your finances in order to proceed with your request.
+",['8'],Course self registration should be done before the start of the course,NA,Zayed University Abu Dhabi Campus,"Kalthoum AlMarzouqi, Acting Graduate Registrar, Tel: +971-2-599-3562 Email: Kalthoum.AlMarzouqi[@]zu.ac.ae.",,Register courses for MA students,GRAD-CSR-EN,https://www.zu.ac.ae/mainhttps://bannerweb.zu.ac.ae,Register courses for MA students,https://eservices.zu.ac.ae/Service/en/Card/Register-courses-for-MA-students,https://eservices.zu.ac.ae/Content/Icons/c5c90b56-39f7-4da0-91c6-8a111c113864.png,Course Self-Registration - English Version,79
+Request provision of Technical Support services to students,SD-001,https://sanad.zu.ac.ae/HomePage.do?view_type=my_view,Provide technical support to students,"1. Click Start
+2. You will be redirect to service desk website 
+3. Login with your ZU ID & password.
+4. Click on “Create a New Incident”
+5. Write complete detail of your request in “Incident Description”, and Select Priority
+6. Click on Submit.
+7. Service Desk staff will receive your request on-line and will respond to your request immediately. ","['7', '5', '3', '6', '8']",8:00 AM to 4:00 PM,N/A,"Dubai: Ground Floor Wing AB, Entrance from Atrium side.
+Abu Dhabi: Administration Building, Ground Floor, opposite Student Affairs.
+","Email – IT.ServiceDesk@zu.ac.ae , Sanad@zu.ac.ae
+Web – https://sanad.zu.ac.ae
+Phone – AUH - 02 599 3666 / DXB – 04 402 1777 ( only if you do not have access to email or web)","Zayed University provides high quality education and it is recognized as one of the leading universities in the region for excellence in educational innovation. We as an IT Department are a part of this entity and we work on supporting the students in their educational journey and we realize the importance of building a sustainable community and being an effective part of the world and UN sustainability supporting goals. Hence, we illustrate below our contribution to Sustainability Development Goals. 
+
+Quality Education: The IT Client Services Unit ensures the continuation and delivery of high quality education to all the students by providing IT technical support on & off campus. Service Desk provides consistent and reliable support of classes to makes it possible for educators to better leverage their use of technology as an effective teaching and learning tool. Technical support team ensures that the technology continues to function, remains up to date and is fully usable by Faculty, and students.
+
+Reduced inequalities: People of determination face challenges of all types, IT Service desk provides constant support of technologies that can help them have an easier learning experience while being able to access all needed resources just like the other students. These technologies help them read and write documents, communicate with others, and search for information on the Internet. The main purpose of supporting people of determination with these rehabilitative technologies is to enable them to be a part of society and lead a near-normal life. 
+
+Gender Equality: IT Service Desk supports both genders equally & treats all students, staff, and faculty fairly. Service Desk has an inclusive culture that ensures equal access to resources to enable students from both genders to fully participate in the learning process and enable everyone to reach their full potential. 
+
+Life on Land: We contribute to this goal through some of our green initiative” which is mainly focusing on managing printing and reducing the use of papers.  For example, printing back and front on one page instead of printing on two pages. ZU printers are used by students, faculty, and staff around the campus via a smart system that keeps the IT helpdesk aware of the volume of print jobs released which can help in analyzing the amount of paper used and how the university can contribute to reducing waste and recycling it when possible. 
+
+Decent work and economic growth: Employment opportunities & well-paid quality jobs are available to both male & female students to help them be productive, develop and grow through a program called (ON CAMPUS EMPLOYMENT). 
+
+IT Service Desk center monitors and maintains university’s computer systems and provides the technical expertise needed to keep all ZU systems running smoothly thus enabling employees, faculty & students to stay productive and maximize the utilization of technologies provided for all users. ",Request provision of Technical Support services to students,SD-001,https://www.zu.ac.ae/mainhttps://sanad.zu.ac.ae/HomePage.do?view_type=my_view,Request provision of Technical Support services to students,https://eservices.zu.ac.ae/Service/en/Card/Request-provision-of-Technical-Support-services-to-students,https://eservices.zu.ac.ae/Content/Icons/54d096ec-df8c-4241-8234-d9175ce7ee74.png,Provide technical support to students,27
+Resource Scheduler,CPDS - 07,https://rscheduler.zu.ac.ae/MyEvents,Service to book a meeting/conference rooms through online,"- Login using your ZU ID
+- Choose the room
+- Choose the date and time
+- Request services e.g: security, cleaning, catering, ..etc
+- Submit",['3'],N/A,N/A,Online,Ayesha.AlFalasi@zu.ac.ae - Fadi.Suwan@zu.ac.ae - Also from other departments ,,Resource Scheduler,CPDS - 07,https://www.zu.ac.ae/mainhttps://rscheduler.zu.ac.ae/MyEvents,Resource Scheduler,https://eservices.zu.ac.ae/Service/en/Card/Resource-Scheduler,https://eservices.zu.ac.ae/Content/Icons/8d24cbc3-a482-4c68-bc48-e366a4bc5431.png,Service to book a meeting/conference rooms through online,6
+Sponsor Access System,Reg-08,,"The Sponsor Access System provides secured access to track the progress of sponsored students toward the completion of their degrees, and verify pertinent information.","1. Register a eService Account.
+2. Start the service. 
+3. Provide the required information shown on the page then submit.
+4. Wait for the confirmation email that your account has been approved.
+5. Go to Sponsor Access System to access your account.",['6'],1 - 2 days,N/A,Sponsors can access the academic data of their sponsored students from their premises,N/A,"Goal 11: Make cities inclusive, safe, resilient and sustainable.
+Goal 12: Ensure sustainable consumption and production patterns.
+Several sustainable development goals are embedded within the services of Registrar’s Office, ensure a quality education by providing quality services. This includes streaming our services to our students to allow them to have peace of mind and focus on their education and personal development than be burdened by administrative paperwork and making inconvenient trips to the campus. Course registration as well as requests for enrolment confirmation and attestation certificates have become web-based services significantly reducing paper waste. This in turn reduces our carbon footprint and helps mitigate the effects of climate change, and the greenhouse gas emissions associated with visiting the campus is another added environmental benefit. Together these benefits contribute to the responsible consumption and production within our institution while providing a high-quality education, and simultaneously prompting sustainable cities and communities.  
+
+
+",Sponsor Access System,Reg-08,NA,Sponsor Access System,https://eservices.zu.ac.ae/Service/en/Card/Sponsor-Access-System,https://eservices.zu.ac.ae/Content/Icons/d0223391-1d8f-4fac-a2c0-81bfbd339bc6.png,The Sponsor Access System provides secured access to track the progress of sponsored students toward...,77
+Stationary Ordering System,CP2,https://stationary.zu.ac.ae,Order stationery from the warehouse ,Scan the barcode of the item using the barcoding machine at the store. ,['3'],N/A,N/A,Store – wing C,Mahamood.Challakkara@zu.ac.ae  ,,Stationary Ordering System,CP2,https://www.zu.ac.ae/mainhttps://stationary.zu.ac.ae,Stationary Ordering System,https://eservices.zu.ac.ae/Service/en/Card/Stationary-Ordering-System,https://eservices.zu.ac.ae/Content/Icons/8b67a0cd-cd24-4ed9-8b4b-3af0b57252c5.png,Order stationery from the warehouse ,47
+Student Car Registration,CPDS- 08,https://gatesystem.zu.ac.ae/SitePages/Home.aspx,Online service to register student/staff and faculty cars in ZU gate system,"- Login using your ZU ID
+- Open: http://gatesystem.zu.ac.ae/SitePages/Home.aspx
+- Click New request
+- Fill the information and attachment 
+- submit
+","['7', '8']",2 Working Day ,"Free for two cars, the third & fourth car will cost 25 AED",Online,CarRegistration_DXB@zu.ac.ae,,Student Car Registration,CPDS- 08,https://www.zu.ac.ae/mainhttps://gatesystem.zu.ac.ae/SitePages/Home.aspx,Student Car Registration,https://eservices.zu.ac.ae/Service/en/Card/Student-Car-Registration,https://eservices.zu.ac.ae/Content/Icons/2a3fcb6c-3411-4871-a49f-ce3161e5e445.png,Online service to register student/staff and faculty cars in ZU gate system,3
+Student Counselling Center,COU-01-A,https://scc.zu.ac.ae/,"The portal contains all the electronic services of the Student Counselling Centre, such as making an appointment with a counsellor, providing an academic accommodation, registering and attending training workshops, or referral which faculty/advisors and professors can request. And in a safe and supportive environment and always taking into account their privacy. To enable them to perform at the best academic and personal level and achieve their personal and leadership goals.
+
+
+
+
+","
+1.	Log in to the portal
+2.	Click on the preferred service (booking appointments/ accommodation/ referral /calendar of events/ upcoming events)
+3.	Fill the application or form 
+4.     Submit ",['7'],The average time for receiving an appointment is approximately 24 hrs after the request is placed. ,N/A,"AUH Office- Student Counseling Center across from the Registration office
+DXB Office- Student Counseling Center located in Student affairs","Abu Dhabi Campus:  
+Amal Bin Alawi  
+Tel: 02-5993728 /0564156060
+Office: (ADM.1.107)
+Email: Amal.BinAlawi@zu.ac.ae
+Dubai Campus:
+Sara Al Marzooq
+Tel: 04-4021637/ 055-3646463  
+Office: (R-GF-077)
+Email: Sara.AlMarzooqi@zu.ac.ae
+","Goal 3 :Promoting health and wellbeing by providing psychological services that increase self awareness, resilience, skills development, and emotional growth and wellbeing.
+Goal 6: Empowering women decreasing gender inequality by empowering women through raising self awareness, purpose, direction and self-determination.
+",Student Counselling Center,COU-01-A,https://www.zu.ac.ae/mainhttps://scc.zu.ac.ae/,Student Counselling Center,https://eservices.zu.ac.ae/Service/en/Card/Student-Counselling-Center,https://eservices.zu.ac.ae/Content/Icons/338f1d94-cd86-4dff-af75-2531bb41711b.png,"The portal contains all the electronic services of the Student Counselling Centre, such as making an...",74
+Student Course Registration ,Reg-06,http://bannerweb.zu.ac.ae,Student self-registration to courses for each semester in order to have a schedule,"Your key contact person for Online Registration is your ADVISOR. Please make an appointment with your Advisor via ARM to review your planned courses and get the temporary advising hold removed so that you can register to courses. 
+
+1. Click Start, you will be redirected to Banner Web site.
+2. Click on Secure Area. 
+3. Enter your ZU ID and Password to login. (Student will only be able to proceed with remaining steps based on his/her time ticket which contains the date and time for registration and can be viewed online on SAP website).  
+4. Student inserts the courses he/she must register in.
+5. Student submits his/her requests and gets an immediate response showing that the process was successfully completed or there is an issue with his/her course selection so he/she will do additional changes to complete the schedule.
+",['7'],22 hours,N/A,"Admissions & Registration Department at Zayed University - Abu Dhabi Campus
+Admissions & Registration Department at Zayed University - Dubai Campus
+",Admissions & Registration Department: Abu Dhabi: RegistrarAuh[@]zu.ac.ae Male Campus 02-5993659 / Female Campus 02-5993773 - Dubai: RegistrarDxb[@]zu.ac.ae 04-4021444,"Goal 11: Make cities inclusive, safe, resilient and sustainable.
+Goal 12: Ensure sustainable consumption and production patterns.
+Several sustainable development goals are embedded within the services of Registrar’s Office, ensure a quality education by providing quality services. This includes streaming our services to our students to allow them to have peace of mind and focus on their education and personal development than be burdened by administrative paperwork and making inconvenient trips to the campus. Course registration as well as requests for enrolment confirmation and attestation certificates have become web-based services significantly reducing paper waste. This in turn reduces our carbon footprint and helps mitigate the effects of climate change, and the greenhouse gas emissions associated with visiting the campus is another added environmental benefit. Together these benefits contribute to the responsible consumption and production within our institution while providing a high-quality education, and simultaneously prompting sustainable cities and communities. 
+
+",Student Course Registration ,Reg-06,https://www.zu.ac.ae/mainhttp://bannerweb.zu.ac.ae,Student Course Registration ,https://eservices.zu.ac.ae/Service/en/Card/Student-Course-Registration-,https://eservices.zu.ac.ae/Content/Icons/368e8d0b-520d-48ed-ad8e-c1fa5594017b.png,Student self-registration to courses for each semester in order to have a schedule,92
+Student Data Modification ,Reg-05,,Modify the student name in the system in case of typo mistake or changing name legally,"(Please before starting with this service, hand the original passport, passport copy, and court letter if needed to the Admissions & Registration Department. The Staff will verify and take the copy only)
+
+1. Click Login
+2. Use your ZU ID and password
+3. Click Start
+4. In case you have a comment, please write it in the comment box
+5. Submit
+6. Admissions & Registration Department  will modify the data in the system. 
+7. Admissions & Registration Department  will send you a notification that the update is successfully done.  
+",['7'],•	The average time for application submission: 2 working day ,N/A,"Admissions & Registration Department at Zayed University - Abu Dhabi Campus
+Admissions & Registration Department at Zayed University - Dubai Campus
+",Admissions & Registration Department: Abu Dhabi: RegistrarAuh[@]zu.ac.ae Male Campus 02-5993659 / Female Campus 02-5993773 - Dubai: RegistrarDxb[@]zu.ac.ae 04-4021444,"Goal 11: Make cities inclusive, safe, resilient and sustainable.
+Goal 12: Ensure sustainable consumption and production patterns.
+Several sustainable development goals are embedded within the services of Registrar’s Office, ensure a quality education by providing quality services. This includes streaming our services to our students to allow them to have peace of mind and focus on their education and personal development than be burdened by administrative paperwork and making inconvenient trips to the campus. Course registration as well as requests for enrolment confirmation and attestation certificates have become web-based services significantly reducing paper waste. This in turn reduces our carbon footprint and helps mitigate the effects of climate change, and the greenhouse gas emissions associated with visiting the campus is another added environmental benefit. Together these benefits contribute to the responsible consumption and production within our institution while providing a high-quality education, and simultaneously prompting sustainable cities and communities. ",Student Data Modification ,Reg-05,NA,Student Data Modification ,https://eservices.zu.ac.ae/Service/en/Card/Student-Data-Modification-,https://eservices.zu.ac.ae/Content/Icons/fd57b1a0-eb56-4e87-b833-a6f1aa7d9524.png,Modify the student name in the system in case of typo mistake or changing name legally,46
+Student of Determination Registration Form,SAS003,,"All Students of Determination are strongly encouraged to register with Student Accessibility Services Department (SAS) through this e-service and submit this request with their documentations as early as possible to benefit from SAS services, while SAS ensures dealing with the information with confidentiality. ","
+1. Click Login.
+2. Use your ZU ID and password to login. 
+3. Fill the ""Student Registration Form"" fields.
+4. Attach the requiered documents. 
+5. Click Submit.
+6. The request will be reviewed, and you will be contacted by Student Accessibility Services staff.
+",['7'],SAS requires 5 working days to process applications.,No Fees Required,"Abu Dhabi: Student Accessibility Services Department           
+           Library, LB-01-037- 1st Floor
+
+Dubai: Student Accessibility Services Department
+       Ground Floor, 04-GF-054
+",(Dubai): Rania.Ali@zu.ac.ae - 04 402 1347  (Abu Dhabi): Hassan.Wardi@zu.ac.ae - 02 599 3186 ,,Student of Determination Registration Form,SAS003,NA,Student of Determination Registration Form,https://eservices.zu.ac.ae/Service/en/Card/Student-of-Determination-Registration-Form,https://eservices.zu.ac.ae/Content/Icons/29032c28-9d87-426a-9421-97675b989360.png,All Students of Determination are strongly encouraged to register with Student Accessibility Service...,29
+Temp employees & Research Assistants Hourly timesheet,FIN 01,https://hourlypaid.zu.ac.ae/SubmitTimesheet/LoadForm,Temp Employees / Research Assistants monthly salary,"Temp Employees /Research Assistants: 
+1.User login with ZU ID and Password
+2.Need to fill details requested in the form also upload the copy of the Agreement 
+3.Once done with approval process
+4.Bank transfer will be done to the employee’s personal bank account",['3'],N/A,No fee required,Financial Resources Department,Joby.Kannampuzha@zu.ac.ae,,Temp employees & Research Assistants Hourly timesheet,FIN 01,https://www.zu.ac.ae/mainhttps://hourlypaid.zu.ac.ae/SubmitTimesheet/LoadForm,Temp employees & Research Assistants Hourly timesheet,https://eservices.zu.ac.ae/Service/en/Card/Temp-employees---Research-Assistants-Hourly-timesheet,https://eservices.zu.ac.ae/Content/Icons/27e3b793-9e32-4ecf-b0c8-8b0f273e1353.png,Temp Employees / Research Assistants monthly salary,49
+To whom it may concern summer approval letter – Digital PDF,Reg-13-D,,Issuing a Summer Approval Letter for students granted permission to study summer courses outside Zayed University upon the student’s request,"1. Click Login.
+2. Use your ZU ID and password.
+3. Click Start.
+4. In case you have a comment, please write it in the comment box.
+5. Submit.
+6. Admissions & Registration Department will issue the Summer Approval Letter.
+7. Admissions & Registration Department will send you an email with digital document 
+",['7'],• The average time for application submission: 10 minutes   • The average time to issue the certificate:  2 working days,No fee required,"•	Admissions & Registration Department at Zayed University - Abu Dhabi Campus
+•	Admissions & Registration Department at Zayed University - Dubai Campus
+",Admissions & Registration Department: Abu Dhabi: RegistrarAuh[@]zu.ac.ae Male Campus 02-5993659 / Female Campus 02-5993773 - Dubai: RegistrarDxb[@]zu.ac.ae 04-4021444,"Goal 11: Make cities inclusive, safe, resilient and sustainable.
+Goal 12: Ensure sustainable consumption and production patterns.
+Several sustainable development goals are embedded within the services of Registrar’s Office, ensure a quality education by providing quality services. This includes streaming our services to our students to allow them to have peace of mind and focus on their education and personal development than be burdened by administrative paperwork and making inconvenient trips to the campus. Course registration as well as requests for enrolment confirmation and attestation certificates have become web-based services significantly reducing paper waste. This in turn reduces our carbon footprint and helps mitigate the effects of climate change, and the greenhouse gas emissions associated with visiting the campus is another added environmental benefit. Together these benefits contribute to the responsible consumption and production within our institution while providing a high-quality education, and simultaneously prompting sustainable cities and communities. 
+",To whom it may concern summer approval letter – Digital PDF,Reg-13-D,NA,To whom it may concern summer approval letter – Digital PDF,https://eservices.zu.ac.ae/Service/en/Card/To-whom-it-may-concern-summer-approval-letter---Digital-PDF,https://eservices.zu.ac.ae/Content/Icons/33139380-1003-48be-bbc1-37648206c192.png,Issuing a Summer Approval Letter for students granted permission to study summer courses outside Zay...,60
+Training & Workshop for Zayed University Students,SAS001,,"The Student Accessibility Services Department offers specialized training courses and workshops for ZU Students. These workshops aim to provide knowledge, tips, and strategies on the most appropriate ways to approach, communicate and interact with Students of Determination."," Click Login.
+
+2. Use your ZU ID and password to log in.
+
+3. Fill in the ""Trainings & Workshops for Zayed University Students Form"" fields.
+
+4. Click Submit.
+
+5. Request will be reviewed, and you will be contacted by Student Accessibility Services staff.","['7', '3']",It takes 3 working days,Not applicable,"Student Accessibility Service, Dubai & Abu Dhabi Campus","(Dubai): Rania.Ali[@]zu.ac.ae. - 04 402 1347,  (Abu Dhabi): Hassan.Wardi[@]zu.ac.ae -  02 599 3186",,Training & Workshop for Zayed University Students,SAS001,NA,Training & Workshop for Zayed University Students,https://eservices.zu.ac.ae/Service/en/Card/Training---Workshop-for-Zayed-University-Students,https://eservices.zu.ac.ae/Content/Icons/f3e20a05-ecf6-4853-b71f-800990782a05.png,The Student Accessibility Services Department offers specialized training courses and workshops for ...,80
+Training & Workshops for Faculty & Admin Staff,SAS004,,"The Student Accessibility Services Department offers training courses and workshops for faculty and admin staff to train them on dealing with Students of Determination, in order to enhance their knowledge about students' disability challenges.","
+1. Click Login.
+2. Use your ZU ID and password to login. 
+3. Fill the ""Trainings & Workshops for Faculty & Admin Staff Form"" fields.
+4. Click Submit.
+5. Request will be reviewed, and you will be contacted by Student Accessibility Services staff.
+",['3'],On average 5 working days from the date of submitting the request.,No Fees Required,"Abu Dhabi: Student Accessibility Services Department           
+           Library, LB-01-037- 1st Floor
+
+Dubai: Student Accessibility Services Department
+       Ground Floor, 04-GF-054
+
+",(Dubai): Rania.Ali@zu.ac.ae - 04 402 1347 (Abu Dhabi): Hassan.Wardi@zu.ac.ae - 02 599 3186 // Rukiya.Deetjen@zu.ac.ae – 02 599 3118,,Training & Workshops for Faculty & Admin Staff,SAS004,NA,Training & Workshops for Faculty & Admin Staff,https://eservices.zu.ac.ae/Service/en/Card/Training---Workshops-for-Faculty---Admin-Staff,https://eservices.zu.ac.ae/Content/Icons/90a6ad09-c4ce-44d8-9846-d4c38cb552b1.png,The Student Accessibility Services Department offers training courses and workshops for faculty and ...,58
+Training & Workshops for Students of Determination,SAS005,,The Student Accessibility Services Department offers specialized training courses and workshops for Students of Determination. These workshops aim to increase the academic and social skills in order to improve the academic performance of Student of Determination.,"
+1. Click Login.
+2. Use your ZU ID and password to login. 
+3. Fill the ""Trainings & Workshops for Students Students of Determination Form"" fields.
+4. Click Submit.
+5. Request will be reviewed, and you will be contacted by Student Accessibility Services staff.
+",['7'],On average 5 working days from the date of submitting the request,No Fees Requiered ,"Abu Dhabi: Student Accessibility Services Department 
+	      Library, LB-01-037
+
+Dubai: 	      Student Accessibility Services Department
+	      Ground Floor, 04-GF-054
+",(Dubai): Rania.Ali@zu.ac.ae - 04 402 3728 // Marjorie.Daniel@zu.ac.ae - 04 402 1822 // Mariyam.Juma@zu.ac.ae - 04 402 1258  (Abu Dhabi): Hassan.Wardi@zu.ac.ae – 02 599 3186 // Rukiya.Deetjen@zu.ac.ae - 02 599 3,,Training & Workshops for Students of Determination,SAS005,NA,Training & Workshops for Students of Determination,https://eservices.zu.ac.ae/Service/en/Card/Training---Workshops-for-Students-of-Determination,https://eservices.zu.ac.ae/Content/Icons/88597a68-fd70-41c4-86b7-2d48e1e7016f.png,The Student Accessibility Services Department offers specialized training courses and workshops for ...,50
+Undergraduate Scholarship Request,Adm-03,,All international students (Non-Emirati) that meet our admission requirements and are applying for a scholarship,"1. Click Start.
+
+2. Fill the Scholarship Application form
+
+3. Upload all required documents.
+
+4. Click Submit.",['7'],After the committee reviews the requests,No fees,"Admission office
+Zayed University  
+Dubai campus: Main entrance 
+Abu Dhabi campus: Gate 2 for female students , Gate 5 for male students.",DXB Campus email: ug_admissions@zu.ac.ae - DXB Tel no: 04- 4021444. AUH Campus email: ug_admissions@zu.ac.ae -AUH Tel no: 02- 5993593,,Undergraduate Scholarship Request,Adm-03,NA,Undergraduate Scholarship Request,https://eservices.zu.ac.ae/Service/en/Card/Undergraduate-Scholarship-Request,https://eservices.zu.ac.ae/Content/Icons/c9a03385-edf8-4d16-895f-b465b8d5a2ec.png,All international students (Non-Emirati) that meet our admission requirements and are applying for a...,59
+Visitor Request,CPDS - 02,https://visitorrequest.zu.ac.ae/,You can apply online if you are expecting a visitor coming to you. ,"Once you apply online, the request goes to the security team so they will be aware of that. ",['3'],One Day,No fee required,Administration building – Level 1 – Campus physical development.   ,Dxb.Security[@]zu.ac.ae.,,Visitor Request,CPDS - 02,https://www.zu.ac.ae/mainhttps://visitorrequest.zu.ac.ae/,Visitor Request,https://eservices.zu.ac.ae/Service/en/Card/Visitor-Request,https://eservices.zu.ac.ae/Content/Icons/c3d7c107-77ab-401b-a5dd-31b2b1879ea6.png,You can apply online if you are expecting a visitor coming to you ,2
+Volunteer Registration Application,SAS006,,"The Student Accessibility Services Department provides Accessibility PALs, Internship and Community Service students trainings related to disabilities to gain knowledge and experience in the field.","
+1. Click Login.
+2. Use your ZU ID and password to login. 
+3. Fill the ""Training Application"" fields.
+4. Click Submit.
+5. Request will be reviewed, and you will be contacted by Student Accessibility Services staff.
+","['7', '3', '5', '6']",SAS requires 3 working days to process applications,No fees required ,"Abu Dhabi: Student Accessibility Services Department 
+	      Library, LB-01-037
+Dubai: 	      Student Accessibility Services Department
+	      Ground Floor, 04-GF-054
+",(Dubai): Dareen.Abu-Lail@zu.ac.ae  - 04 402 1683    Rania.Ali[@]zu.ac.ae. - 04 4021347  (Abu Dhabi): Hassan.Wardi@zu.ac.ae - 02 599 3186,,Volunteer Registration Application,SAS006,NA,Volunteer Registration Application,https://eservices.zu.ac.ae/Service/en/Card/Volunteer-Registration-Application,https://eservices.zu.ac.ae/Content/Icons/5f3d49d7-05d0-4b29-bea7-b8021046789f.png,"The Student Accessibility Services Department provides Accessibility PALs, Internship and Community ...",85
+Zayed University Virtual Bridge ,ZUVB-01,https://zuvb.zu.ac.ae/,"The Zayed University Virtual Bridge is an education platform that is sponsored and managed by Zayed University and which hosts short Massive Open Online Courses (MOOCs) for those wishing to advance their knowledge and career potential. The project, named after the late Sheikh Zayed Bin Sultan, is an extension of his unwavering efforts to make education available to all students and citizens in the United Arab Emirates.","Click start and you will be directed to Zayed University Virtual Bridge website.
+The user need to sign up in the service.
+You will find the courses in the main page.
+Choose a course and enroll yourself.
+Course dates is open.
+Enrollment dates are open ended.
+","['7', '3', '5', '6']",24hrs,Free,Online only,email:  zuvb@zu.ac.ae,,Zayed University Virtual Bridge ,ZUVB-01,https://www.zu.ac.ae/mainhttps://zuvb.zu.ac.ae/,Zayed University Virtual Bridge ,https://eservices.zu.ac.ae/Service/en/Card/Zayed-University-Virtual-Bridge-,https://eservices.zu.ac.ae/Content/Icons/368e8d0b-520d-48ed-ad8e-c1fa5594017b.png,The Zayed University Virtual Bridge is an education platform that is sponsored and managed by Zayed ...,28

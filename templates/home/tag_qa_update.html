@@ -55,9 +55,10 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="bmd-label-floating">Answer</label>
-                                <input type="search" class='form-control' id="ans" name="ans"
-                                       placeholder="Answer"
-                                       value="{% if event_answer %}{{event_answer}}{% endif %}">
+                                <textarea class='form-control'  id="ans" name="ans"
+                                       placeholder="Answer" rows="4">
+                                       {% if event_answer %}{{event_answer}}{% endif %}
+                                </textarea>
                             </div>
                         </div>
                     </div>
@@ -66,7 +67,7 @@
                         <div class="col-md-12">
                             <div class="form-group" id = "div_categories">
                                 <label class="bmd-label-floating">Category & Sub Category</label>
-                                <select id="ctype" name="ctype" class='form-control'  onchange="sub_category({{data}}, this)">
+                                <select id="ctype" name="ctype" class='form-control'  onchange="sub_category({{data}}, this)" required>
                                    <option value="" selected>Select</option>
                                     {% for category in categories %}
                                     <option value="{{ category.id }}">{{ category.description }}</option>
@@ -102,6 +103,7 @@
         var selectList = document.createElement("select");
         selectList.className = "form-control";
         selectList.name = "ctype";
+        selectList.required = true;
         selectList.onchange = function(){
             sub_category(whole_data, selectList);
         };
