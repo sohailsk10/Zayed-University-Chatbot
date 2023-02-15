@@ -22,6 +22,7 @@ urlpatterns = [
     path('get_tag_qa/<id>/', views.get_tag_qa,  name='get_tag_qa'),
     path('get_tag_qa/', views.get_tag_qa_1,  name='get_tag_qa'),
     path('get_child_categories/<parent>/', views.get_child_categories,  name='get_child_categories'),
+    path('q_key_extract/<id>/', views.q_key_extract, name ='q_key_extract'),
 
     # path('answer_search/', answer_search, 'answer_search')
 ]

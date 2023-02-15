@@ -752,20 +752,6 @@ def export_excel(request):
     return HttpResponse("No Data Found.")
 
 
-# # Automatically downloads Filtered PDF file
-# class FilterPDF(LoginRequiredMixin, View):
-
-#     def get(self, request, *args, **kwargs):
-#         global log_exp
-
-#         context = {
-#             'log_': log_exp,
-#         }
-#         pdf = render_to_pdf('home/filter_template.html', context)
-#         if pdf:
-#             return HttpResponse(pdf, content_type='application/pdf')
-#         return HttpResponse("PDF Not Found.")
-
 # Automatically downloads Filtered PDF file
 class FilterPDF(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
@@ -840,3 +826,13 @@ def filter_excel(request):
     if wb:
         return response
     return HttpResponse("No Data Found.")
+
+
+from django.http import JsonResponse
+
+def q_key_extract(request, id):
+    keywords_ = get_keyword_KeyBERT(id)
+    data = {
+        'keywords': keywords_,
+    }
+    return JsonResponse(data)

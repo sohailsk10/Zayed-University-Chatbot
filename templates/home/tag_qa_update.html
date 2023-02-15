@@ -24,9 +24,16 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="bmd-label-floating">Question</label>
-                                <input type="search" class='form-control' id="quest" name="quest" placeholder="Question"
-                                    value="{% if event_question %}{{event_question}}{% endif %}">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label class="bmd-label-floating">Question</label>
+                                        <input type="text" class='form-control' id="quest" name="quest" placeholder="Question"
+                                            value="{% if event_question %}{{event_question}}{% endif %}">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" id= "btnSpinner" class="btn btn-primary btn-sm" onclick="get_que_keywords()">Extract keywords</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -34,9 +41,8 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="bmd-label-floating">Keyword Extracted</label>
-                                <input type="search" class='form-control' id="key_extracted" name="key_extracted"
-                                    placeholder="Keyword Extracted"
-                                    value="{% if keyword_list %}{{keyword_list}}{% endif %}">
+                                <textarea class='form-control' id="key_extracted" name="key_extracted" placeholder="Keyword Extracted"
+                                rows="2" cols="30">{% if keyword_list %}{{q_key_extract}}{% endif %}</textarea>
                             </div>
                         </div>
                     </div>
@@ -44,11 +50,17 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="bmd-label-floating">Add Additional Keyword</label>
-                                <input type="search" class='form-control' id="add_key" name="add_key"
-                                    placeholder="Add Additional Keyword" value="{% if add_key %}{{add_key}}{% endif %}">
-                            </div>
-
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label class="bmd-label-floating">Add Additional Keyword</label>
+                                        <input type="text" class='form-control' id="add_key" name="add_key"
+                                            placeholder="Add Additional Keyword" value="{% if add_key %}{{add_key}}{% endif %}">
+                                        </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-primary btn-sm" onclick="add_ad_keywords()">Add New Keywords</button>
+                                    </div>
+                                </div>
+                                </div>
                         </div>
                     </div>
                     <br />
@@ -79,7 +91,6 @@
                     <button type="submit" class="btn btn-primary">Save</button>
             </div>
             <br />
-
             </form>
         </div>
     </div>
@@ -89,6 +100,7 @@
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
+
 <script>
 
     function arrayRemove(arr, value) {
@@ -97,7 +109,6 @@
             return ele != value;
         });
     }
-
 
     function add_dropdown(dropdown_data, parent_element, whole_data) {
         var selectList = document.createElement("select");
@@ -151,10 +162,46 @@
         if (new_data.length > 0) {
             add_dropdown(new_data, element.parentElement, data)
         }
+    }
+    // spineer
+    $(document).ready(function() {
+        $("#btnSpinner").click(function() {
+          // disable button
+          $(this).prop("disabled", true);
+          // add spinner to button
+          $(this).html(
+            '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Extracting...'
+          );
+
+        });
+        $(this).prop("enabled", true);
+    });
+        
+    function get_que_keywords() {
+        document.getElementById("key_extracted").value = '';
+        var id =  document.getElementById("quest").value; 
+        $.ajax({
+           url: "/chatbot/q_key_extract/" + id + "/",
+            type: 'GET',
+            success: function(data) {
+                document.getElementById("key_extracted").value = data.keywords;
+            }
+        });
+    }
+
+
+    function add_ad_keywords(){
+        var key = document.getElementById("add_key").value;
+        var keys = document.getElementById("key_extracted").value;
+        var _temp = keys + " " +  key;
+        document.getElementById("key_extracted").value = '';
+        document.getElementById("key_extracted").value = _temp;
 
 
     }
+ 
 
+      
 </script>
 
 {% endblock javascripts %}
