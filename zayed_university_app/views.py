@@ -420,7 +420,7 @@ def get_response_from_watson(request):
     for i in all_csv:
         links_ratio.append([i[0], string_similarity(i[1][1], _main_input_string), i[1][1], i[1][0], i[1][2]])
     
-    # print("links_ratio", links_ratio)
+
     max_ratio = max(links_ratio, key=lambda x: x[1])[1]
     print("max_ratio", max_ratio)
     
