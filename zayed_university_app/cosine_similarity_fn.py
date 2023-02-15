@@ -4,7 +4,6 @@ from sklearn.metrics.pairwise import cosine_similarity
 def cosine_similarity_fn(new_df, questions_asked_vec, questions_vec):
     score = []
     dump_score = []
-    print("INDSIDE CS")
     # for i in range(len(questions)):
     # new_df['question'] = new_df[['title', 'description']].apply(lambda x: ''.join(x), axis=1)
     for i in range(len(new_df['title'])):
@@ -52,7 +51,7 @@ def cosine_similarity_fn(new_df, questions_asked_vec, questions_vec):
         else:
             score = dump_score
 
-    # print("score", score)
+    print("score", type(score), score)
     
 
     ans_disp = ""
@@ -76,4 +75,4 @@ def cosine_similarity_fn(new_df, questions_asked_vec, questions_vec):
     else:
         score_avg = score_sum/5
 
-    return ans_disp, ans_list, score_avg
+    return ans_disp, ans_list, score[0][1]

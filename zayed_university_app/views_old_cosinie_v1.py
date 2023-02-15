@@ -49,7 +49,6 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 from django.contrib import messages
-import difflib
 
 
 workspace_id = 'lMpsX8-ivT4J5jaAZRo4cNUnotfqOO-_Vp2zia532An5'
@@ -96,19 +95,7 @@ def get_ratios(_input_list_, _sys_, _main_list):
                     _main_list.append([string_similarity(i, name), j])
             except:
                 pass
-    return _main_list
 
-
-def get_ratios_from_df(_input_list_, _df_, _main_list):
-    for i in _input_list_:
-        for index, row in _df_.iterrows():
-            name = row.question
-            # print("name", name)
-            try:
-                # if i.upper().strip() in name.upper().strip() or i.upper().strip() == name.upper().strip():
-                _main_list.append([string_similarity(i, name), row.question, row.answer])
-            except:
-                pass
     return _main_list
 
 
@@ -123,7 +110,6 @@ def list_to_str(_list):
                 _str += i + " "
 
     return _str
-
 
 
 cont = {}
@@ -157,17 +143,9 @@ def get_data(_dict):
     return _dict['event_type'], _dict['event_question'], _dict['user_email']
 
 
-
-# def string_similarity(input_string, reference_string):
-# #The ndiff method returns a list of strings representing the differences between the two input strings.
-#     diff = difflib.ndiff(input_string.lower(), reference_string.lower())
-#     diff_count = 0
-#     for line in diff:
-#       # a "-", indicating that it is a deleted character from the input string.
-#         if line.startswith("-"):
-#             diff_count += 1
-# # calculates the similarity by subtracting the ratio of the number of deleted characters to the length of the input string from 1
-#     return 1 - (diff_count / len(input_string))
+def string_similarity(str1, str2):
+    result = SequenceMatcher(a=str1.lower(), b=str2.lower())
+    return result.ratio()
 
 def remove_duplicates(input_list):
     output_list = []
@@ -175,27 +153,6 @@ def remove_duplicates(input_list):
         if item not in output_list:
             output_list.append(item)
     return output_list
-
-
-def get_proper_extension(_list):
-    final_df = []
-
-    for i in _list:
-        if 'https://eservices.zu.ac.ae' in i:
-            final_df.append(i)
-
-        else:
-            temp = True
-            for j in EXTENSTION_LIST:
-                if j in i.split("/")[-1].upper() and temp:
-                    temp = False
-                    final_df.append(i)
-                    break
-                
-            if temp:
-                final_df.append(i + ".aspx")
-    
-    return final_df
 
 
 @csrf_exempt
@@ -262,94 +219,8 @@ def get_response_from_watson(request):
     print(len(res['output']['intents']) > 0, res_conf > 0.85)
     if len(res['output']['intents']) > 0 and res_conf > 0.85:
         intents = res['output']['intents'][0]['intent']
-        try:
-            output = res['output']['generic'][0]['primary_results'][0]['highlight']['answer']
-        except:
-            try:
-                output = res['output']['generic'][0]['additional_results'][0]['highlight']['answer']
-            except:
-                try:
-                    output = res['output']['generic'][0]['text']
-                    print("OUTPUT", output, intents)
-                    if intents.lower() == "greetings" or intents.lower() == "start_greetings" or intents.lower() == "end_greetings" or intents.lower() == "live_agent":
-                        return JsonResponse({'session_id': session_id_, 'answer': output, 'intent': intents})
-                except:
-                    print("In 3rd Except")
-                    eid = EventType.objects.get(id=int(5))
-                    Log.objects.create(event_type_id=eid, user_email=user_email, user_ip=ip, event_question=text,
-                                    event_answer='', intent=intents)
-                    return JsonResponse(
-                        {'session_id': session_id_,
-                        'answer': "Sorry, I am not able to detect the language you are asking."})
-
-        if len(output) > 1:
-            temp = ''
-            for o in output:
-                temp += o + ' '
-            message = cleanhtml(temp)
-
-        else:
-            message = cleanhtml(output[0])
-        if message == '':
-            message = cleanhtml(res['output']['generic'][0]
-                                ['primary_results'][0]['answers'][0]['text'])
-        message = cleanhtml(message)
-        eid = EventType.objects.get(id=int(event_type))
-        Log.objects.create(event_type_id=eid, user_email=user_email, user_ip=ip, event_question=text,
-                        event_answer=message, intent=intents)
-        return JsonResponse({'session_id': session_id_, 'answer': message, 'intent': intents})
-    
-   
-
+        # print("intents", intents)
     else:
-        _text = text.lower()
-        _main_input = _text.split(" ")
-        _main_input_list = [i for i in _main_input if i]
-        _main_input_list = remove_custom('i', _main_input_list)
-        _main_input_list = remove_custom('a', _main_input_list)
-        _main_input_string = list_to_str(_main_input_list)
-        try:
-            tag_df = pd.read_csv("TAG_DF.csv")
-            tag_df = tag_df.drop(['Unnamed: 0'], axis=1)
-            # print("tag_df", tag_df)
-            all_csv = []
-            df_ratios = get_ratios_from_df([_main_input_string], tag_df, all_csv)
-            print("DF RATIOS", df_ratios)
-            # print(*df_ratios[:5], sep="\n")
-
-            tag_df_ratios = pd.DataFrame(df_ratios, columns=['ratio', 'question', 'answer'])
-            main_df = tag_df_ratios.drop_duplicates(subset="answer", keep="last")
-
-            top_tag_df = main_df.sort_values('ratio', ascending=False).head(5).values.tolist()
-            # tag_df_top_ratio = max(tag_df_ratios, key=lambda x: x[1][0])
-            tag_df_top_ratio = top_tag_df[0][0]
-            print("tag_df_top_ratio",tag_df_top_ratio)
-            print("TOP TAG DF")
-            print(*top_tag_df[:5], sep="\n")
-        except Exception as e:
-            print("In Exception", e)
-        # todo: check ratio 
-            tag_df_top_ratio = 0.0
-        
-        if float(tag_df_top_ratio) > 0.60:
-            top_tag_df_links = [i[2] for i in top_tag_df]
-            top_tag_df_extension = get_proper_extension(top_tag_df_links)
-
-            tag_df_str = ""
-            for i in top_tag_df_extension:
-                tag_df_str += i + "\n"
-                
-            if len(top_tag_df_extension) > 0:
-                return JsonResponse({'session_id': session_id_, 'answer': tag_df_str, 'intent': 'General', 'url': top_tag_df_extension})
-
-        # else:
-        #     eid = EventType.objects.get(id=int(5))
-        #     Log.objects.create(event_type_id=eid, user_email=user_email, user_ip=ip, event_question=text,
-        #                     event_answer='', intent='General')
-        #     return JsonResponse(
-        #         {'session_id': session_id_,
-        #         'answer': "Sorry, I am not able to detect the language you are asking."})
-
         intents = ""
         _text = text.lower()
         # _text = text.lower().replace('zayed', '').replace('university', '')
@@ -366,21 +237,22 @@ def get_response_from_watson(request):
         #         _text = _text.replace(i, "")
                 # print("_text", _text)
 
-        # for i in _input_list:
-        #     for j in _stop_words_ar:
-        #         if i.upper().strip() == j.upper().strip():
-        #             _text = _text.replace(i, "")
+        for i in _input_list:
+            for j in _stop_words_ar:
+                if i.upper().strip() == j.upper().strip():
+                    _text = _text.replace(i, "")
 
-        # _main_input = _text.split(" ")
-        # # _main_input = get_combinations(_main_input)
-        # # print("_main_input", _main_input)
-        # _main_input_list = [i for i in _main_input if i]
+        _main_input = _text.split(" ")
+        # _main_input = get_combinations(_main_input)
+        # print("_main_input", _main_input)
+        _main_input_list = [i for i in _main_input if i]
 
-        # _main_input_list = remove_custom('i', _main_input_list)
-        # _main_input_list = remove_custom('a', _main_input_list)
+        _main_input_list = remove_custom('i', _main_input_list)
+        _main_input_list = remove_custom('a', _main_input_list)
         # _main_input_string = list_to_str(_main_input_list)
         # keywords = kw_model.extract_keywords(_main_input_string.strip().lower(), keyphrase_ngram_range=(1, 7), stop_words=None, use_mmr=True, diversity=0.7, highlight=True, top_n=10)
         
+
         main_df = pd.DataFrame()
         all_csv_ = []
 
@@ -408,7 +280,6 @@ def get_response_from_watson(request):
                     created_on = 1
 
                 all_csv_.append([path, title, created_on])
-
     print("Len of csv", len(all_csv_))
     # print(all_csv_[0])
     all_csv = []
@@ -416,36 +287,130 @@ def get_response_from_watson(request):
     _main_input_string = list_to_str(_main_input_list)
     print("_main_input_string", _main_input_string)
     
-    links_ratio = []
-    for i in all_csv:
-        links_ratio.append([i[0], string_similarity(i[1][1], _main_input_string), i[1][1], i[1][0], i[1][2]])
+    keywords = kw_model.extract_keywords(_main_input_string.strip().lower(), keyphrase_ngram_range=(1, 7), stop_words=None, use_mmr=True, diversity=0.7, highlight=True, top_n=10)
+    print("keywords", keywords)
+    print('Before command dictionary')
+    keywords_list = list(dict(keywords).keys())
+    print("keywords_list[0]", keywords_list[0])
+    questions_asked = [keywords_list[0]]
     
-    # print("links_ratio", links_ratio)
-    max_ratio = max(links_ratio, key=lambda x: x[1])[1]
-    print("max_ratio", max_ratio)
+    questions_asked_vec = tag_model.encode(questions_asked)
+    try:
+        TAG_QUESTION_VEC = np.load("TAG_QUESTION_VEC.npy")
+        TAG_DF = pd.DataFrame(list(Tag_QA.objects.all().values()))
+        TAG_DF['q_tag'] = np.arange(len(TAG_DF))
+        TAG_DF['title'] = TAG_DF['question']
+        TAG_DF['path'] = TAG_DF['answer']
+        TAG_DF['bert_keyword'] = TAG_DF['keywords']
+        print("TAG DF LOADED", TAG_DF.head())
+        # res, res_list, conf = cosine_similarity_fn(TAG_DF, questions_asked_vec, TAG_QUESTION_VEC)
+        res, res_list, conf = cosine_similarity_fn(TAG_DF, questions_asked_vec, TAG_QUESTION_VEC)
+        print("CONF TAG QA", conf)
+    except Exception as e:
+        print("In Exception", e)
+        conf = 0.0
     
-    df1 = pd.DataFrame(links_ratio, columns=['single_ratio', 'actual_ratio', 'name', 'path', 'timestamp'])
-    df1['timestamp'] = pd.to_datetime(df1['timestamp'])
-    main_df = df1.drop_duplicates(subset="path", keep="last")
+    if conf <= 0.60:
+        links_ratio = []
+        print(len(all_csv))
+        for i in all_csv:
+            links_ratio.append([i[0], string_similarity(i[1][1], _main_input_string), i[1][1], i[1][0], i[1][2]])
 
-    top_df1 = main_df.sort_values('actual_ratio', ascending=False).head(5).values.tolist()
-    top_df1 = [i[3] for i in top_df1]
-    top_df_extension = get_proper_extension(top_df1)
+        df1 = pd.DataFrame(links_ratio, columns=['single_ratio', 'actual_ratio', 'name', 'path', 'timestamp'])
+        df1['timestamp'] = pd.to_datetime(df1['timestamp'])
+        main_df = df1.drop_duplicates(subset="path", keep="last")
 
-    df1_str = ""
-    for i in top_df_extension:
-        df1_str += i + "\n"
-        
-    if len(top_df_extension) > 0:
-        return JsonResponse({'session_id': session_id_, 'answer': df1_str, 'intent': 'General', 'url': top_df_extension})
+        top_df1 = main_df.sort_values('actual_ratio', ascending=False).head(5).values.tolist()
+        top_df1 = [i[3] if ".pdf" in i[3] else i[3] + ".aspx" for i in top_df1]
+
+        df1_str = ""
+        for i in top_df1:
+            df1_str += i + "\n"
+
+        if len(top_df1) > 0:
+            return JsonResponse({'session_id': session_id_, 'answer': df1_str, 'intent': 'General', 'url': top_df1})
+
+        else:
+            eid = EventType.objects.get(id=int(5))
+            Log.objects.create(event_type_id=eid, user_email=user_email, user_ip=ip, event_question=text,
+                            event_answer='', intent='General')
+            return JsonResponse(
+                {'session_id': session_id_,
+                'answer': "Sorry, I am not able to detect the language you are asking."})
+    else:
+        res_list = remove_duplicates(res_list)
+        print("res_list", res_list)
+        main_df = pd.DataFrame(res_list, columns=['path'])
+        main_df = main_df.drop_duplicates(subset="path", keep="last")
+        # print(main_df.head(5))
+        top_df1 = main_df.head(5).values.tolist()
+        final_df = []
+        for i in res_list:
+            if 'https://eservices.zu.ac.ae' in i:
+                final_df.append(i)
+            else:
+                temp = True
+                for j in EXTENSTION_LIST:
+                    if j in i.split("/")[-1].upper() and temp:
+                        temp = False
+                        final_df.append(i)
+                        break
+                if temp:
+                    final_df.append(i + ".aspx")
+        final_df = final_df[:5]
+
+        df1_str = ""
+        for i in final_df:
+            df1_str += i + "\n"
+        print("df1_str", df1_str)
+
+        if len(top_df1) > 0:
+            return JsonResponse({'session_id': session_id_, 'answer': df1_str, 'intent': 'General', 'url': final_df})
+
+        else:
+            eid = EventType.objects.get(id=int(5))
+            Log.objects.create(event_type_id=eid, user_email=user_email, user_ip=ip, event_question=text,
+                               event_answer='', intent='General')
+            return JsonResponse(
+                {'session_id': session_id_,
+                    'answer': "Sorry, I am not able to detect the language you are asking."})
+
+    try:
+        output = res['output']['generic'][0]['primary_results'][0]['highlight']['answer']
+    except:
+        try:
+            output = res['output']['generic'][0]['additional_results'][0]['highlight']['answer']
+        except:
+            try:
+                output = res['output']['generic'][0]['text']
+                print("OUTPUT", output, intents)
+                if intents.lower() == "greetings" or intents.lower() == "start_greetings" or intents.lower() == "end_greetings" or intents.lower() == "live_agent":
+                    return JsonResponse({'session_id': session_id_, 'answer': output, 'intent': intents})
+            except:
+                print("In 3rd Except")
+                eid = EventType.objects.get(id=int(5))
+                Log.objects.create(event_type_id=eid, user_email=user_email, user_ip=ip, event_question=text,
+                                   event_answer='', intent=intents)
+                return JsonResponse(
+                    {'session_id': session_id_,
+                     'answer': "Sorry, I am not able to detect the language you are asking."})
+
+    if len(output) > 1:
+        temp = ''
+        for o in output:
+            temp += o + ' '
+        message = cleanhtml(temp)
 
     else:
-        eid = EventType.objects.get(id=int(5))
-        Log.objects.create(event_type_id=eid, user_email=user_email, user_ip=ip, event_question=text,
-                        event_answer='', intent='General')
-        return JsonResponse(
-            {'session_id': session_id_,
-            'answer': "Sorry, I am not able to detect the language you are asking."})
+        message = cleanhtml(output[0])
+    if message == '':
+        message = cleanhtml(res['output']['generic'][0]
+                            ['primary_results'][0]['answers'][0]['text'])
+    message = cleanhtml(message)
+    eid = EventType.objects.get(id=int(event_type))
+    Log.objects.create(event_type_id=eid, user_email=user_email, user_ip=ip, event_question=text,
+                       event_answer=message, intent=intents)
+    return JsonResponse({'session_id': session_id_, 'answer': message, 'intent': intents})
 
 
 def get_keyword_KeyBERT(text):
@@ -516,7 +481,9 @@ def get_tag_qa(request, id):
         TAG_DF['path'] = TAG_DF['answer']
         TAG_DF['bert_keyword'] = TAG_DF['keywords']
         print("TAGDF", TAG_DF.head())
-        TAG_DF.to_csv("TAG_DF.csv")
+        TAG_QUESTION_VEC = tag_model.encode(TAG_DF['title'])
+        np.save('TAG_QUESTION_VEC.npy', TAG_QUESTION_VEC)
+        
 
         messages.success(request, "record updated sucessfully!!!")
         context = {
