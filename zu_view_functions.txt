@@ -1,0 +1,347 @@
+--20
+
+CREATE VIEW [dbo].[monthly_no_count]
+AS
+select user_email,user_datetime
+from dbo.zayed_university_app_log
+WHERE MONTH(user_datetime)=MONTH(getdate()) and event_type_id_id=5 
+GROUP BY user_email,user_datetime
+GO
+
+
+--19
+CREATE VIEW [dbo].[monthly_wrong_count]
+AS
+select user_email,user_datetime
+from dbo.zayed_university_app_log
+WHERE MONTH(user_datetime)=MONTH(getdate()) and event_type_id_id=3 
+GROUP BY user_email,user_datetime
+GO
+
+
+--18
+CREATE VIEW [dbo].[monthly_right_count]
+AS
+select user_email,user_datetime
+from dbo.zayed_university_app_log
+WHERE MONTH(user_datetime)=MONTH(getdate()) and event_type_id_id=4 
+GROUP BY user_email,user_datetime
+GO
+
+
+
+--17
+CREATE VIEW [dbo].[daily_no_count]
+AS
+select distinct user_email,event_type_id_id, count(event_type_id_id) as count_ev
+from dbo.zayed_university_app_log
+WHERE user_datetime > CAST(GETDATE() AS DATE)
+  AND user_datetime < CAST(GETDATE()+1 AS DATE) and event_type_id_id=5 
+GROUP BY user_email, event_type_id_id
+GO
+
+--16
+CREATE VIEW [dbo].[daily_right_count]
+AS
+select distinct user_email,event_type_id_id, count(event_type_id_id) as count_ev
+from dbo.zayed_university_app_log
+WHERE user_datetime > CAST(GETDATE() AS DATE)
+  AND user_datetime < CAST(GETDATE()+1 AS DATE) and event_type_id_id=4 
+GROUP BY user_email, event_type_id_id
+GO
+
+--15
+CREATE VIEW [dbo].[daily_wrong_count]
+AS
+select distinct user_email,event_type_id_id, count(event_type_id_id) as count_ev
+from dbo.zayed_university_app_log
+WHERE user_datetime > CAST(GETDATE() AS DATE)
+  AND user_datetime < CAST(GETDATE()+1 AS DATE) and event_type_id_id=3 
+GROUP BY user_email, event_type_id_id
+GO
+
+--14
+CREATE VIEW [dbo].[daily_livechat_count]
+AS
+select distinct user_email,event_type_id_id, count(event_type_id_id) as count_ev
+from dbo.zayed_university_app_log
+WHERE user_datetime > CAST(GETDATE() AS DATE)
+  AND user_datetime < CAST(GETDATE()+1 AS DATE) and event_type_id_id=6 
+GROUP BY user_email, event_type_id_id
+GO
+
+  
+--13
+CREATE VIEW [dbo].[daily_reset_count]
+AS
+select distinct user_email,event_type_id_id, count(event_type_id_id) as count_ev
+from dbo.zayed_university_app_log
+WHERE user_datetime > CAST(GETDATE() AS DATE)
+  AND user_datetime < CAST(GETDATE()+1 AS DATE) and event_type_id_id=7 
+GROUP BY user_email, event_type_id_id
+GO
+=== check first and do above 
+--12
+alter VIEW [dbo].[monthly_new_users_view]
+AS
+select distinct(user_email),user_datetime
+from dbo.zayed_university_app_log
+WHERE MONTH(user_datetime)=MONTH(getdate()) and event_type_id_id=1 
+GROUP BY user_email,user_datetime
+Having count(event_type_id_id)<=1
+
+
+--11
+create VIEW [dbo].[monthly_eng_users_view]
+AS
+select distinct(user_email)
+from dbo.zayed_university_app_log
+WHERE MONTH(user_datetime)=MONTH(getdate()) and event_type_id_id=1 
+GROUP BY user_email
+Having count(event_type_id_id)>1
+
+--10
+create VIEW [dbo].[daily_eng_users_view]
+AS
+select distinct user_email,event_type_id_id, count(event_type_id_id) as count_ev
+from dbo.zayed_university_app_log
+WHERE user_datetime > CAST(GETDATE() AS DATE)
+  AND user_datetime < CAST(GETDATE()+1 AS DATE) and event_type_id_id=1 
+GROUP BY user_email, event_type_id_id
+HAVING count(event_type_id_id)>1
+GO
+
+--11
+create VIEW [dbo].[daily_new_users_view]
+AS
+select distinct user_email,event_type_id_id, count(event_type_id_id) as count_ev
+from dbo.zayed_university_app_log
+WHERE user_datetime > CAST(GETDATE() AS DATE)
+  AND user_datetime < CAST(GETDATE()+1 AS DATE) and event_type_id_id=1 
+GROUP BY user_email, event_type_id_id
+HAVING count(event_type_id_id)=1
+GO
+
+
+--1
+CREATE  VIEW [dbo].[busy_period_count]
+AS
+SELECT intent,dateadd(hour, datediff(hour, 0, user_datetime), 0) as TimeStampHour, Count(intent) as intent_counts
+FROM dbo.zayed_university_app_log
+GROUP BY intent,dateadd(hour, datediff(hour, 0, user_datetime), 0)
+order by TimeStampHour desc OFFSET 0 ROWS;
+GO
+
+--2
+CREATE  VIEW [dbo].[busy_period_count_monthly]
+AS
+SELECT intent,dateadd(Month, datediff(Month, 0, user_datetime), 0) as TimeStampHour, Count(intent) as intent_counts
+FROM dbo.zayed_university_app_log
+GROUP BY intent,dateadd(Month, datediff(Month, 0, user_datetime), 0)
+
+order by TimeStampHour desc OFFSET 0 ROWS;
+GO
+
+--3
+CREATE VIEW [dbo].[livechat_daywise]
+AS
+SELECT    dateadd(DAY, datediff(DAY, 0, zayed_university_app_log.user_datetime), 0) as day,
+          COUNT(*) AS 'counts'
+FROM     dbo.zayed_university_app_log
+INNER JOIN 
+    dbo.zayed_university_app_eventtype
+ON
+     zayed_university_app_log.event_type_id_id = zayed_university_app_eventtype.id
+where zayed_university_app_log.event_type_id_id = 6
+GROUP BY dateadd(DAY, datediff(DAY, 0, zayed_university_app_log.user_datetime), 0)
+GO
+
+--4
+CREATE VIEW [dbo].[reset_daywise]
+AS
+SELECT    
+		  dateadd(DAY, datediff(DAY, 0, zayed_university_app_log.user_datetime), 0) as day,
+          COUNT(*) AS 'counts'
+FROM     dbo.zayed_university_app_log
+INNER JOIN 
+    dbo.zayed_university_app_eventtype
+ON
+     zayed_university_app_log.event_type_id_id = zayed_university_app_eventtype.id
+where zayed_university_app_log.event_type_id_id = 7
+GROUP BY dateadd(DAY, datediff(DAY, 0, zayed_university_app_log.user_datetime), 0)
+GO
+
+--9
+CREATE VIEW [dbo].[new_users_view]
+AS
+select user_email,description,user_datetime,COUNT(DISTINCT user_email) AS count 
+from dbo.zayed_university_app_log
+INNER JOIN 
+    dbo.zayed_university_app_eventtype
+ON
+    zayed_university_app_log.event_type_id_id = zayed_university_app_eventtype.id
+where user_datetime > CAST(GETDATE() AS DATE)
+  AND user_datetime < CAST(GETDATE()+1 AS DATE) and event_type_id_id=1
+GROUP BY user_email,description, user_datetime
+
+
+
+--5
+CREATE VIEW [dbo].[monthly_engaged_users_view]
+AS
+Select  user_email , count(*) as event_counts
+from dbo.zayed_university_app_log
+where event_type_id_id = 1 and user_datetime >= CONVERT(DateTime, DATEDIFF(MONTH, 0, GETDATE()))
+group by user_email,event_type_id_id having COUNT(event_type_id_id)> 1;
+GO
+--
+CREATE VIEW [dbo].[monthly_new_users_view]
+AS
+SELECT user_email , count(*) as event_counts
+FROM dbo.zayed_university_app_log
+WHERE  event_type_id_id = 1  and user_datetime >= CONVERT(DateTime, DATEDIFF(MONTH, 0, GETDATE()))
+group by user_email,event_type_id_id having COUNT(event_type_id_id)<= 1;
+GO
+
+--6
+CREATE VIEW [dbo].[total_ans_cnt_view]
+WITH SCHEMABINDING
+AS
+SELECT 
+	zayed_university_app_eventtype.description,
+	--COUNT(zayed_university_app_log.event_type_id_id) AS counts,
+	COUNT_BIG(*) AS counts
+FROM 
+    dbo.zayed_university_app_log 
+INNER JOIN 
+    dbo.zayed_university_app_eventtype  
+ON
+     zayed_university_app_log.event_type_id_id = zayed_university_app_eventtype.id
+WHERE  zayed_university_app_log.event_type_id_id IN (3, 4, 5)
+GROUP BY 
+	zayed_university_app_eventtype.description;
+GO
+
+--7
+CREATE VIEW [dbo].[repeated_bot_users_day_view]
+AS
+SELECT Distinct user_email, count(event_type_id_id)  as ev_count, dateadd(hour, datediff(hour, 0, user_datetime), 0) as datewise
+from dbo.zayed_university_app_log
+where event_type_id_id IN(3,4,5) 
+group by user_email, dateadd(hour, datediff(hour, 0, user_datetime), 0)
+order by datewise desc OFFSET 0 ROWS;
+GO
+
+
+--8
+CREATE VIEW [dbo].[repeated_bot_users_monthly_view]
+AS
+SELECT Distinct user_email, count(event_type_id_id)  as ev_count,  dateadd(MONTH, datediff(MONTH, 0, zayed_university_app_log.user_datetime), 0) as month
+from dbo.zayed_university_app_log
+where event_type_id_id IN(1,3,4,5,7,10003) 
+group by user_email,  dateadd(MONTH, datediff(MONTH, 0, zayed_university_app_log.user_datetime), 0)
+order by month desc OFFSET 0 ROWS;
+GO
+
+
+
+
+
+--==================================================
+--Functions - 
+--==============================================
+--1
+CREATE FUNCTION [dbo].[fn_deptwise_ans_data] (@deptname varchar(50))
+
+RETURNS TABLE
+
+AS
+
+RETURN
+
+SELECT    zayed_university_app_eventtype.description,
+          --DATEPART(DAY, user_datetime) AS 'Day',
+		    dateadd(DAY, datediff(DAY, 0, zayed_university_app_log.user_datetime), 0) as day,
+          COUNT(*) AS 'counts'
+FROM     dbo.zayed_university_app_log
+INNER JOIN 
+    dbo.zayed_university_app_eventtype
+ON
+     zayed_university_app_log.event_type_id_id = zayed_university_app_eventtype.id
+where zayed_university_app_log.event_type_id_id IN (3, 4, 5) and intent= @deptname
+GROUP BY zayed_university_app_eventtype.description,  dateadd(DAY, datediff(DAY, 0, zayed_university_app_log.user_datetime), 0)
+GO
+
+--2
+CREATE FUNCTION [dbo].[fn_dept_reptd_usr_cnt] (@deptname varchar(50))
+RETURNS TABLE
+AS
+RETURN
+SELECT Distinct user_email, count(event_type_id_id)  as ev_count, dateadd(hour, datediff(hour, 0, user_datetime), 0) as datewise
+from dbo.zayed_university_app_log
+where event_type_id_id IN(2,3,4,5,6,7,10003) and  intent = @deptname 
+group by user_email, dateadd(hour, datediff(hour, 0, user_datetime), 0)
+order by datewise desc OFFSET 0 ROWS;
+GO
+
+
+--3
+CREATE FUNCTION [dbo].[fn_deptwise_busy_period_cnt] (@deptname varchar(50))
+RETURNS TABLE
+AS
+RETURN
+SELECT intent,dateadd(hour, datediff(hour, 0, user_datetime), 0) as TimeStampHour, Count(intent) as intent_counts
+FROM dbo.zayed_university_app_log
+where intent=@deptname
+GROUP BY intent,dateadd(hour, datediff(hour, 0, user_datetime), 0)
+order by TimeStampHour desc OFFSET 0 ROWS ;
+GO
+
+--4
+CREATE FUNCTION [dbo].[fn_deptwise_new_usr_cnt] (@deptname varchar(50))
+RETURNS TABLE
+AS
+RETURN
+SELECT Distinct user_email
+from dbo.zayed_university_app_log
+where event_type_id_id IN(1) and  intent= @deptname 
+GO
+
+==================
+daily_wrong_count
+daily_right_count
+daily_no_count
+
+monthly_wrong_count
+monthly_right_count
+monthly_no_count
+
+repeated_bot_users_day_view
+repeated_bot_users_monthly_view
+
+busy_period_count
+busy_period_count_monthly
+
+livechat_daywise
+livechat_monthwise
+
+daily_reset_count
+monthly_reset_count
+
+engaged_users_view1
+new_users_view1
+
+monthly_engaged_users_view
+monthly_new_users_view
+
+daily_eng_users_view
+daily_new_users_view
+
+total_ans_cnt_view
+
+
+
+
+
+
+

@@ -1,0 +1,30 @@
+Reports - 
+---------------
+Daily
+Monthly
+
+Departments - 
+-------------------
+CALL_CENTER
+general
+GCD
+Graduate_Program
+CAREER_COUNSELING
+ACADEMIC_ADVISING
+
+
+User Type-
+--------------
+Department_Admin
+User_Admin
+
+Event_Type-
+----------------
+Log In
+Log Out
+Wrong Answer
+Right Answer
+No Answer
+LiveChat
+Reset
+Greetings
