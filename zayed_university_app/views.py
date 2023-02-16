@@ -369,7 +369,6 @@ def get_response_from_watson(request):
         path = r"zayed_university_app/remove_404_csv"
         csv_files = glob.glob(os.path.join(path, "*.csv"))
         for f in csv_files:
-            # print(f)
             df = pd.read_csv(f)
             for index, row in df.iterrows():
                 try:
