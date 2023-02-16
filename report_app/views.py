@@ -47,6 +47,8 @@ import urllib.request
 from pdfminer.high_level import extract_text
 from django.utils import timezone
 # from report_app.forms import UploadForm #upload csv
+import xml.etree.ElementTree as ET
+
 
 
 def parsefile(file):
@@ -84,15 +86,21 @@ def get_custuser(cname, cadmin, cdepart, chk_true):
         # print("in get custuser ", chk_list)
         return chk_list
 
+# read_xml_ = 'database_connection.xml'
+# tree = ET.parse(read_xml_)
+# root = tree.getroot()
+# print("root", root)
+# print("#######",root[0].text)
+
 
 def get_connection():
     # # for server
-    # conn = pymssql.connect(server='192.168.5.79', user='chatboat_sa', password='ch@tb0@t$@',
+    conn = pymssql.connect(server='192.168.5.79', user='chatboat_sa', password='ch@tb0@t$@',
     # database='zu_chatbot_log_devel')
-    conn = pyodbc.connect('Driver=SQL Server;'  ## for local
-                          'Server=SOHAIL;'
-                          'Database=zayed_university_db;'
-                          'Trusted_Connection=yes;')
+    # conn = pyodbc.connect('Driver=SQL Server;'  ## for local
+    #                       'Server=SOHAIL;'
+    #                       'Database=zayed_university_db;'
+    #                       'Trusted_Connection=yes;')
     return conn
 
 

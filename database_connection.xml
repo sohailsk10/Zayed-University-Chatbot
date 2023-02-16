@@ -1,0 +1,6 @@
+<connection>
+    <Driver>SOHAIL</Driver>
+    <Server>SQL Server</Server>
+    <Database>zayed_university_db</Database>
+    <Trusted_Connection>yes;</Trusted_Connection>
+</connection>
