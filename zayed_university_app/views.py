@@ -157,18 +157,6 @@ def get_data(_dict):
     return _dict['event_type'], _dict['event_question'], _dict['user_email']
 
 
-
-# def string_similarity(input_string, reference_string):
-# #The ndiff method returns a list of strings representing the differences between the two input strings.
-#     diff = difflib.ndiff(input_string.lower(), reference_string.lower())
-#     diff_count = 0
-#     for line in diff:
-#       # a "-", indicating that it is a deleted character from the input string.
-#         if line.startswith("-"):
-#             diff_count += 1
-# # calculates the similarity by subtracting the ratio of the number of deleted characters to the length of the input string from 1
-#     return 1 - (diff_count / len(input_string))
-
 def remove_duplicates(input_list):
     output_list = []
     for item in input_list:
@@ -181,9 +169,9 @@ def get_proper_extension(_list):
     final_df = []
 
     for i in _list:
+        print("LINKS", i)
         if 'https://eservices.zu.ac.ae' in i:
             final_df.append(i)
-
         else:
             temp = True
             for j in EXTENSTION_LIST:
@@ -191,7 +179,6 @@ def get_proper_extension(_list):
                     temp = False
                     final_df.append(i)
                     break
-                
             if temp:
                 final_df.append(i + ".aspx")
     
@@ -324,8 +311,6 @@ def get_response_from_watson(request):
             # tag_df_top_ratio = max(tag_df_ratios, key=lambda x: x[1][0])
             tag_df_top_ratio = top_tag_df[0][0]
             print("tag_df_top_ratio",tag_df_top_ratio)
-            print("TOP TAG DF")
-            print(*top_tag_df[:5], sep="\n")
         except Exception as e:
             print("In Exception", e)
         # todo: check ratio 
@@ -352,10 +337,7 @@ def get_response_from_watson(request):
 
         intents = ""
         _text = text.lower()
-        # _text = text.lower().replace('zayed', '').replace('university', '')
-
         _input_list = _text.split(' ')
-
         _input_list = remove_custom('i', _input_list)
         _input_list = remove_custom('a', _input_list)
 
@@ -404,7 +386,7 @@ def get_response_from_watson(request):
                     # last_published = df['last_published']
                 except:
                     title = row['ServiceName']
-                    path = row['GeneratedLink']
+                    path = row['ServiceUrl']
                     created_on = 1
 
                 all_csv_.append([path, title, created_on])
