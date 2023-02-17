@@ -307,41 +307,16 @@ from dbo.zayed_university_app_log
 where event_type_id_id IN(1) and  intent= @deptname 
 GO
 
-==================
-daily_wrong_count
-daily_right_count
-daily_no_count
-
-monthly_wrong_count
-monthly_right_count
-monthly_no_count
-
-repeated_bot_users_day_view
-repeated_bot_users_monthly_view
-
-busy_period_count
-busy_period_count_monthly
-
-livechat_daywise
-livechat_monthwise
-
-daily_reset_count
-monthly_reset_count
-
-engaged_users_view1
-new_users_view1
-
-monthly_engaged_users_view
-monthly_new_users_view
-
-daily_eng_users_view
-daily_new_users_view
-
-total_ans_cnt_view
-
-
-
-
-
-
-
+CREATE VIEW [dbo].[livechat_monthwise]
+AS
+SELECT    
+		  dateadd(MONTH, datediff(MONTH, 0, zayed_university_app_log.user_datetime), 0) as month,
+          COUNT(*) AS 'counts'
+FROM     dbo.zayed_university_app_log
+INNER JOIN 
+    dbo.zayed_university_app_eventtype
+ON
+     zayed_university_app_log.event_type_id_id = zayed_university_app_eventtype.id
+where zayed_university_app_log.event_type_id_id = 6
+GROUP BY dateadd(MONTH, datediff(MONTH, 0, zayed_university_app_log.user_datetime), 0)
+GO

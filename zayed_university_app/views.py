@@ -185,6 +185,15 @@ def get_proper_extension(_list):
     return final_df
 
 
+def remove_zu(_str_list, _str_to_insert, _sub_str="zu"):
+    for i in _str_list:
+        if _sub_str in i:
+            idx = _str_list.index(i)
+            _str_list.insert(idx, _str_to_insert)
+            _str_list.pop(idx + 1)
+    
+    return list_to_str(_str_list)
+
 @csrf_exempt
 def get_response_from_watson(request):
     _data = JSONParser().parse(request)
@@ -291,13 +300,21 @@ def get_response_from_watson(request):
     else:
         _text = text.lower()
         _main_input = _text.split(" ")
+        _text = remove_zu(_main_input, "zayed university")
+        _main_input = _text.split(" ")
         _main_input_list = [i for i in _main_input if i]
         _main_input_list = remove_custom('i', _main_input_list)
         _main_input_list = remove_custom('a', _main_input_list)
+        _main_input_list = remove_custom('the', _main_input_list)
         _main_input_string = list_to_str(_main_input_list)
+        
         try:
-            tag_df = pd.read_csv("TAG_DF.csv")
-            tag_df = tag_df.drop(['Unnamed: 0'], axis=1)
+            tag_df = pd.DataFrame(list(Tag_QA.objects.all().values()))
+            tag_df['q_tag'] = np.arange(len(tag_df))
+            tag_df['title'] = tag_df['question']
+            tag_df['path'] = tag_df['answer']
+            tag_df['bert_keyword'] = tag_df['keywords']
+            # tag_df = tag_df.drop(['Unnamed: 0'], axis=1)
             # print("tag_df", tag_df)
             all_csv = []
             df_ratios = get_ratios_from_df([_main_input_string], tag_df, all_csv)
@@ -338,8 +355,10 @@ def get_response_from_watson(request):
         intents = ""
         _text = text.lower()
         _input_list = _text.split(' ')
+        _text = remove_zu(_input_list, "zayed university")
         _input_list = remove_custom('i', _input_list)
         _input_list = remove_custom('a', _input_list)
+        _input_list = remove_custom('the', _input_list)
 
         # for i in _input_list:
         #     if i.lower().strip() in _stop_words:
@@ -394,7 +413,9 @@ def get_response_from_watson(request):
     # print(all_csv_[0])
     all_csv = []
     all_csv = get_ratios(_main_input_list, all_csv_, all_csv)
+    
     _main_input_string = list_to_str(_main_input_list)
+    print("_main_input_list", _main_input_list)
     print("_main_input_string", _main_input_string)
     
     links_ratio = []
@@ -410,6 +431,7 @@ def get_response_from_watson(request):
     main_df = df1.drop_duplicates(subset="path", keep="last")
 
     top_df1 = main_df.sort_values('actual_ratio', ascending=False).head(5).values.tolist()
+    
     top_df1 = [i[3] for i in top_df1]
     top_df_extension = get_proper_extension(top_df1)
 

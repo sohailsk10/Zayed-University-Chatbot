@@ -22,12 +22,12 @@ class MasterTableAdmin(admin.ModelAdmin):
 # QA Category
 class QA_CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'description')
-    list_filter = ('description',)
+    # list_filter = ('description',)
 
 # Tag QA
 class Tag_QAAdmin(admin.ModelAdmin):
     list_display = ('tag','question','answer','keywords','category')
-    list_filter = ('question','answer','keywords','category')
+    # list_filter = ('question','answer','keywords','category')
 
 admin.site.register(Log, LogAdmin)
 
