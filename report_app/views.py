@@ -95,7 +95,7 @@ def get_custuser(cname, cadmin, cdepart, chk_true):
 
 def get_connection():
     # # for server
-    conn = pymssql.connect(server='192.168.5.79', user='chatboat_sa', password='ch@tb0@t$@', database='zu_chatbot_log_devel')
+    conn = pymssql.connect(server='192.168.5.79', user='chatboat_sa', password='ch@tb0@t$@', database='zayed-chatbot-database')
     # conn = pyodbc.connect('Driver=SQL Server;'  ## for local
     #                       'Server=SOHAIL;'
     #                       'Database=zayed_university_db;'

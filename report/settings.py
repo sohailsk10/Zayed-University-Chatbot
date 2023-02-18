@@ -98,7 +98,7 @@ WSGI_APPLICATION = 'report.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME': 'zu_chatbot_log_devel',
+        'NAME': 'zayed-chatbot-database',
         'USER': 'chatboat_sa',
         'PASSWORD': 'ch@tb0@t$@',
         'HOST': '192.168.5.79',
