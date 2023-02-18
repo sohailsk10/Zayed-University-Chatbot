@@ -95,33 +95,33 @@ WSGI_APPLICATION = 'report.wsgi.application'
 # }
 
 # for Server
-DATABASES = {
-    'default': {
-        'ENGINE': 'mssql',
-        'NAME': 'zayed-chatbot-database',
-        'USER': 'chatboat_sa',
-        'PASSWORD': 'ch@tb0@t$@',
-        'HOST': '192.168.5.79',
-        'PORT': '1433',
-        'OPTIONS': {
-            'driver': 'ODBC Driver 17 for SQL Server',
-        },
-    },
-}
-
-
 # DATABASES = {
-#     "default": {
-#         "ENGINE": "mssql",
-#         "NAME": "zayed_university_db",
-#         "USER": "",
-#         "PASSWORD": "",
-#         "HOST": "localhost",
-#         "PORT": "",
-#         "OPTIONS": {"driver": "ODBC Driver 17 for SQL Server",
-#                     },
+#     'default': {
+#         'ENGINE': 'mssql',
+#         'NAME': 'zayed-chatbot-database',
+#         'USER': 'chatboat_sa',
+#         'PASSWORD': 'ch@tb0@t$@',
+#         'HOST': '192.168.5.79',
+#         'PORT': '1433',
+#         'OPTIONS': {
+#             'driver': 'ODBC Driver 17 for SQL Server',
+#         },
 #     },
 # }
+
+
+DATABASES = {
+    "default": {
+        "ENGINE": "mssql",
+        "NAME": "zayed_university_db",
+        "USER": "",
+        "PASSWORD": "",
+        "HOST": "localhost",
+        "PORT": "",
+        "OPTIONS": {"driver": "ODBC Driver 17 for SQL Server",
+                    },
+    },
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
