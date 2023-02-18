@@ -154,7 +154,7 @@ assistant.set_service_url(assistant_url)
 
 
 def get_data(_dict):
-    return _dict['event_type'], _dict['event_question'], _dict['user_email']
+    return _dict['event_type'], _dict['event_question'].lower(), _dict['user_email']
 
 
 def remove_duplicates(input_list):
@@ -207,28 +207,35 @@ def get_response_from_watson(request):
 
     # print('RIGHT SPELLING', spell(text))
     print('RIGHT SPELLING', spell(text), _data['spell_check_bool'], _data['spell_check_bool'] == True)
-    if spell(text) != text and _data['spell_check_bool'] == True:
-        uncorrect = spell(text).lower()
-        print("uncorrect", uncorrect)
-        if "university" in uncorrect or "university?" in uncorrect:
-            u_list = uncorrect.split()
+    
+    uncorrect = spell(text).lower()
+    u_list = uncorrect.split()
+    temp = u_list.copy()
+    if "university" in uncorrect or "university?" in uncorrect:
+        try:
+            uni_pos = u_list.index("university")
+        except:
             try:
-                uni_pos = u_list.index("university")
-            except:
                 uni_pos = u_list.index("university?")
-            try:
-                if u_list[uni_pos - 1] == "based":
-                    u_list[uni_pos - 1] = "zayed"
             except:
-                pass
-            res = ' '.join([str(elem) for elem in u_list])
+                uni_pos = u_list.index("university's")
+        try:
+            if u_list[uni_pos - 1] == "based":
+                u_list[uni_pos - 1] = "zayed"
+            
+            temp[uni_pos] = "university"
+        except:
+            pass
 
-            if res.lower() != text.lower():
-                return JsonResponse({'session_id': session_id_, 'answer': f'{res}', 'intent': 'spell'})
+    res = ' '.join([str(elem) for elem in u_list])
+    if res.lower() != text.lower() and _data['spell_check_bool'] == True:
+        print({'session_id': "session_id_", 'answer': f'{res}', 'intent': 'spell'})
+        return JsonResponse({'session_id': session_id_, 'answer': f'{res}', 'intent': 'spell'})
 
-            else:
-                text = res
-        # uncorrect = spell(text)
+    else:
+        res = ' '.join([str(i) for i in temp])
+        text = res
+            # uncorrect = spell(text)
         # return JsonResponse({'session_id': session_id_, 'answer': f'{spell(text)}', 'intent': 'spell'})
 
     doc = nlp(text.upper())
