@@ -167,9 +167,11 @@ def remove_duplicates(input_list):
 
 def get_proper_extension(_list):
     final_df = []
-
-    for i in _list:
-        print("LINKS", i)
+    index_links = [link for link in _list if 'index' in link]
+    other_links = [link for link in _list if 'index' not in link]
+    result = index_links + other_links
+    
+    for i in result:
         if 'https://eservices.zu.ac.ae' in i:
             final_df.append(i)
         else:
@@ -194,6 +196,7 @@ def remove_zu(_str_list, _str_to_insert, _sub_str="zu"):
     
     return list_to_str(_str_list)
 
+
 @csrf_exempt
 def get_response_from_watson(request):
     _data = JSONParser().parse(request)
@@ -205,8 +208,7 @@ def get_response_from_watson(request):
         text = ''
         session_id_ = ''
 
-    # print('RIGHT SPELLING', spell(text))
-    print('RIGHT SPELLING', spell(text), _data['spell_check_bool'], _data['spell_check_bool'] == True)
+    # print('RIGHT SPELLING', spell(text), _data['spell_check_bool'], _data['spell_check_bool'] == True)
     
     uncorrect = spell(text).lower()
     u_list = uncorrect.split()
@@ -235,8 +237,6 @@ def get_response_from_watson(request):
     else:
         res = ' '.join([str(i) for i in temp])
         text = res
-            # uncorrect = spell(text)
-        # return JsonResponse({'session_id': session_id_, 'answer': f'{spell(text)}', 'intent': 'spell'})
 
     doc = nlp(text.upper())
     print("text", text)
@@ -321,23 +321,19 @@ def get_response_from_watson(request):
             tag_df['title'] = tag_df['question']
             tag_df['path'] = tag_df['answer']
             tag_df['bert_keyword'] = tag_df['keywords']
-            # tag_df = tag_df.drop(['Unnamed: 0'], axis=1)
-            # print("tag_df", tag_df)
+
             all_csv = []
             df_ratios = get_ratios_from_df([_main_input_string], tag_df, all_csv)
             print("DF RATIOS", df_ratios)
-            # print(*df_ratios[:5], sep="\n")
 
             tag_df_ratios = pd.DataFrame(df_ratios, columns=['ratio', 'question', 'answer'])
             main_df = tag_df_ratios.drop_duplicates(subset="answer", keep="last")
 
             top_tag_df = main_df.sort_values('ratio', ascending=False).head(5).values.tolist()
-            # tag_df_top_ratio = max(tag_df_ratios, key=lambda x: x[1][0])
             tag_df_top_ratio = top_tag_df[0][0]
             print("tag_df_top_ratio",tag_df_top_ratio)
         except Exception as e:
             print("In Exception", e)
-        # todo: check ratio 
             tag_df_top_ratio = 0.0
         
         if float(tag_df_top_ratio) > 0.60:
@@ -408,7 +404,6 @@ def get_response_from_watson(request):
                         created_on = row['created-on']
                     except:
                         created_on = row['created_on']
-                    # last_published = df['last_published']
                 except:
                     title = row['ServiceName']
                     path = row['ServiceUrl']
@@ -416,13 +411,10 @@ def get_response_from_watson(request):
 
                 all_csv_.append([path, title, created_on])
 
-    print("Len of csv", len(all_csv_))
-    # print(all_csv_[0])
     all_csv = []
     all_csv = get_ratios(_main_input_list, all_csv_, all_csv)
     
     _main_input_string = list_to_str(_main_input_list)
-    print("_main_input_list", _main_input_list)
     print("_main_input_string", _main_input_string)
     
     links_ratio = []
@@ -436,7 +428,6 @@ def get_response_from_watson(request):
     df1 = pd.DataFrame(links_ratio, columns=['single_ratio', 'actual_ratio', 'name', 'path', 'timestamp'])
     df1['timestamp'] = pd.to_datetime(df1['timestamp'])
     main_df = df1.drop_duplicates(subset="path", keep="last")
-
     top_df1 = main_df.sort_values('actual_ratio', ascending=False).head(5).values.tolist()
     
     top_df1 = [i[3] for i in top_df1]
@@ -474,7 +465,6 @@ def get_plain_string(_string):
 
 @login_required
 def get_tag_qa(request, id):
-    # print("log id -", id)
     depart_name = request.session['depart']
     log_id = Log.objects.get(id =id)
     event_type_id = log_id.event_type_id
@@ -482,7 +472,6 @@ def get_tag_qa(request, id):
     event_question = log_id.event_question
     event_answer = log_id.event_answer
     keyword_lst = get_keyword_KeyBERT(event_question)
-    # print("keyword_lst - ", keyword_lst)
     intent = log_id.intent
     categories = QA_Category.objects.filter(parent_id__exact='')
     all_categories = QA_Category.objects.all()
@@ -526,7 +515,6 @@ def get_tag_qa(request, id):
         TAG_DF['path'] = TAG_DF['answer']
         TAG_DF['bert_keyword'] = TAG_DF['keywords']
         print("TAGDF", TAG_DF.head())
-        TAG_DF.to_csv("TAG_DF.csv")
 
         messages.success(request, "record updated sucessfully!!!")
         context = {
