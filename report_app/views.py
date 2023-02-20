@@ -15,7 +15,7 @@ from . import models
 from .models import *
 from zayed_university_app.models import Log
 
-import pymssql
+# import pymssql
 import pyodbc
 from .models import DepartmentAdminUser, Department, UserType
 from django.views.decorators.cache import cache_control

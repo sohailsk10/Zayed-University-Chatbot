@@ -114,7 +114,7 @@ def get_ratios_from_df(_input_list_, _df_, _main_list):
 
 def list_to_str(_list):
     _str = ""
-    if len(_list) > 1:
+    if len(_list) >= 1:
         for i in _list:
             if i == _list[-1]:
                 _str += i
@@ -188,6 +188,10 @@ def get_proper_extension(_list):
 
 
 def remove_zu(_str_list, _str_to_insert, _sub_str="zu"):
+    print("Length", len(_str_list))
+    if len(_str_list) == 1:
+        return _str_list[0]
+    
     for i in _str_list:
         if _sub_str in i:
             idx = _str_list.index(i)
@@ -196,6 +200,15 @@ def remove_zu(_str_list, _str_to_insert, _sub_str="zu"):
     
     return list_to_str(_str_list)
 
+
+def str_to_list(_str):
+    if _str.find(" "):
+        _main_input = _str.split(" ")
+    else:
+        _main_input = [_str]
+        
+    return _main_input
+    
 
 @csrf_exempt
 def get_response_from_watson(request):
@@ -207,12 +220,11 @@ def get_response_from_watson(request):
     except:
         text = ''
         session_id_ = ''
-
-    # print('RIGHT SPELLING', spell(text), _data['spell_check_bool'], _data['spell_check_bool'] == True)
     
     uncorrect = spell(text).lower()
     u_list = uncorrect.split()
     temp = u_list.copy()
+    temp_1 = text.split()
     if "university" in uncorrect or "university?" in uncorrect:
         try:
             uni_pos = u_list.index("university")
@@ -235,11 +247,10 @@ def get_response_from_watson(request):
         return JsonResponse({'session_id': session_id_, 'answer': f'{res}', 'intent': 'spell'})
 
     else:
-        res = ' '.join([str(i) for i in temp])
+        res = ' '.join([str(i) for i in temp_1])
         text = res
 
     doc = nlp(text.upper())
-    print("text", text)
 
     if session_id_ == '' and doc._.language['language'] == 'ar':
         session_id_ = assistant.create_session(
@@ -262,7 +273,6 @@ def get_response_from_watson(request):
         except:
             res_conf = 0 if res['output']['generic'][0][
                                 'header'] == "I searched my knowledge base, but did not find anything related to your query." else 0
-    print(len(res['output']['intents']) > 0, res_conf > 0.85)
     if len(res['output']['intents']) > 0 and res_conf > 0.85:
         intents = res['output']['intents'][0]['intent']
         try:
@@ -302,19 +312,17 @@ def get_response_from_watson(request):
                         event_answer=message, intent=intents)
         return JsonResponse({'session_id': session_id_, 'answer': message, 'intent': intents})
     
-   
 
     else:
         _text = text.lower()
-        _main_input = _text.split(" ")
+        _main_input = str_to_list(_text)
         _text = remove_zu(_main_input, "zayed university")
-        _main_input = _text.split(" ")
+        _main_input = str_to_list(_text)
         _main_input_list = [i for i in _main_input if i]
         _main_input_list = remove_custom('i', _main_input_list)
         _main_input_list = remove_custom('a', _main_input_list)
         _main_input_list = remove_custom('the', _main_input_list)
         _main_input_string = list_to_str(_main_input_list)
-        
         try:
             tag_df = pd.DataFrame(list(Tag_QA.objects.all().values()))
             tag_df['q_tag'] = np.arange(len(tag_df))
@@ -324,14 +332,12 @@ def get_response_from_watson(request):
 
             all_csv = []
             df_ratios = get_ratios_from_df([_main_input_string], tag_df, all_csv)
-            print("DF RATIOS", df_ratios)
 
             tag_df_ratios = pd.DataFrame(df_ratios, columns=['ratio', 'question', 'answer'])
             main_df = tag_df_ratios.drop_duplicates(subset="answer", keep="last")
 
             top_tag_df = main_df.sort_values('ratio', ascending=False).head(5).values.tolist()
             tag_df_top_ratio = top_tag_df[0][0]
-            print("tag_df_top_ratio",tag_df_top_ratio)
         except Exception as e:
             print("In Exception", e)
             tag_df_top_ratio = 0.0
@@ -347,44 +353,7 @@ def get_response_from_watson(request):
             if len(top_tag_df_extension) > 0:
                 return JsonResponse({'session_id': session_id_, 'answer': tag_df_str, 'intent': 'General', 'url': top_tag_df_extension})
 
-        # else:
-        #     eid = EventType.objects.get(id=int(5))
-        #     Log.objects.create(event_type_id=eid, user_email=user_email, user_ip=ip, event_question=text,
-        #                     event_answer='', intent='General')
-        #     return JsonResponse(
-        #         {'session_id': session_id_,
-        #         'answer': "Sorry, I am not able to detect the language you are asking."})
-
         intents = ""
-        _text = text.lower()
-        _input_list = _text.split(' ')
-        _text = remove_zu(_input_list, "zayed university")
-        _input_list = remove_custom('i', _input_list)
-        _input_list = remove_custom('a', _input_list)
-        _input_list = remove_custom('the', _input_list)
-
-        # for i in _input_list:
-        #     if i.lower().strip() in _stop_words:
-        #         # for j in _stop_words:
-        #         #     if i.upper().strip() == j.upper().strip():
-        #         _text = _text.replace(i, "")
-                # print("_text", _text)
-
-        # for i in _input_list:
-        #     for j in _stop_words_ar:
-        #         if i.upper().strip() == j.upper().strip():
-        #             _text = _text.replace(i, "")
-
-        # _main_input = _text.split(" ")
-        # # _main_input = get_combinations(_main_input)
-        # # print("_main_input", _main_input)
-        # _main_input_list = [i for i in _main_input if i]
-
-        # _main_input_list = remove_custom('i', _main_input_list)
-        # _main_input_list = remove_custom('a', _main_input_list)
-        # _main_input_string = list_to_str(_main_input_list)
-        # keywords = kw_model.extract_keywords(_main_input_string.strip().lower(), keyphrase_ngram_range=(1, 7), stop_words=None, use_mmr=True, diversity=0.7, highlight=True, top_n=10)
-        
         main_df = pd.DataFrame()
         all_csv_ = []
 
@@ -415,12 +384,10 @@ def get_response_from_watson(request):
     all_csv = get_ratios(_main_input_list, all_csv_, all_csv)
     
     _main_input_string = list_to_str(_main_input_list)
-    print("_main_input_string", _main_input_string)
     
     links_ratio = []
     for i in all_csv:
         links_ratio.append([i[0], string_similarity(i[1][1], _main_input_string), i[1][1], i[1][0], i[1][2]])
-    
 
     max_ratio = max(links_ratio, key=lambda x: x[1])[1]
     print("max_ratio", max_ratio)
@@ -631,7 +598,6 @@ def advance_filter(request):
         log_ = Log.objects.all().order_by('-user_datetime')
 
     event_type_id_exact_query = request.GET.get('etype')
-    print("type = ", type(event_type_id_exact_query))
     user_email = request.GET.get('email')
     event_question = request.GET.get('quest')
     event_answer = request.GET.get('ans')
