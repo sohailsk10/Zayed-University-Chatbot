@@ -395,6 +395,7 @@ def get_response_from_watson(request):
     df1 = pd.DataFrame(links_ratio, columns=['single_ratio', 'actual_ratio', 'name', 'path', 'timestamp'])
     df1['timestamp'] = pd.to_datetime(df1['timestamp'])
     main_df = df1.drop_duplicates(subset="path", keep="last")
+    main_df = main_df.loc[~main_df['path'].str.contains("_hidden")]
     top_df1 = main_df.sort_values('actual_ratio', ascending=False).head(5).values.tolist()
     
     top_df1 = [i[3] for i in top_df1]
