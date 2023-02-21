@@ -15,7 +15,7 @@ from . import models
 from .models import *
 from zayed_university_app.models import Log
 
-import pymssql
+
 import pyodbc
 from .models import DepartmentAdminUser, Department, UserType
 from django.views.decorators.cache import cache_control
@@ -92,6 +92,7 @@ def get_custuser(cname, cadmin, cdepart, chk_true):
 # print("root", root)
 # print("#######",root[0].text)
 
+import pymssql
 
 def get_connection():
     # # for server
