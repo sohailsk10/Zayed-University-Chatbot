@@ -188,7 +188,6 @@ def get_proper_extension(_list):
 
 
 def remove_zu(_str_list, _str_to_insert, _sub_str="zu"):
-    print("Length", len(_str_list))
     if len(_str_list) == 1:
         return _str_list[0]
     
