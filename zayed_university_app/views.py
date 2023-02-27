@@ -404,6 +404,7 @@ def get_response_from_watson(request):
                 answer.append(links[ids.index(key)])
        
             print("answer", answer)
+            #test comment
 
             # all_csv = []
             # df_ratios = get_ratios_from_df([_main_input_string], tag_df, all_csv)
