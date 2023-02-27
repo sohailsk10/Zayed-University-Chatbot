@@ -240,7 +240,6 @@ def get_ZU_acronyms(input_list):
 
 
 def get_proper_extension(_list):
-    final_df = []
     answer_list = [link for link in _list if 'https:' not in link[:8]]
 
     if len(answer_list) >= 1:
@@ -259,7 +258,7 @@ def get_proper_extension(_list):
     #         if temp:
     #             final_df.append(i + ".aspx") 
     
-    return [final_df, "link"]
+    return [_list, "link"]
 
 
 @csrf_exempt
@@ -404,7 +403,7 @@ def get_response_from_watson(request):
                 print(links[ids.index(key)])
                 answer.append(links[ids.index(key)])
        
-
+            print("answer", answer)
 
             # all_csv = []
             # df_ratios = get_ratios_from_df([_main_input_string], tag_df, all_csv)
@@ -415,17 +414,19 @@ def get_response_from_watson(request):
             # top_tag_df = main_df.sort_values('ratio', ascending=False).head(1).values.tolist()
             # tag_df_top_ratio = top_tag_df[0][0]
             tag_df_top_ratio = list(sorted_dict.values())[0]
-            
+            print("tag_df_top_ratio", tag_df_top_ratio)
             
             
         except Exception as e:
             print("In Exception", e)
             tag_df_top_ratio = [0.0]
-        
-        if float(tag_df_top_ratio[0]) > 0.1:
+        print(float(tag_df_top_ratio[0]))
+    
+        if tag_df_top_ratio[0] > 0.1:
             # top_tag_df_links = [i[2] for i in top_tag_df]
             # top_tag_df_extension = get_proper_extension(top_tag_df_links)
             top_tag_df_extension = get_proper_extension(answer)
+            print("top_tag_df_extension", top_tag_df_extension)
             tag_df_str = ""
             for i in answer:
                 tag_df_str += i + "\n"

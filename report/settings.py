@@ -109,7 +109,7 @@ DATABASES = {
         },
     },
 }
-
+#test
 
 # DATABASES = {
 #     "default": {

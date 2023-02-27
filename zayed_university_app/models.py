@@ -59,7 +59,7 @@ class Tag_QA(models.Model):
     
 class Acronyms(models.Model):
     short_form = models.CharField(max_length=50)
-    long_form = models.CharField(max_length=200, blank=True)
+    long_form = models.CharField(max_length=1000, blank=True)
 
 
     def str(self):
