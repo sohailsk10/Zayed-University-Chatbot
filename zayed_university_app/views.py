@@ -406,14 +406,6 @@ def get_response_from_watson(request):
             print("answer", answer)
             #test comment
 
-            # all_csv = []
-            # df_ratios = get_ratios_from_df([_main_input_string], tag_df, all_csv)
-
-            # tag_df_ratios = pd.DataFrame(df_ratios, columns=['ratio', 'question', 'answer'])
-            # main_df = tag_df_ratios.drop_duplicates(subset="answer", keep="last")
-
-            # top_tag_df = main_df.sort_values('ratio', ascending=False).head(1).values.tolist()
-            # tag_df_top_ratio = top_tag_df[0][0]
             tag_df_top_ratio = list(sorted_dict.values())[0]
             print("tag_df_top_ratio", tag_df_top_ratio)
             
@@ -424,8 +416,6 @@ def get_response_from_watson(request):
         print(float(tag_df_top_ratio[0]))
     
         if tag_df_top_ratio[0] > 0.1:
-            # top_tag_df_links = [i[2] for i in top_tag_df]
-            # top_tag_df_extension = get_proper_extension(top_tag_df_links)
             top_tag_df_extension = get_proper_extension(answer)
             print("top_tag_df_extension", top_tag_df_extension)
             print(len(answer))
