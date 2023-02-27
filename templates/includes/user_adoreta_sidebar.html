@@ -20,19 +20,26 @@
                     <p>Users</p>
                 </a>
             </li>
+             <!-- for acronyms -->
+             <li class="nav-item">
+                <a class="nav-link" href="{% url 'acronyms_list' %}">
+                    <i class="material-icons">text_format</i>
+                    <p>Acronyms</p>
+                </a>
+            </li> 
              <!-- for rectication -->
            <!--    <li class="nav-item active">
                 <a class="nav-link" href="{% url 'answer_rectification' %}">
                     <i class="material-icons">done_outline</i>
                     <p>Answer Rectification</p>
                 </a>
-            </li>  -->
+            </li> 
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'search_answer' %}">
                     <i class="material-icons">manage_search</i>
                     <p>Search Answer</p>
                 </a>
-            </li>
+            </li> -->
             {% else %}
             <li class="nav-item">
                 {% if request.path == '/register_/' %}

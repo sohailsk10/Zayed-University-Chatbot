@@ -58,13 +58,13 @@
                 </a>
             </li> 
             <!-- for rectication -->
-           <!--  <li class="nav-item">
-                <a class="nav-link" href="{% url 'get_qa_category' %}">
-                    <i class="material-icons">done_outline</i>
-                    <p>Category Update</p>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'acronyms_list' %}">
+                    <i class="material-icons">text_format</i>
+                    <p>Acronyms</p>
                 </a>
             </li>
-           <li class="nav-item active">
+          <!--   <li class="nav-item active">
                 <a class="nav-link" href="{% url 'get_tag_qa' %}">
                     <i class="material-icons">menu</i>
                     <p>QA Update</p>
@@ -77,19 +77,21 @@
                 </a>
             </li>-->
             {% else %}
-            <!-- for rectication -->
-             {% comment %} <li class="nav-item">
-                <a class="nav-link" href="{% url 'get_qa_category' %}">
-                    <i class="material-icons">menu</i>
-                    <p>Category Update</p>
+            <!-- for acronyms -->
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'acronyms_list' %}">
+                    <i class="material-icons">text_format</i>
+                    <p>Acronyms</p>
                 </a>
             </li>
+            {% comment %}   
             <li class="nav-item active">
                 <a class="nav-link" href="{% url 'get_tag_qa' %}">
                     <i class="material-icons">done_outline</i>
                     <p>QA Update</p>
                 </a>
-            </li>  {% endcomment %}
+            </li> 
+             {% endcomment %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'logout' %}">
                     <i class="material-icons">power_settings_new</i>

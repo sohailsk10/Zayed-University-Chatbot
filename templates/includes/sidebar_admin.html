@@ -25,8 +25,15 @@
                     <p>Logs</p>
                 </a>
             </li>
+             <!-- for acronyms -->
+             <li class="nav-item">
+                <a class="nav-link" href="{% url 'acronyms_list' %}">
+                    <i class="material-icons">text_format</i>
+                    <p>Acronyms</p>
+                </a>
+            </li>
              <!-- for rectication -->
-             <!-- {% comment %} <li class="nav-item">
+             {% comment %} <li class="nav-item">
                 <a class="nav-link" href="{% url 'get_qa_category' %}">
                     <i class="material-icons">menu</i>
                     <p>Category Update</p>
@@ -37,7 +44,7 @@
                     <i class="material-icons">manage_search</i>
                     <p>Search Answer</p>
                 </a>
-            </li> {% endcomment %} -->
+            </li> {% endcomment %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'logout' %}">
                     <i class="material-icons">power_settings_new</i>

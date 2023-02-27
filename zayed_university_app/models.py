@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from django.db import models
 import uuid
 
@@ -55,3 +56,11 @@ class Tag_QA(models.Model):
 
     def _str_(self):
         return str(self.tag)
+    
+class Acronyms(models.Model):
+    short_form = models.CharField(max_length=50)
+    long_form = models.CharField(max_length=30, blank=True)
+
+
+    def str(self):
+        return self.short_form

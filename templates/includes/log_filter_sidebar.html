@@ -57,19 +57,13 @@
                     <p>Export Report (Excel)</p>
                 </a>
             </li>
-            <!-- for rectication -->
-           <!-- {% comment %} <li class="nav-item">
-                <a class="nav-link" href="{% url 'get_qa_category' %}">
-                    <i class="material-icons">menu</i>
-                    <p>Category Update</p>
+            <!-- for acronyms -->
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'acronyms_list' %}">
+                    <i class="material-icons">text_format</i>
+                    <p>Acronyms</p>
                 </a>
-            </li>  -->
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="{% url 'search_answer' %}">
-                    <i class="material-icons">manage_search</i>
-                    <p>Search Answer</p>
-                </a>
-            </li>  {% endcomment %} -->
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'logout_' %}">
                     <i class="material-icons">power_settings_new</i>
@@ -78,7 +72,8 @@
             </li>
             {% else %}
             <!-- for rectication -->
-              <!-- {% comment %} <li class="nav-item">
+        
+              {% comment %} <li class="nav-item">
                 <a class="nav-link" href="{% url 'get_qa_category' %}">
                     <i class="material-icons">menu</i>
                     <p>Category Update</p>
@@ -89,7 +84,14 @@
                     <i class="material-icons">manage_search</i>
                     <p>Search Answer</p>
                 </a>
-            </li> {% endcomment %} -->
+            </li> {% endcomment %}
+            <!-- for acronyms -->
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'acronyms_list' %}">
+                    <i class="material-icons">text_format</i>
+                    <p>Acronyms</p>
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'logout' %}">
                     <i class="material-icons">power_settings_new</i>

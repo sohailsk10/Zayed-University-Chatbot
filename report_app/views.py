@@ -82,25 +82,20 @@ def get_custuser(cname, cadmin, cdepart, chk_true):
         chk_list.append(cname)
         chk_list.append(cadmin)
         chk_list.append(cdepart)
+        
     else:
-        # print("in get custuser ", chk_list)
         return chk_list
 
-# read_xml_ = 'database_connection.xml'
-# tree = ET.parse(read_xml_)
-# root = tree.getroot()
-# print("root", root)
-# print("#######",root[0].text)
 
 import pymssql
 
 def get_connection():
     # # for server
-    conn = pymssql.connect(server='192.168.5.79', user='chatboat_sa', password='ch@tb0@t$@', database='zayed-chatbot-database')
-    # conn = pyodbc.connect('Driver=SQL Server;'  ## for local
-    #                       'Server=SOHAIL;'
-    #                       'Database=zayed_university_db;'
-    #                       'Trusted_Connection=yes;')
+    # conn = pymssql.connect(server='192.168.5.79', user='chatboat_sa', password='ch@tb0@t$@', database='zayed-chatbot-database')
+    conn = pyodbc.connect('Driver=SQL Server;'  ## for local
+                          'Server=SOHAIL;'
+                          'Database=zayed_university_db;'
+                          'Trusted_Connection=yes;')
     return conn
 
 

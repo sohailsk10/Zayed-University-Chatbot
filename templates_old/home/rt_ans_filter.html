@@ -1,0 +1,124 @@
+{% extends "layouts/user_adoreta_base.html" %}
+{% block title %} Right Answer Update {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+{% endblock stylesheets %}
+{% block content %}
+
+<br>
+
+
+{% comment %} {{ wr.event_question }} {% endcomment %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card" id="newpost">
+            <div class="card-header card-header-warning">
+                <h4 class="card-title">
+                    Question Chatbot Response and Expected Answer 
+                </h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {% for rt in rt_answer_list %}
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Question</label>
+                                <input type="text" class='form-control' id="question" name="question"
+                                       placeholder="Question"
+                                       value="{% if rt.event_question %}{{rt.event_question}}{% endif %}">
+                            </div>
+                        </div>
+                  
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Chatbot Response</label>
+                                <textarea class="form-control" id="ans" name="ans" placeholder="Answer" rows="6">{{rt.event_answer}}</textarea>
+                                                               
+                                {% comment %} {{rt.event_answer}} {% endcomment %}
+                                {% comment %} <textarea class="form-control" id="ans" name="ans" placeholder="Answer" rows="6">{{rt.event_answer}}</textarea> {% endcomment %}
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <input type="radio" id="right_ans" name="right_ans" value="{{rt.event_answer}}">
+                                <br>
+                                <button type="submit" class="btn btn-primary" id="submit">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                 
+                    {% comment %} <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Expected Answer</label>
+                                <textarea class="form-control" id="exp_ans" name="exp_ans" placeholder="Expected Answer"  rows="3">{{wr.event_answer}}</textarea>
+                            </div>
+                        </div>
+                    </div> {% endcomment %}
+                    <br/>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-primary" id="submit">Save All</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br>
+
+{% endblock %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+$(document).ready(function(){
+    $('#submit').on('click', function(){
+        $question = $('#question').val();
+        $ans = $('#ans').val();
+        $exp_ans = $('#exp_ans').val();
+        
+        debugger;
+
+        if($ans == ""){
+            $.ajax({
+                type: "POST",
+                url: "update_wr_ans",
+                data:{
+                    question: $question,
+                    ans: $ans,
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                },
+                success: function(){
+                    alert('Save Data');
+                    $('#question').val('');
+                    $('#exp_ans').val('');
+                    window.location = "/update_wr_ans";
+                }
+            });
+        }else{
+            $.ajax({
+                type: "POST",
+                url: "update_wr_ans",
+                data:{
+                    question: $question,
+                    exp_ans: $ans,
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                },
+                success: function(){
+                    alert('Save Data');
+                    $('#question').val('');
+                    $('#ans').val('');
+                    window.location = "/update_wr_ans";
+                }
+            });
+        
+    });
+});
+
+<script/>
+{% endblock javascripts %}
+<html/>

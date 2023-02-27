@@ -1,0 +1,33 @@
+{% extends "layouts/acronyms_base.html" %}
+
+{% load static %}
+
+
+{% block content %}
+  <button type="button" class="btn btn-primary js-create-acronyms" data-url="{% url 'acronyms_create' %}">
+    <span class="glyphicon glyphicon-plus"></span>
+    New Acronyms
+  </button>
+
+  <table class="table table-hover" id="acronyms-table">
+    <thead class="text-warning">
+      <tr>
+        <th>Acronyms</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% include 'acronyms/partial_acronyms_list.html' %}
+    </tbody>
+  </table>
+
+  <div class="modal fade" id="modal-acronyms">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+<script src="{% static 'assets/js/acronyms.js' %}"></script>

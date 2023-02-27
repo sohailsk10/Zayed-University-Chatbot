@@ -1,0 +1,107 @@
+{% extends "layouts/ans_rectify_base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-7">
+        <div class="card" id="newpost">
+            <div class="card-header card-header-warning">
+                <h4 class="card-title">
+                    Update Question with Category
+                </h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" action=".">
+                    {% csrf_token %}
+                    {% comment %} <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Select Event</label>
+                                <select id="etype" name="etype" class='form-control'>
+                                    {% if not event_type_id_exact_query %}
+                                    <option value="" selected>Select Event...</option>
+                                    {% for e in event_ %}
+                                    <option value="{{ e.id }}">{{ e.description }}</option>
+                                    {% endfor %}
+                                    {% else %}
+                                    <option value="">Select Event...</option>
+                                    {% for e in event_ %}
+                                    {% if event_type_id_exact_query == e.id|slugify %}
+                                    <option value="{{e.id}}" selected>{{e.description}}</option>
+                                    {% else %}
+                                    <option value="{{ e.id }}">{{ e.description }}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                    </div> {% endcomment %}
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Add Question</label>
+                                <input type="search" class='form-control' id="question" name="question"
+                                       placeholder="Question" value="{% if user_question %}{{user_question}}{% endif %}">
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Description</label>
+                                <input type="search" class='form-control' id="desc" name="desc"
+                                       placeholder="Description"
+                                       value="{% if description %}{{description}}{% endif %}">
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Parent ID</label>
+                                <input type="search" class='form-control' id="pid" name="pid"
+                                       placeholder="Parent ID" value="{% if pid %}{{pid}}{% endif %}">
+                            </div>
+                        </div>
+                    </div>
+                    
+                   
+                    <br/>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+    function showhide()
+    {
+         var div = document.getElementById("newpost");
+         if (div.style.display !== "none")
+         {
+             div.style.display = "none";
+         }
+         else
+         {
+             div.style.display = "block";
+         }
+    }
+</script>
+{% endblock javascripts %}

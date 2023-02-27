@@ -1,0 +1,242 @@
+{% extends "layouts/log_filter_base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+
+{% endblock stylesheets %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 col-md-8"></div>
+    <div class="col-lg-4 col-md-4 text-warning">
+        Download your filtered report here...
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8 col-md-8"><h3></h3></div>
+    <div class="col-lg-2 col-md-2">
+        <a href="{% url 'filter_pdf' %}" target="_blank">
+            <button type="button" class="btn btn-primary">Export as PDF</button>
+        </a>
+    </div>
+    <div class="col-lg-2 col-md-2">
+        <a href="{% url 'filter_excel' %}">
+            <button type="button" class="btn btn-primary">Export as Excel</button>
+        </a>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-5 col-md-5"></div>
+    <div class="col-lg-2 col-md-2">
+        <a id="button" onclick="showhide()">
+            <button type="button" class="btn btn-primary">Show/Hide Form</button>
+        </a>
+    </div>
+</div>
+
+<!-- search form  -->
+<div class="row">
+    <div class="col-md-7">
+        <div class="card" id="newpost">
+            <div class="card-header card-header-warning">
+                <h4 class="card-title">
+                    Filter Form
+                </h4>
+            </div>
+            <div class="card-body">
+                <form method="GET" action=".">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Select Event</label>
+                                <select id="etype" name="etype" class='form-control'>
+                                    {% if not event_type_id_exact_query %}
+                                    <option value="" selected>Select Event...</option>
+                                    {% for e in event_ %}
+                                    <option value="{{ e.id }}">{{ e.description }}</option>
+                                    {% endfor %}
+                                    {% else %}
+                                    <option value="">Select Event...</option>
+                                    {% for e in event_ %}
+                                    {% if event_type_id_exact_query == e.id|slugify %}
+                                    <option value="{{e.id}}" selected>{{e.description}}</option>
+                                    {% else %}
+                                    <option value="{{ e.id }}">{{ e.description }}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Email</label>
+                                <input type="search" class='form-control' id="email" name="email"
+                                       placeholder="Email" value="{% if user_email %}{{user_email}}{% endif %}">
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Question</label>
+                                <input type="search" class='form-control' id="quest" name="quest"
+                                       placeholder="Question"
+                                       value="{% if event_question %}{{event_question}}{% endif %}">
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Answer</label>
+                                <input type="search" class='form-control' id="ans" name="ans"
+                                       placeholder="Answer" value="{% if event_answer %}{{event_answer}}{% endif %}">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="date_min">From Date :</label>
+                            <input type="date" class="form-control" id="date_min" name="date_min"
+                                   value="{% if date_min %}{{date_min}}{% endif %}">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="date_max">To Date :</label>
+                            <input type="date" class="form-control" id="date_max" name="date_max"
+                                   value="{% if date_max %}{{date_max}}{% endif %}">
+                        </div>
+                    </div>
+                    <br>
+                    {% if user.is_superuser %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Select Department</label>
+
+                                <select id="dtype" name="dtype" class='form-control'>
+                                    {% if not intent_exact_query %}
+                                    <option value="" selected>Select Department...</option>
+                                    {% for d in dept_list %}
+                                    <option value="{{ d }}">{{ d }}</option>
+                                    {% endfor %}
+                                    {% else %}
+                                    <option value="" selected>Select Department...</option>
+                                    {% for d in dept_list %}
+                                    {% if intent_exact_query == d %}
+                                    <option value="{{ d }}" selected>{{ d }}</option>
+                                    {% else %}
+                                    <option value="{{ d }}">{{ d }}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <br/>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <!--        <div class="card">-->
+        <table class="table table-hover">
+            <thead class="text-warning">
+            <th>Event ID</th>
+            <th>DateTime</th>
+            <th>User Email</th>
+            <th>Question</th>
+            <th>Answer</th>
+            <th>Department</th>
+            </thead>
+            <tbody>
+            {% if log_|length < 1 %}
+            <tr>
+                <td colspan=4>Sorry No Record Found, Please refresh your search</td>
+            </tr>
+            {% else %}
+            {% for rec in log_ %}
+            <tr>
+                <td>{{rec.event_type_id}}</td>
+                <td>{{rec.user_datetime}}</td>
+                <td>{{rec.user_email}}</td>
+                <td style="word-wrap: break-word;width:170px">{{rec.event_question}}</td>
+                  <!-- {% if rec.event_type_id == 'Right Answer'%} -->
+                <td style="word-wrap: break-word;width:180px">{{rec.event_answer}}</td>
+                         <!--<input type="radio" id="right_ans" name="right_ans" value="{{rt.event_answer}}"> -->
+                    <!--  {% else %} 
+                   
+                        <td style="word-wrap: break-word;width:180px">{{rec.event_answer}}</td> 
+                    {% endif %}--> 
+                <td>{{rec.intent}}</td>
+              <!--  {% if rec.event_type_id == '4' %}
+                    <td>{{rec.event_type_id}}</td>
+                    <td>{{rec.user_datetime}}</td>
+                    <td>{{rec.user_email}}</td>
+                    <td style="word-wrap: break-word;width:170px">{{rec.event_question}}</td>
+                    <td style="word-wrap: break-word;width:180px"><input type="radio" id="right_ans" name="right_ans" value="{{rt.event_answer}}"></td> 
+                    <td>{{rec.intent}}</td>
+                {% else %}
+                    <td>{{rec.event_type_id}}</td>
+                    <td>{{rec.user_datetime}}</td>
+                    <td>{{rec.user_email}}</td>
+                    <td style="word-wrap: break-word;width:170px">{{rec.event_question}}</td>
+                    <td style="word-wrap: break-word;width:180px">{{rec.event_answer}}</td> 
+                    <td>{{rec.intent}}</td>
+                {% endif %}-->
+            </tr>
+            {% endfor %}
+            {% endif %}
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+{% endblock %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+    function showhide()
+    {
+         var div = document.getElementById("newpost");
+         if (div.style.display !== "none")
+         {
+             div.style.display = "none";
+         }
+         else
+         {
+             div.style.display = "block";
+         }
+    }
+
+
+
+
+
+
+
+
+</script>
+{% endblock javascripts %}

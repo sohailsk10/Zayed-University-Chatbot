@@ -50,6 +50,12 @@ from django.template import loader
 from django.urls import reverse
 from django.contrib import messages
 import difflib
+from .forms import AcronymsForm
+from django.shortcuts import render, get_object_or_404
+from django.http import JsonResponse
+from django.template.loader import render_to_string
+from .pre_process_ds import pre_process
+from .utils_links import get_proper_link
 
 
 workspace_id = 'lMpsX8-ivT4J5jaAZRo4cNUnotfqOO-_Vp2zia532An5'
@@ -62,15 +68,21 @@ assistant_crawl_json_id = '4c8f53fc-7293-43dd-970c-fba16887b8b2'
 
 nltk.download('stopwords')
 _stop_words = stopwords.words('english')
-_stop_words_ar = stopwords.words('arabic')
 _stop_words.append('get')
+_stop_words.append('pull')
+_stop_words.append('list')
+_stop_words.remove('about')
 
+_stop_words_ar = stopwords.words('arabic')
 tag_model = SentenceTransformer('bert-base-nli-mean-tokens')
+
 model = SentenceTransformer('bert-base-nli-mean-tokens')
-kw_model = KeyBERT(model='all-mpnet-base-v2')
+# kw_model = KeyBERT(model='all-mpnet-base-v2')
+kw_model = KeyBERT(model= model)
 
-EXTENSTION_LIST = ["JPG", "PDF", "DOC", "PNG", "DOCX", "GIF", "XLSX", "JPEG", "ASPX", "ASP"]
+EXTENSTION_LIST = ["JPG", "PDF", "DOC", "PNG", "DOCX", "GIF", "XLSX", "CSV", "JPEG", "ASPX", "ASP"]
 
+read_zu_files = r"zayed_university_app/ZU_404_new"
 
 def remove_custom(_char, _list):
     for i in _list:
@@ -125,7 +137,6 @@ def list_to_str(_list):
     return _str
 
 
-
 cont = {}
 translator = ''
 session_id_ = ''
@@ -165,13 +176,13 @@ def remove_duplicates(input_list):
     return output_list
 
 
-def get_proper_extension(_list):
+def get_proper_extension_old(_list):
     final_df = []
-    index_links = [link for link in _list if 'index' in link]
-    other_links = [link for link in _list if 'index' not in link]
-    result = index_links + other_links
+    # index_links = [link for link in _list if 'index' in link]
+    # other_links = [link for link in _list if 'index' not in link]
+    # result = index_links + other_links
     
-    for i in result:
+    for i in _list:
         if 'https://eservices.zu.ac.ae' in i:
             final_df.append(i)
         else:
@@ -188,14 +199,19 @@ def get_proper_extension(_list):
 
 
 def remove_zu(_str_list, _str_to_insert, _sub_str="zu"):
+    acr_list = Acronyms.objects.all()
+    print("Length", len(_str_list))
     if len(_str_list) == 1:
         return _str_list[0]
     
     for i in _str_list:
-        if _sub_str in i:
-            idx = _str_list.index(i)
-            _str_list.insert(idx, _str_to_insert)
-            _str_list.pop(idx + 1)
+        for zu_acr in acr_list:
+            # print("position", i, zu_acr.short_form, zu_acr.long_form)
+            if zu_acr.short_form.lower() == i.lower():
+                idx = _str_list.index(i)
+                # print("position", idx, i, zu_acr.short_form, zu_acr.long_form)
+                _str_list.insert(idx, zu_acr.long_form)
+                _str_list.pop(idx + 1)
     
     return list_to_str(_str_list)
 
@@ -207,7 +223,39 @@ def str_to_list(_str):
         _main_input = [_str]
         
     return _main_input
+
+
+def eng_stopwords(text):
+    return " ".join([word for word in str(text).split() if word not in _stop_words])
+
+def get_ZU_acronyms(input_list):
+    acr_list = Acronyms.objects.all()
+    for i in acr_list:
+        remove_zu(input_list, i.long_form, i.short_form)
+
+
+def get_proper_extension(_list):
+    final_df = []
+    answer_list = [link for link in _list if 'https:' not in link[:8]]
+
+    if len(answer_list) >= 1:
+        return [answer_list, "string"]
+        
+    for i in _list:
+        if 'https://eservices.zu.ac.ae' in i:
+            final_df.append(i)
+        else:
+            temp = True
+            for j in EXTENSTION_LIST:
+                if j in i.split("/")[-1].upper() and temp:
+                    temp = False
+                    final_df.append(i)
+                    break
+            if temp:
+                final_df.append(i + ".aspx") 
     
+    return [final_df, "link"]
+
 
 @csrf_exempt
 def get_response_from_watson(request):
@@ -318,10 +366,7 @@ def get_response_from_watson(request):
         _text = remove_zu(_main_input, "zayed university")
         _main_input = str_to_list(_text)
         _main_input_list = [i for i in _main_input if i]
-        _main_input_list = remove_custom('i', _main_input_list)
-        _main_input_list = remove_custom('a', _main_input_list)
-        _main_input_list = remove_custom('the', _main_input_list)
-        _main_input_string = list_to_str(_main_input_list)
+        _main_input_string = eng_stopwords(_text)
         try:
             tag_df = pd.DataFrame(list(Tag_QA.objects.all().values()))
             tag_df['q_tag'] = np.arange(len(tag_df))
@@ -335,7 +380,7 @@ def get_response_from_watson(request):
             tag_df_ratios = pd.DataFrame(df_ratios, columns=['ratio', 'question', 'answer'])
             main_df = tag_df_ratios.drop_duplicates(subset="answer", keep="last")
 
-            top_tag_df = main_df.sort_values('ratio', ascending=False).head(5).values.tolist()
+            top_tag_df = main_df.sort_values('ratio', ascending=False).head(1).values.tolist()
             tag_df_top_ratio = top_tag_df[0][0]
         except Exception as e:
             print("In Exception", e)
@@ -346,66 +391,67 @@ def get_response_from_watson(request):
             top_tag_df_extension = get_proper_extension(top_tag_df_links)
 
             tag_df_str = ""
-            for i in top_tag_df_extension:
+            for i in top_tag_df_extension[0]:
                 tag_df_str += i + "\n"
-                
-            if len(top_tag_df_extension) > 0:
-                return JsonResponse({'session_id': session_id_, 'answer': tag_df_str, 'intent': 'General', 'url': top_tag_df_extension})
+            
+            if len(top_tag_df_extension[0]) > 0 and top_tag_df_extension[1] == "link":
+                return JsonResponse({'session_id': session_id_, 'answer': tag_df_str, 'intent': 'General', 'url': top_tag_df_extension[0]})
+
+        
+            if len(top_tag_df_extension[0]) > 0 and top_tag_df_extension[1] == "string":
+                return JsonResponse({'session_id': session_id_, 'answer': tag_df_str, 'intent': 'General'})
 
         intents = ""
-        main_df = pd.DataFrame()
-        all_csv_ = []
+        data = pd.read_csv("MAIN3.csv")
+        links = data.path.values.tolist()
+        title = data.title.values.tolist()
+        ids = data.id.values.tolist()
 
-        path = r"zayed_university_app/remove_404_csv"
-        csv_files = glob.glob(os.path.join(path, "*.csv"))
-        for f in csv_files:
-            df = pd.read_csv(f)
-            for index, row in df.iterrows():
+        # acr_list = ZUACRONYMS.objects.all()
+        # acr_list = Acronyms.objects.all()
+        # for i in acr_list:
+        #     print("####", i.long_form, _main_input_string)
+        #     if i.long_form in  _main_input_string:
+        #         _main_input_string = _main_input_string.replace(i.long_form, "")
+        #         print("_main_input_string", _main_input_string)
+       
+            
+        processed_message = pre_process(_main_input_string).split()
+
+        question_length = len(processed_message)
+        processed_message_set = set(processed_message)
+
+        print("processed_message", processed_message)
+
+        jaccard = {}
+
+        for i in range(len(links)):
+            if "/ar/" not in links[i]:
                 try:
-                    path = row['path']
-                    try:
-                        title = row['title']
-                    except:
-                        title = row['name']
+                    process_link = set(pre_process(get_proper_link(links[i])).split())
+                    process_title = set(pre_process(title[i]).split())
+                    process_union = process_link.union(process_title)
+                    jaccard[ids[i]] = ([len(processed_message_set.intersection(process_union)) / len(processed_message_set.union(process_union))])
+                
+                except Exception as e:
+                    print("EXCEPTION", e)
 
-                    try:
-                        created_on = row['created-on']
-                    except:
-                        created_on = row['created_on']
-                except:
-                    title = row['ServiceName']
-                    path = row['ServiceUrl']
-                    created_on = 1
-
-                all_csv_.append([path, title, created_on])
-
-    all_csv = []
-    all_csv = get_ratios(_main_input_list, all_csv_, all_csv)
-    
-    _main_input_string = list_to_str(_main_input_list)
-    
-    links_ratio = []
-    for i in all_csv:
-        links_ratio.append([i[0], string_similarity(i[1][1], _main_input_string), i[1][1], i[1][0], i[1][2]])
-
-    max_ratio = max(links_ratio, key=lambda x: x[1])[1]
-    print("max_ratio", max_ratio)
-    
-    df1 = pd.DataFrame(links_ratio, columns=['single_ratio', 'actual_ratio', 'name', 'path', 'timestamp'])
-    df1['timestamp'] = pd.to_datetime(df1['timestamp'])
-    main_df = df1.drop_duplicates(subset="path", keep="last")
-    main_df = main_df.loc[~main_df['path'].str.contains("_hidden")]
-    top_df1 = main_df.sort_values('actual_ratio', ascending=False).head(5).values.tolist()
-    
-    top_df1 = [i[3] for i in top_df1]
-    top_df_extension = get_proper_extension(top_df1)
+        sorted_dict = {k: v for k, v in sorted(jaccard.items(), key=lambda item: item[1], reverse=True)[:5]}
+        print(sorted_dict)
+        answer= []
+        for key, _ in sorted_dict.items():
+            print(links[ids.index(key)])
+            answer.append(links[ids.index(key)])
+       
 
     df1_str = ""
-    for i in top_df_extension:
+    for i in answer:
         df1_str += i + "\n"
-        
-    if len(top_df_extension) > 0:
-        return JsonResponse({'session_id': session_id_, 'answer': df1_str, 'intent': 'General', 'url': top_df_extension})
+    
+    if len(answer) > 0 :
+        return JsonResponse({'session_id': session_id_, 'answer': df1_str, 'intent': 'General', 'url': answer})
+
+   
 
     else:
         eid = EventType.objects.get(id=int(5))
@@ -414,6 +460,99 @@ def get_response_from_watson(request):
         return JsonResponse(
             {'session_id': session_id_,
             'answer': "Sorry, I am not able to detect the language you are asking."})
+
+
+def acronyms_list(request):
+    acronyms = Acronyms.objects.all()
+    depart_name = request.session['depart']
+    context = {
+        'depart_name': depart_name,
+        'admin_type': request.session['admin_type'],
+        'acronyms':acronyms,
+    }
+    
+    return render(request, 'acronyms/acronyms_list.html', context)
+
+def save_acronyms_form(request, form, template_name):
+    depart_name = request.session['depart']
+   
+    data = dict()
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            data['form_is_valid'] = True
+            acronyms = Acronyms.objects.all()
+            context = {
+                'depart_name': depart_name,
+                'admin_type': request.session['admin_type'],
+                'acronyms':acronyms,
+             }
+            data['html_acronyms_list'] = render_to_string('acronyms/partial_acronyms_list.html',context)
+        else:
+            data['form_is_valid'] = False
+    context = {
+                'depart_name': depart_name,
+                'admin_type': request.session['admin_type'],
+                'form': form,
+    }
+    data['html_form'] = render_to_string(template_name, context, request=request)
+    return JsonResponse(data)
+
+def acronyms_create(request):
+    depart_name = request.session['depart']
+    data = dict()
+    if request.method == 'POST':
+        print("In POST acronyms create-", request.POST)
+        form = AcronymsForm(request.POST)
+        if form.is_valid():
+            print("form valid")
+            form.save()
+            data['form_is_valid'] = True
+            acronyms = Acronyms.objects.all()
+            context = {
+                'depart_name': depart_name,
+                'admin_type': request.session['admin_type'],
+                'acronyms':acronyms,
+             }
+            data['html_acronyms_list'] = render_to_string('acronyms/partial_acronyms_list.html',context)
+    else:
+        form = AcronymsForm()
+    return save_acronyms_form(request, form, 'acronyms/partial_acronyms_create.html')
+
+def acronyms_update(request, pk):
+    acronyms = get_object_or_404(Acronyms, pk=pk)
+    if request.method == 'POST':
+        form = AcronymsForm(request.POST, instance=acronyms)
+    else:
+        form = AcronymsForm(instance=acronyms)
+    return save_acronyms_form(request, form, 'acronyms/partial_acronyms_update.html')
+
+
+def acronyms_delete(request, pk):
+    depart_name = request.session['depart']
+    data = dict()
+    if request.method == 'POST':
+        acronym = get_object_or_404(Acronyms, pk=pk)
+        print("In POST",pk, acronym)
+        acronym.delete()
+        data['form_is_valid'] = True
+        acronym = Acronyms.objects.all()
+        context = {
+                'depart_name': depart_name,
+                'admin_type': request.session['admin_type'],
+                'acronyms': acronym
+        }
+        data['html_acronyms_list'] = render_to_string('acronyms/partial_acronyms_list.html', context)
+    else:
+        print("In get",pk)
+        acronyms = Acronyms.objects.get(id=pk)
+        context = {
+                'depart_name': depart_name,
+                'admin_type': request.session['admin_type'],
+                 'acronyms': acronyms
+        }
+        data['html_form'] = render_to_string('acronyms/partial_acronyms_delete.html', context, request=request)
+    return JsonResponse(data)
 
 
 def get_keyword_KeyBERT(text):

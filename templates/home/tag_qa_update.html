@@ -192,9 +192,9 @@
     function add_ad_keywords(){
         var key = document.getElementById("add_key").value;
         var keys = document.getElementById("key_extracted").value;
-        var _temp = keys + "," +  key;
+        var _temp = keys + " " +  key;
         document.getElementById("key_extracted").value = '';
-        // document.getElementById("key_extracted").value = _temp;
+        document.getElementById("key_extracted").value = _temp;
 
 
     }

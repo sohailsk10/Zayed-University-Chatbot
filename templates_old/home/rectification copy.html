@@ -1,0 +1,72 @@
+{% extends "layouts/ans_rectify_base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <!--        <div class="card">-->
+        <table class="table table-hover">
+            <thead class="text-warning">
+            <th>Question</th>
+            <th>Answer</th>
+           
+             <!-- <th>Department</th>-->
+            <th>Save</th>
+            </thead>
+            <tbody>
+            {% if log_|length < 1 %}
+            <tr>
+                <td colspan=4>Sorry No Record Found, Please refresh your search</td>
+            </tr>
+            {% else %}
+            {% for rec in log_ %} 
+                {% if rec.event_type_id|title == "Right Answer" %}  
+                <tr>
+                    <td>{{rec.event_question}}</td>
+                    <td>
+                        {% if "https://"  in rec.event_answer %}
+                        <input type = "radio">&nbsp;&nbsp;{{rec.event_answer}}<br>
+                        {% else %}
+                        <input type = "radio">&nbsp;&nbsp;{{rec.event_answer}}
+                        {% endif %}
+                    </td> 
+                   
+                    <td> <button type="submit" class="btn btn-primary" id="submit">Update</button></td>
+                </tr>
+                {% else %}
+                <tr>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            {% endif %} 
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+    function showhide()
+    {
+         var div = document.getElementById("newpost");
+         if (div.style.display !== "none")
+         {
+             div.style.display = "none";
+         }
+         else
+         {
+             div.style.display = "block";
+         }
+    }
+</script>
+{% endblock javascripts %}
