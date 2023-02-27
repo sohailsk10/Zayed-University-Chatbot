@@ -24,7 +24,7 @@ CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-czjq&a=v@8y#0&k5vsl=f-&6(=$y4sp-hi@dw!-1l*+s#_ti-h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -84,6 +84,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'report.wsgi.application'
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE =  720 * 60
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

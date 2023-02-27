@@ -301,6 +301,66 @@ def get_response_from_watson(request):
         res = ' '.join([str(i) for i in temp_1])
         text = res
 
+    _text = text.lower()
+    _main_input = str_to_list(_text)
+    _text = remove_zu(_main_input, "zayed university")
+    _main_input = str_to_list(_text)
+    _main_input_list = [i for i in _main_input if i]
+    _main_input_string = eng_stopwords(_text)
+    try:
+        tag_df = pd.DataFrame(list(Tag_QA.objects.all().values()))
+        tag_df['q_tag'] = np.arange(len(tag_df))
+        tag_df['title'] = tag_df['question']
+        tag_df['path'] = tag_df['answer']
+        tag_df['bert_keyword'] = tag_df['keywords']
+        rectify_ques = tag_df.title.values.tolist()
+        ids = tag_df.q_tag.values.tolist()
+        links = tag_df.path.values.tolist()
+            
+        processed_message = pre_process(_main_input_string).split()
+        question_length = len(processed_message)
+        processed_message_set = set(processed_message)
+
+        jaccard = {}
+        for i in range(len(rectify_ques)):
+            try:
+                process_title = set(pre_process(rectify_ques[i]).split())
+                jaccard[ids[i]] = ([len(processed_message_set.intersection(process_title)) / len(processed_message_set.union(process_title))])
+            
+            except Exception as e:
+                print("EXCEPTION", e)
+
+        sorted_dict = {k: v for k, v in sorted(jaccard.items(), key=lambda item: item[1], reverse=True)[:1]}
+        print(sorted_dict)
+        answer= []
+        for key, _ in sorted_dict.items():
+            print(links[ids.index(key)])
+            answer.append(links[ids.index(key)])
+    
+        print("answer", answer)
+
+        tag_df_top_ratio = list(sorted_dict.values())[0]
+        print("tag_df_top_ratio", tag_df_top_ratio)
+         
+    except Exception as e:
+        print("In Exception", e)
+        tag_df_top_ratio = [0.0]
+    
+    if tag_df_top_ratio[0] > 0.3:
+        top_tag_df_extension = get_proper_extension(answer)
+        print("top_tag_df_extension", top_tag_df_extension)
+        print(len(answer))
+        tag_df_str = ""
+        for i in answer:
+            tag_df_str += i + "\n"
+        
+        if len(top_tag_df_extension[0] ) > 0  and top_tag_df_extension[1] == "link":
+            return JsonResponse({'session_id': session_id_, 'answer': tag_df_str, 'intent': 'General', 'url': answer})
+
+    
+        if len(top_tag_df_extension[0]) > 0 and top_tag_df_extension[1] == "string":
+            return JsonResponse({'session_id': session_id_, 'answer': tag_df_str, 'intent': 'General'})
+
     doc = nlp(text.upper())
 
     if session_id_ == '' and doc._.language['language'] == 'ar':
@@ -354,6 +414,7 @@ def get_response_from_watson(request):
 
         else:
             message = cleanhtml(output[0])
+
         if message == '':
             message = cleanhtml(res['output']['generic'][0]
                                 ['primary_results'][0]['answers'][0]['text'])
@@ -361,95 +422,18 @@ def get_response_from_watson(request):
         eid = EventType.objects.get(id=int(event_type))
         Log.objects.create(event_type_id=eid, user_email=user_email, user_ip=ip, event_question=text,
                         event_answer=message, intent=intents)
-        return JsonResponse({'session_id': session_id_, 'answer': message, 'intent': intents})
-    
+        return JsonResponse({'session_id': session_id_, 'answer': message, 'intent': intents}) 
 
     else:
-        _text = text.lower()
-        _main_input = str_to_list(_text)
-        _text = remove_zu(_main_input, "zayed university")
-        _main_input = str_to_list(_text)
-        _main_input_list = [i for i in _main_input if i]
-        _main_input_string = eng_stopwords(_text)
-        try:
-            tag_df = pd.DataFrame(list(Tag_QA.objects.all().values()))
-            tag_df['q_tag'] = np.arange(len(tag_df))
-            tag_df['title'] = tag_df['question']
-            tag_df['path'] = tag_df['answer']
-            tag_df['bert_keyword'] = tag_df['keywords']
-            rectify_ques = tag_df.title.values.tolist()
-            ids = tag_df.q_tag.values.tolist()
-            links = tag_df.path.values.tolist()
-            
-            
-            processed_message = pre_process(_main_input_string).split()
-
-            question_length = len(processed_message)
-            processed_message_set = set(processed_message)
-
-            jaccard = {}
-            for i in range(len(rectify_ques)):
-                try:
-                    process_title = set(pre_process(rectify_ques[i]).split())
-                    jaccard[ids[i]] = ([len(processed_message_set.intersection(process_title)) / len(processed_message_set.union(process_title))])
-                
-                except Exception as e:
-                    print("EXCEPTION", e)
-
-            sorted_dict = {k: v for k, v in sorted(jaccard.items(), key=lambda item: item[1], reverse=True)[:1]}
-            print(sorted_dict)
-            answer= []
-            for key, _ in sorted_dict.items():
-                print(links[ids.index(key)])
-                answer.append(links[ids.index(key)])
-       
-            print("answer", answer)
-            #test comment
-
-            tag_df_top_ratio = list(sorted_dict.values())[0]
-            print("tag_df_top_ratio", tag_df_top_ratio)
-            
-            
-        except Exception as e:
-            print("In Exception", e)
-            tag_df_top_ratio = [0.0]
-        print(float(tag_df_top_ratio[0]))
-    
-        if tag_df_top_ratio[0] > 0.1:
-            top_tag_df_extension = get_proper_extension(answer)
-            print("top_tag_df_extension", top_tag_df_extension)
-            print(len(answer))
-            tag_df_str = ""
-            for i in answer:
-                tag_df_str += i + "\n"
-            
-            if len(top_tag_df_extension[0] ) > 0  and top_tag_df_extension[1] == "link":
-                return JsonResponse({'session_id': session_id_, 'answer': tag_df_str, 'intent': 'General', 'url': answer})
-
-        
-            if len(top_tag_df_extension[0]) > 0 and top_tag_df_extension[1] == "string":
-                return JsonResponse({'session_id': session_id_, 'answer': tag_df_str, 'intent': 'General'})
-
         intents = ""
         data = pd.read_csv("MAIN3.csv")
         links = data.path.values.tolist()
         title = data.title.values.tolist()
         ids = data.id.values.tolist()
 
-        # acr_list = ZUACRONYMS.objects.all()
-        # acr_list = Acronyms.objects.all()
-        # for i in acr_list:
-        #     print("####", i.long_form, _main_input_string)
-        #     if i.long_form in  _main_input_string:
-        #         _main_input_string = _main_input_string.replace(i.long_form, "")
-        #         print("_main_input_string", _main_input_string)
-       
-            
         processed_message = pre_process(_main_input_string).split()
-
         question_length = len(processed_message)
         processed_message_set = set(processed_message)
-
         print("processed_message", processed_message)
 
         jaccard = {}
@@ -457,10 +441,6 @@ def get_response_from_watson(request):
         for i in range(len(links)):
             if "/ar/" not in links[i]:
                 try:
-                    # process_link = set(pre_process(get_proper_link(links[i])).split())
-                    # process_title = set(pre_process(title[i]).split())
-                    # process_union = process_link.union(process_title)
-                    # # jaccard[ids[i]] = ([len(processed_message_set.intersection(process_union)) / len(processed_message_set.union(process_union))])
                     jaccard[ids[i]] = ([len(processed_message_set.intersection(process_links_all[i])) / len(processed_message_set.union(process_links_all[i]))])
                 except Exception as e:
                     print("EXCEPTION", e)
@@ -472,16 +452,13 @@ def get_response_from_watson(request):
             print(links[ids.index(key)])
             answer.append(links[ids.index(key)])
        
-
     df1_str = ""
     for i in answer:
         df1_str += i + "\n"
     
     if len(answer) > 0 :
         return JsonResponse({'session_id': session_id_, 'answer': df1_str, 'intent': 'General', 'url': answer})
-
-   
-
+    
     else:
         eid = EventType.objects.get(id=int(5))
         Log.objects.create(event_type_id=eid, user_email=user_email, user_ip=ip, event_question=text,
