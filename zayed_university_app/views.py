@@ -57,6 +57,11 @@ from django.template.loader import render_to_string
 from .pre_process_ds import pre_process
 from .utils_links import get_proper_link
 
+data = pd.read_csv("MAIN3.csv")
+links_all = data.path.values.tolist()
+ids_all = data.id.values.tolist()
+process_links_all = [set(pre_process(get_proper_link(links_all[i])).split()) for i in range(len(links_all))]
+
 
 workspace_id = 'lMpsX8-ivT4J5jaAZRo4cNUnotfqOO-_Vp2zia532An5'
 workspace_url = 'https://api.eu-gb.assistant.watson.cloud.ibm.com/instances/dbb25da5-56bd-4b0c-ac66-62db88b266a6'
@@ -459,11 +464,11 @@ def get_response_from_watson(request):
         for i in range(len(links)):
             if "/ar/" not in links[i]:
                 try:
-                    process_link = set(pre_process(get_proper_link(links[i])).split())
-                    process_title = set(pre_process(title[i]).split())
-                    process_union = process_link.union(process_title)
-                    jaccard[ids[i]] = ([len(processed_message_set.intersection(process_union)) / len(processed_message_set.union(process_union))])
-                
+                    # process_link = set(pre_process(get_proper_link(links[i])).split())
+                    # process_title = set(pre_process(title[i]).split())
+                    # process_union = process_link.union(process_title)
+                    # # jaccard[ids[i]] = ([len(processed_message_set.intersection(process_union)) / len(processed_message_set.union(process_union))])
+                    jaccard[ids[i]] = ([len(processed_message_set.intersection(process_links_all[i])) / len(processed_message_set.union(process_links_all[i]))])
                 except Exception as e:
                     print("EXCEPTION", e)
 
