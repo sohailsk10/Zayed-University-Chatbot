@@ -428,6 +428,7 @@ def get_response_from_watson(request):
             # top_tag_df_extension = get_proper_extension(top_tag_df_links)
             top_tag_df_extension = get_proper_extension(answer)
             print("top_tag_df_extension", top_tag_df_extension)
+            print(len(answer))
             tag_df_str = ""
             for i in answer:
                 tag_df_str += i + "\n"
