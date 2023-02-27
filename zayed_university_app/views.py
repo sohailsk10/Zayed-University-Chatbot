@@ -241,18 +241,18 @@ def get_proper_extension(_list):
     if len(answer_list) >= 1:
         return [answer_list, "string"]
         
-    for i in _list:
-        if 'https://eservices.zu.ac.ae' in i:
-            final_df.append(i)
-        else:
-            temp = True
-            for j in EXTENSTION_LIST:
-                if j in i.split("/")[-1].upper() and temp:
-                    temp = False
-                    final_df.append(i)
-                    break
-            if temp:
-                final_df.append(i + ".aspx") 
+    # for i in _list:
+    #     if 'https://eservices.zu.ac.ae' in i:
+    #         final_df.append(i)
+    #     else:
+    #         temp = True
+    #         for j in EXTENSTION_LIST:
+    #             if j in i.split("/")[-1].upper() and temp:
+    #                 temp = False
+    #                 final_df.append(i)
+    #                 break
+    #         if temp:
+    #             final_df.append(i + ".aspx") 
     
     return [final_df, "link"]
 
@@ -373,29 +373,60 @@ def get_response_from_watson(request):
             tag_df['title'] = tag_df['question']
             tag_df['path'] = tag_df['answer']
             tag_df['bert_keyword'] = tag_df['keywords']
+            rectify_ques = tag_df.title.values.tolist()
+            ids = tag_df.q_tag.values.tolist()
+            links = tag_df.path.values.tolist()
+            
+            
+            processed_message = pre_process(_main_input_string).split()
 
-            all_csv = []
-            df_ratios = get_ratios_from_df([_main_input_string], tag_df, all_csv)
+            question_length = len(processed_message)
+            processed_message_set = set(processed_message)
 
-            tag_df_ratios = pd.DataFrame(df_ratios, columns=['ratio', 'question', 'answer'])
-            main_df = tag_df_ratios.drop_duplicates(subset="answer", keep="last")
+            jaccard = {}
+            for i in range(len(rectify_ques)):
+                try:
+                    process_title = set(pre_process(rectify_ques[i]).split())
+                    jaccard[ids[i]] = ([len(processed_message_set.intersection(process_title)) / len(processed_message_set.union(process_title))])
+                
+                except Exception as e:
+                    print("EXCEPTION", e)
 
-            top_tag_df = main_df.sort_values('ratio', ascending=False).head(1).values.tolist()
-            tag_df_top_ratio = top_tag_df[0][0]
+            sorted_dict = {k: v for k, v in sorted(jaccard.items(), key=lambda item: item[1], reverse=True)[:1]}
+            print(sorted_dict)
+            answer= []
+            for key, _ in sorted_dict.items():
+                print(links[ids.index(key)])
+                answer.append(links[ids.index(key)])
+       
+
+
+            # all_csv = []
+            # df_ratios = get_ratios_from_df([_main_input_string], tag_df, all_csv)
+
+            # tag_df_ratios = pd.DataFrame(df_ratios, columns=['ratio', 'question', 'answer'])
+            # main_df = tag_df_ratios.drop_duplicates(subset="answer", keep="last")
+
+            # top_tag_df = main_df.sort_values('ratio', ascending=False).head(1).values.tolist()
+            # tag_df_top_ratio = top_tag_df[0][0]
+            tag_df_top_ratio = list(sorted_dict.values())[0]
+            
+            
+            
         except Exception as e:
             print("In Exception", e)
-            tag_df_top_ratio = 0.0
+            tag_df_top_ratio = [0.0]
         
-        if float(tag_df_top_ratio) > 0.60:
-            top_tag_df_links = [i[2] for i in top_tag_df]
-            top_tag_df_extension = get_proper_extension(top_tag_df_links)
-
+        if float(tag_df_top_ratio[0]) > 0.1:
+            # top_tag_df_links = [i[2] for i in top_tag_df]
+            # top_tag_df_extension = get_proper_extension(top_tag_df_links)
+            top_tag_df_extension = get_proper_extension(answer)
             tag_df_str = ""
-            for i in top_tag_df_extension[0]:
+            for i in answer:
                 tag_df_str += i + "\n"
             
-            if len(top_tag_df_extension[0]) > 0 and top_tag_df_extension[1] == "link":
-                return JsonResponse({'session_id': session_id_, 'answer': tag_df_str, 'intent': 'General', 'url': top_tag_df_extension[0]})
+            if len(top_tag_df_extension[0] ) > 0  and top_tag_df_extension[1] == "link":
+                return JsonResponse({'session_id': session_id_, 'answer': tag_df_str, 'intent': 'General', 'url': answer})
 
         
             if len(top_tag_df_extension[0]) > 0 and top_tag_df_extension[1] == "string":
