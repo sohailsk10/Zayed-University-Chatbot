@@ -205,9 +205,9 @@ def get_proper_extension_old(_list):
 
 def remove_zu(_str_list, _str_to_insert, _sub_str="zu"):
     acr_list = Acronyms.objects.all()
-    print("Length", len(_str_list))
-    if len(_str_list) == 1:
-        return _str_list[0]
+    print("Length", len(_str_list), len(acr_list))
+    # if len(_str_list) == 1:
+        # return _str_list[0]
     
     for i in _str_list:
         for zu_acr in acr_list:
@@ -304,9 +304,11 @@ def get_response_from_watson(request):
     _text = text.lower()
     _main_input = str_to_list(_text)
     _text = remove_zu(_main_input, "zayed university")
+    print("307", _text)
     _main_input = str_to_list(_text)
     _main_input_list = [i for i in _main_input if i]
     _main_input_string = eng_stopwords(_text)
+    print("310", _main_input_string)
     try:
         tag_df = pd.DataFrame(list(Tag_QA.objects.all().values()))
         tag_df['q_tag'] = np.arange(len(tag_df))
