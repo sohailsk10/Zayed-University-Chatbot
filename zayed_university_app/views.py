@@ -56,6 +56,10 @@ from django.http import JsonResponse
 from django.template.loader import render_to_string
 from .pre_process_ds import pre_process
 from .utils_links import get_proper_link
+import string
+from nltk.tokenize import RegexpTokenizer
+
+punctuation = RegexpTokenizer(r'\w+')
 
 data = pd.read_csv("MAIN3.csv")
 links_all = data.path.values.tolist()
@@ -183,9 +187,6 @@ def remove_duplicates(input_list):
 
 def get_proper_extension_old(_list):
     final_df = []
-    # index_links = [link for link in _list if 'index' in link]
-    # other_links = [link for link in _list if 'index' not in link]
-    # result = index_links + other_links
     
     for i in _list:
         if 'https://eservices.zu.ac.ae' in i:
@@ -273,17 +274,23 @@ def get_response_from_watson(request):
         session_id_ = ''
     
     uncorrect = spell(text).lower()
+    puntucate = punctuation.tokenize(text.lower())
+    print("puntucate", puntucate)
     u_list = uncorrect.split()
+    print("u_list", u_list)
     temp = u_list.copy()
     temp_1 = text.split()
-    if "university" in uncorrect or "university?" in uncorrect:
+    # if "university" in uncorrect or "university?" in uncorrect:
+    if "university" in puntucate:
         try:
-            uni_pos = u_list.index("university")
+            uni_pos = puntucate.index("university")
         except:
-            try:
-                uni_pos = u_list.index("university?")
-            except:
-                uni_pos = u_list.index("university's")
+            pass
+            # try:
+            #     uni_pos = u_list.index("university?")
+            # except:
+            #     print("EXCEPT u_list", u_list)
+            #     uni_pos = u_list.index("university's")
         try:
             if u_list[uni_pos - 1] == "based":
                 u_list[uni_pos - 1] = "zayed"
@@ -291,6 +298,7 @@ def get_response_from_watson(request):
             temp[uni_pos] = "university"
         except:
             pass
+    print("##u_list", u_list)
 
     res = ' '.join([str(elem) for elem in u_list])
     if res.lower() != text.lower() and _data['spell_check_bool'] == True:
@@ -348,7 +356,7 @@ def get_response_from_watson(request):
         print("In Exception", e)
         tag_df_top_ratio = [0.0]
     
-    if tag_df_top_ratio[0] > 0.1:
+    if tag_df_top_ratio[0] > 0.5:
         top_tag_df_extension = get_proper_extension(answer)
         print("top_tag_df_extension", top_tag_df_extension)
         print(len(answer))
