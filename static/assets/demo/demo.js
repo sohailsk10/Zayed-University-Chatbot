@@ -18,9 +18,6 @@ $(function () {
     });
   };
 
-
-  
-
   var saveForm = function () {
     var form = $(this);
     $.ajax({

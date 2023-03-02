@@ -24,7 +24,7 @@ CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-czjq&a=v@8y#0&k5vsl=f-&6(=$y4sp-hi@dw!-1l*+s#_ti-h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+
 
 ALLOWED_HOSTS = ["*"]
 
@@ -99,6 +99,7 @@ SESSION_COOKIE_AGE =  720 * 60
 # }
 
 # for Server
+DEBUG = False 
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
@@ -113,6 +114,7 @@ DATABASES = {
     },
 }
 
+# DEBUG = True
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "mssql",

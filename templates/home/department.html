@@ -57,21 +57,20 @@ html {
                     <p>Export Report (PDF)</p>
                 </a>
             </li>
-
-            <li class="nav-item {% if 'page-user' in segment %} active {% endif %}">
-                <a class="nav-link" href="{% url 'export_exl_dept' dept_name %}">
-                    <i class="material-icons">file_download</i>
-                    <p>Export Report (Excel)</p>
-                </a>
-            </li>
+            <!-- for acronyms -->
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'acronyms_list' %}">
                     <i class="material-icons">text_format</i>
                     <p>Acronyms</p>
                 </a>
+            </li> 
+                        <li class="nav-item {% if 'page-user' in segment %} active {% endif %}">
+                <a class="nav-link" href="{% url 'export_exl_dept' dept_name %}">
+                    <i class="material-icons">file_download</i>
+                    <p>Export Report (Excel)</p>
+                </a>
             </li>
-           
-
+        
             <li class="nav-item {% if 'page-user' in segment %} active {% endif %}">
                 <a class="nav-link" href="{% url 'logout_' %}">
                     <i class="material-icons">power_settings_new</i>

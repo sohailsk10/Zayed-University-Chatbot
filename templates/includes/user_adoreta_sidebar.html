@@ -27,7 +27,7 @@
                     <p>Acronyms</p>
                 </a>
             </li> 
-          
+     
             {% else %}
             <li class="nav-item">
                 {% if request.path == '/register_/' %}
@@ -49,7 +49,7 @@
                 </a>
             </li>
             {% if user.is_superuser %}
-          
+           
             <li class="nav-item {% if 'page-user' in segment %} active {% endif %}">
                 <a class="nav-link" href="{% url 'logout' %}">
                     <i class="material-icons">power_settings_new</i>
@@ -57,7 +57,7 @@
                 </a>
             </li>
             {% else %}
-         
+          
             <li class="nav-item {% if 'page-user' in segment %} active {% endif %}">
                 <a class="nav-link" href="{% url 'logout_' %}">
                     <i class="material-icons">power_settings_new</i>
