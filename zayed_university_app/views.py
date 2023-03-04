@@ -58,6 +58,7 @@ from .pre_process_ds import pre_process
 from .utils_links import get_proper_link
 import string
 from nltk.tokenize import RegexpTokenizer
+import re
 
 punctuation = RegexpTokenizer(r'\w+')
 
@@ -301,6 +302,7 @@ def get_response_from_watson(request):
     print("##u_list", u_list)
 
     res = ' '.join([str(elem) for elem in u_list])
+    print(res)
     if res.lower() != text.lower() and _data['spell_check_bool'] == True:
         print({'session_id': "session_id_", 'answer': f'{res}', 'intent': 'spell'})
         return JsonResponse({'session_id': session_id_, 'answer': f'{res}', 'intent': 'spell'})
@@ -356,7 +358,7 @@ def get_response_from_watson(request):
         print("In Exception", e)
         tag_df_top_ratio = [0.0]
     
-    if tag_df_top_ratio[0] > 0.5:
+    if tag_df_top_ratio[0] > 0.25:
         top_tag_df_extension = get_proper_extension(answer)
         print("top_tag_df_extension", top_tag_df_extension)
         print(len(answer))
@@ -429,6 +431,15 @@ def get_response_from_watson(request):
             message = cleanhtml(res['output']['generic'][0]
                                 ['primary_results'][0]['answers'][0]['text'])
         message = cleanhtml(message)
+        # print("message", message)
+        # url_pattern = re.compile(r'(https?://\S+)')
+        # urls = re.findall(url_pattern, message)
+        # for url in urls:
+        #     hyperlink = f'<a href="{url}">{url}</a>'
+        #     message = re.sub(url, hyperlink, message)
+        #     #
+            
+        
         eid = EventType.objects.get(id=int(event_type))
         Log.objects.create(event_type_id=eid, user_email=user_email, user_ip=ip, event_question=text,
                         event_answer=message, intent=intents)
