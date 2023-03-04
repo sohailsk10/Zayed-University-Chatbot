@@ -3,10 +3,6 @@ from django.db import models
 import uuid
 
 
-def list_to_str(text_list):
-    return " ".join([i for i in text_list])
-
-
 class EventType(models.Model):
     description = models.CharField(max_length=20)
 
@@ -49,27 +45,17 @@ class QA_Category(models.Model):
     def _str_(self):
         return str(self.id)
 
+    
+def check_acronyms(fields):
+    print("Line 50", fields)
+
 
 class Tag_QA(models.Model):
     tag = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    question = models.CharField(max_length=1000)
+    question = models.CharField(max_length=1000, default=check_acronyms(self))
     answer = models.CharField(max_length=1000)
     keywords = models.TextField()
     category = models.TextField()
-
-    def save(self) -> None:
-        acr_list = Acronyms.objects.all()
-        str_list = self.question.split()
-        
-        for i in str_list:
-            for zu_acr in acr_list:
-                if zu_acr.short_form.lower() == i.lower():
-                    idx = str_list.index(i)
-                    str_list.insert(idx, zu_acr.long_form)
-                    str_list.pop(idx + 1)
-        
-        self.question = list_to_str(str_list)
-        return super().save()
 
     def _str_(self):
         return str(self.tag)
