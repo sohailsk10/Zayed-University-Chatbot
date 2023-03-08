@@ -15,7 +15,6 @@
 </style>
 {% endblock stylesheets %}
 
-
 {% block content %}
 <div class="row">
     <div class="col-md-7">
@@ -78,8 +77,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="bmd-label-floating">Answer</label>
-                                <textarea class='form-control' id="ans" name="ans" placeholder="Answer"
-                                    rows="4">{% if event_answer %}{{event_answer}}{% endif %}</textarea>
+                                <textarea class='form-control' id="ans" name="ans" placeholder="Answer">{% if event_answer %}{{event_answer}}{% endif %}</textarea>
                             </div>
                         </div>
                     </div>
@@ -199,8 +197,22 @@
 
     }
  
+    {% comment %} tinymcs {% endcomment %}
+    tinymce.init({
+        selector: 'textarea#ans',
+        height: 400,
+        plugins: [
+          'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+          'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+          'insertdatetime', 'media', 'table', 'help', 'wordcount'
+        ],
+        toolbar: 'undo redo | blocks | ' +
+        'bold italic backcolor | alignleft aligncenter ' +
+        'alignright alignjustify | bullist numlist outdent indent | ' +
+        'removeformat | help',
+        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+      });
 
-      
 </script>
 
 {% endblock javascripts %}

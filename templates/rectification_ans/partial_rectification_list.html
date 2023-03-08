@@ -1,0 +1,28 @@
+{% comment %} {% load custom_tag %} {% endcomment %}
+{% for rect in rectified_ans %}
+  <tr>
+
+    <td>{{ forloop.counter }}</td>
+    <td>{{ rect.1 }}</td>
+    <td>{{ rect.2 }}</td>
+    <td>{% for dsc in rect.3 %}
+      {{ dsc }}<br>
+    {% endfor %}</td> 
+    <td>
+      <button type="button"
+              class="btn btn-warning btn-sm js-update-acronyms"
+              data-url="{% url 'rectification_update' rect.0 %}">
+        <span class="glyphicon glyphicon-pencil"></span> Edit
+      </button>
+      <button type="button"
+              class="btn btn-danger btn-sm js-delete-acronyms"
+              data-url="{% url 'rectification_delete' rect.0 %}">
+        <span class="glyphicon glyphicon-trash"></span> Delete
+      </button>
+    </td>
+  </tr>
+{% empty %}
+  <tr>
+    <td colspan="8" class="text-center bg-warning">No Rectification</td>
+  </tr>
+{% endfor %}

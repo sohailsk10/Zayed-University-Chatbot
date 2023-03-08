@@ -1,0 +1,36 @@
+{% load widget_tweaks %}
+
+{% for field in form %}
+ <div class="form-group{% if field.errors %} has-error{% endif %}">
+  {% if field.id_for_label == 'id_answer' %}
+  <br>
+  <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+  <textarea class='form-control' id="ans" name="ans" placeholder="Answer">{{field.value}}</textarea>
+  {% elif field.id_for_label == 'id_question' %}
+  <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+  {% render_field field class="form-control" %}
+    {% for error in field.errors %}
+      <p class="help-block">{{ error }}</p>
+    {% endfor %}
+  {% endif %}
+  </div>
+{% endfor %}
+
+{% comment %} <script>
+
+  tinymce.init({
+    selector: 'textarea#ans',
+    height: 300,
+    plugins: [
+      'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+      'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+      'insertdatetime', 'media', 'table', 'help', 'wordcount'
+    ],
+    toolbar: 'undo redo | blocks | ' +
+    'bold italic backcolor | alignleft aligncenter ' +
+    'alignright alignjustify | bullist numlist outdent indent | ' +
+    'removeformat | help',
+    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+  });
+
+</script> {% endcomment %}

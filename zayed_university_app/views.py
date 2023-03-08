@@ -50,7 +50,7 @@ from django.template import loader
 from django.urls import reverse
 from django.contrib import messages
 import difflib
-from .forms import AcronymsForm
+from .forms import *
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.template.loader import render_to_string
@@ -59,6 +59,7 @@ from .utils_links import get_proper_link
 import string
 from nltk.tokenize import RegexpTokenizer
 import re
+from .utils import truncate_list
 
 punctuation = RegexpTokenizer(r'\w+')
 
@@ -82,11 +83,13 @@ _stop_words.append('get')
 _stop_words.append('pull')
 _stop_words.append('list')
 _stop_words.remove('why')
+_stop_words.remove('do')
 _stop_words.remove('what')
 _stop_words.remove('how')
 _stop_words.remove('when')
 _stop_words.remove('which')
 _stop_words.remove('about')
+
 
 _stop_words_ar = stopwords.words('arabic')
 tag_model = SentenceTransformer('bert-base-nli-mean-tokens')
@@ -281,7 +284,7 @@ def get_response_from_watson(request):
     
     uncorrect = spell(text).lower()
     puntucate = punctuation.tokenize(text.lower())
-    print("puntucate", puntucate)
+    # print("puntucate", puntucate)
     u_list = uncorrect.split()
     print("u_list", u_list)
     temp = u_list.copy()
@@ -337,6 +340,8 @@ def get_response_from_watson(request):
         processed_message = pre_process(_main_input_string).split()
         question_length = len(processed_message)
         processed_message_set = set(processed_message)
+        print("343", processed_message_set)
+        
 
         jaccard = {}
         for i in range(len(rectify_ques)):
@@ -970,4 +975,92 @@ def q_key_extract(request, id):
     data = {
         'keywords': keywords_,
     }
+    return JsonResponse(data)
+
+##rectification list with search box
+def rectified_list(request):
+    lst = [(str(qa_cat.tag), str(qa_cat.question), str(qa_cat.answer), truncate_list(qa_cat.category.split())) for qa_cat in Tag_QA.objects.all()]
+    rectified_list = list(lst)
+    
+    
+    depart_name = request.session['depart']
+    context = {
+        'depart_name': depart_name,
+        'admin_type': request.session['admin_type'],
+        'rectified_ans':rectified_list,
+    }
+    return render(request, 'rectification_ans/rectification_list.html', context)
+
+def save_rectification_form(request, form, template_name):
+    depart_name = request.session['depart']
+   
+    data = dict()
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            data['form_is_valid'] = True
+            rectified_ans = Tag_QA.objects.all()
+            context = {
+                'depart_name': depart_name,
+                'admin_type': request.session['admin_type'],
+                'rectified_ans':rectified_ans,
+             }
+            data['html_rectification_list'] = render_to_string('rectification_ans/partial_rectification_list.html',context)
+        else:
+            data['form_is_valid'] = False
+    context = {
+                'depart_name': depart_name,
+                'admin_type': request.session['admin_type'],
+                'form': form,
+    }
+    data['html_form'] = render_to_string(template_name, context, request=request)
+    return JsonResponse(data)
+
+def rectification_update(request, pk):
+    rectification_ans = get_object_or_404(Tag_QA, pk=pk)
+    data = dict()
+    
+    if request.method == 'POST':
+        rectification_ans.question = request.POST["question"]
+        rectification_ans.answer = request.POST["ans"]
+        rectification_ans.save()
+        data['form_is_valid'] = True
+        depart_name = request.session['depart']
+        lst = [(str(qa_cat.tag), str(qa_cat.question), str(qa_cat.answer), truncate_list(qa_cat.category.split())) for qa_cat in Tag_QA.objects.all()]
+        rectified_list = list(lst)
+        context = {
+                'depart_name': depart_name,
+                'admin_type': request.session['admin_type'],
+                'rectified_ans':rectified_list,
+        }
+        data['html_rectification_list'] = render_to_string('rectification_ans/partial_rectification_list.html',context)
+        return JsonResponse(data)
+    else:
+        form = Tag_QAForm(instance=rectification_ans)
+    return save_rectification_form(request, form, 'rectification_ans/partial_rectification_update.html')
+
+def rectification_delete(request, pk):
+    depart_name = request.session['depart']
+    data = dict()
+    if request.method == 'POST':
+        rectification_ans = get_object_or_404(Tag_QA, pk=pk)
+        rectification_ans.delete()
+        data['form_is_valid'] = True
+        lst = [(str(qa_cat.tag), str(qa_cat.question), str(qa_cat.answer), truncate_list(qa_cat.category.split())) for qa_cat in Tag_QA.objects.all()]
+        rectified_list = list(lst)
+        context = {
+                'depart_name': depart_name,
+                'admin_type': request.session['admin_type'],
+                'rectified_ans': rectified_list
+        }
+        data['html_rectification_list'] = render_to_string('rectification_ans/partial_rectification_list.html', context)
+    else:
+        rectification_ans = Tag_QA.objects.get(tag=pk)
+        
+        context = {
+                'depart_name': depart_name,
+                'admin_type': request.session['admin_type'],
+                'rectification_ans': rectification_ans
+        }
+        data['html_form'] = render_to_string('rectification_ans/partial_rectification_delete.html', context, request=request)
     return JsonResponse(data)
