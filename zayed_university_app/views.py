@@ -368,7 +368,7 @@ def get_response_from_watson(request):
         print("In Exception", e)
         tag_df_top_ratio = [0.0]
     
-    if tag_df_top_ratio[0] > 0.5:
+    if tag_df_top_ratio[0] > 0.7:
         top_tag_df_extension = get_proper_extension(answer)
         print("top_tag_df_extension", top_tag_df_extension)
         print(len(answer))
