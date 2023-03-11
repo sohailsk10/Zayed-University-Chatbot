@@ -99,7 +99,7 @@ SESSION_COOKIE_AGE =  720 * 60
 # }
 
 # for Server
-DEBUG = False 
+DEBUG = True 
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
