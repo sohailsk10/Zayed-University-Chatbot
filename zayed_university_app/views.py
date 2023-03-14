@@ -510,6 +510,7 @@ def acronyms_list(request):
     
     return render(request, 'acronyms/acronyms_list.html', context)
 
+
 def save_acronyms_form(request, form, template_name):
     depart_name = request.session['depart']
    
@@ -535,11 +536,12 @@ def save_acronyms_form(request, form, template_name):
     data['html_form'] = render_to_string(template_name, context, request=request)
     return JsonResponse(data)
 
+
 def acronyms_create(request):
     depart_name = request.session['depart']
     data = dict()
     if request.method == 'POST':
-        print("In POST acronyms create-", request.POST)
+        # print("In POST acronyms create-", request.POST)
         form = AcronymsForm(request.POST)
         if form.is_valid():
             print("form valid")
@@ -556,6 +558,7 @@ def acronyms_create(request):
         form = AcronymsForm()
     return save_acronyms_form(request, form, 'acronyms/partial_acronyms_create.html')
 
+
 def acronyms_update(request, pk):
     acronyms = get_object_or_404(Acronyms, pk=pk)
     if request.method == 'POST':
@@ -570,7 +573,7 @@ def acronyms_delete(request, pk):
     data = dict()
     if request.method == 'POST':
         acronym = get_object_or_404(Acronyms, pk=pk)
-        print("In POST",pk, acronym)
+        # print("In POST",pk, acronym)
         acronym.delete()
         data['form_is_valid'] = True
         acronym = Acronyms.objects.all()
@@ -581,7 +584,7 @@ def acronyms_delete(request, pk):
         }
         data['html_acronyms_list'] = render_to_string('acronyms/partial_acronyms_list.html', context)
     else:
-        print("In get",pk)
+        # print("In get",pk)
         acronyms = Acronyms.objects.get(id=pk)
         context = {
                 'depart_name': depart_name,
@@ -590,7 +593,6 @@ def acronyms_delete(request, pk):
         }
         data['html_form'] = render_to_string('acronyms/partial_acronyms_delete.html', context, request=request)
     return JsonResponse(data)
-
 
 def get_keyword_KeyBERT(text):
     kw_model = KeyBERT(model='all-mpnet-base-v2')
