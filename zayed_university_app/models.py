@@ -16,7 +16,7 @@ class EventType(models.Model):
 
 class MasterTable(models.Model):
     question = models.CharField(max_length=1000)
-    answer = models.TextField(max_length=8000)
+    answer = models.TextField(max_length=4000)
 
     def __str__(self):
         return self.question
@@ -53,7 +53,7 @@ class QA_Category(models.Model):
 class Tag_QA(models.Model):
     tag = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     question = models.CharField(max_length=1000)
-    answer = models.CharField(max_length=8000)
+    answer = models.CharField(max_length=4000)
     keywords = models.TextField()
     category = models.TextField()
 
