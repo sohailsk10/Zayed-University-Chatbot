@@ -86,7 +86,7 @@ def get_custuser(cname, cadmin, cdepart, chk_true):
     else:
         return chk_list
 
-#comment
+
 import pymssql
 
 def get_connection():
